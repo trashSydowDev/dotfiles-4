@@ -28,7 +28,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 
 # Functions and aliases
-alias vim='mvim -v'
+#alias vim='mvim -v'
 alias irs='irssi'
 function mkcd () {
 	mkdir $1;
