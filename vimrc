@@ -50,11 +50,11 @@ set background=dark
 set ic
 set number
 set cul
-" Set tabs as 2 spaces - type :retab for setting a
+" Set tabs as 4 spaces - type :retab for setting a
 " file's tabs to spaces
 set expandtab        
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 " Better overall tab management
 set smarttab
 " General
