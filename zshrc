@@ -4,8 +4,6 @@ ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="ym"
-#ZSH_THEME="sorin"
-#ZSH_THEME="miloshadzic"
 
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -28,7 +26,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 
 # Functions and aliases
-#alias vim='mvim -v'
+alias vim='mvim -v'
 alias irs='irssi'
 function mkcd () {
 	mkdir $1;
