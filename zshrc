@@ -37,6 +37,9 @@ function mkcd () {
 #alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
 # xcape for linux
 #xcape
+# chromeos and ubuntu default boot
+#alias chromeos-defaultboot="sudo cgpt add -i 6 -P 0 -S 1 /dev/sda"
+#alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
 
 # OSX stuff
 
