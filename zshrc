@@ -26,12 +26,20 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 
 # Functions and aliases
-alias vim='mvim -v'
-alias irs='irssi'
 function mkcd () {
 	mkdir $1;
 	cd $1;
 }
+
+# Linux Stuff
+
+# Tmux fix for linux
+#alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
+# xcape for linux
+#xcape
+
+# OSX stuff
+
 # Use vim pager
 export PAGER=~/.bin/vimpager
 alias less=$PAGER
@@ -40,3 +48,5 @@ alias zless=$PAGER
 function vol () {
   osascript -e "set volume $1"
 }
+alias vim='mvim -v'
+alias irs='irssi'
