@@ -59,6 +59,7 @@ set background=dark
 set ic
 set number
 set cul
+set textwidth=79
 " Set tabs as 4 spaces - type :retab for setting a
 " file's tabs to spaces
 set expandtab        
