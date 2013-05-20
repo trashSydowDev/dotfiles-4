@@ -57,7 +57,10 @@ syntax enable
 colorscheme solarized
 set background=dark
 set ic
-set number
+set relativenumber
+" Make vim use absolute numbers in insert mode
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 set cul
 set textwidth=79
 " Set tabs as 4 spaces - type :retab for setting a
