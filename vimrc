@@ -42,10 +42,10 @@ if has("unix")
   if !v:shell_error && s:uname == "Linux"
     set t_Co=256
     if $TERM =~ '256color'
-       Disable Background Color Erase (BCE) so that 
-       color schemes work properly when Vim is used 
-       inside tmux and GNU screen.  See also
-       http://snk.tuxfamily.org/log/vim-256color-bce.html
+      " Disable Background Color Erase (BCE) so that 
+      " color schemes work properly when Vim is used 
+      " inside tmux and GNU screen.  See also
+      " http://snk.tuxfamily.org/log/vim-256color-bce.html
       set t_ut=
     endif
   endif
