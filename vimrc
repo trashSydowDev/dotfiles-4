@@ -143,7 +143,7 @@ nnoremap <leader>u :GundoToggle<CR>
 " Solarized
 let g:solarized_termcolors = 256
 " Tabularize
-vnoremap <leader>w :Tabularize /
+vnoremap <leader>w :Tabularize/
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
 " General tweaks:
