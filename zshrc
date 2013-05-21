@@ -31,25 +31,34 @@ function mkcd () {
 	cd $1;
 }
 
-# Linux Stuff
+# Determine which OS zsh is running on
+platform='unknown'
+if [[ $(uname) == 'Linux' ]]; then
+   platform='linux'
+elif [[ $(uname) == 'Darwin' ]]; then
+   platform='osx'
+fi
 
-# Tmux fix for linux
-#alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
-# xcape for linux
-#xcape
-# chromeos and ubuntu default boot
-#alias chromeos-defaultboot="sudo cgpt add -i 6 -P 0 -S 1 /dev/sda"
-#alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
+# Linux Stuff
+if [[ $platform == 'linux' ]]; then
+    # Tmux fix for linux
+    alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
+    # xcape for linux
+    xcape
+    # chromeos and ubuntu default boot
+    alias chromeos-defaultboot="sudo cgpt add -i 6 -P 0 -S 1 /dev/sda"
+    alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
 
 # OSX stuff
-
-# Use vim pager
-export PAGER=~/.bin/vimpager
-alias less=$PAGER
-alias zless=$PAGER
-# Volume for OSX
-function vol () {
-  osascript -e "set volume $1"
-}
-alias vim='mvim -v'
-alias irs='irssi'
+elif [[ $platform == 'osx' ]]; then
+    # Use vim pager
+    export PAGER=~/.bin/vimpager
+    alias less=$PAGER
+    alias zless=$PAGER
+    # Volume for OSX
+    function vol () {
+      osascript -e "set volume $1"
+    }
+    alias vim='mvim -v'
+    alias irs='irssi'
+fi
