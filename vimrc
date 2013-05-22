@@ -58,7 +58,7 @@ if has("unix")
     endif
     " Make transparency possible in gnome-terminal
     " by overriding solarized default settings.
-    highlight Normal ctermbg=NONE ctermfg=White
+    highlight Normal ctermbg=NONE 
   endif
 endif
 
