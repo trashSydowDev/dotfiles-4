@@ -216,7 +216,6 @@ set statusline+=%L            " Total lines
 "--------------------------------------------------
 " PowerLine
 "--------------------------------------------------
-let g:Powerline_colorscheme='solarized256'
 let g:Powerline_symbols='compatible'
 
 
