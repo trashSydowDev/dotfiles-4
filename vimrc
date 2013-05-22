@@ -36,6 +36,14 @@ filetype plugin indent on
 "--------------------------------------------------
 " Standard config
 "--------------------------------------------------
+" Looks
+set ttyfast    " indicates we have a strong 
+               " terminal connection
+syntax enable
+colorscheme solarized
+set background=dark
+set cursorline
+
 " Look good on linux:
 if has("unix")
   let s:uname = system("echo -n \"$(uname)\"")
@@ -48,21 +56,18 @@ if has("unix")
       " http://snk.tuxfamily.org/log/vim-256color-bce.html
       set t_ut=
     endif
+    " Make transparency possible in gnome-terminal
+    " by overriding solarized default settings.
+    highlight Normal ctermbg=NONE ctermfg=White
   endif
 endif
 
-set autoindent smartindent
-set ttyfast    " indicates we have a strong 
-               " terminal connection
-syntax enable
-colorscheme solarized
-set background=dark
-set ic
-set relativenumber
 " Make vim use absolute numbers in insert mode
+set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
-set cul
+" Indentation and textwidth
+set autoindent smartindent
 set textwidth=79
 " Set tabs as 4 spaces - type :retab for setting a
 " file's tabs to spaces
@@ -72,6 +77,7 @@ set tabstop=4
 " Better overall tab key behaviour
 set smarttab
 " General
+set ic         " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
 set noerrorbells
