@@ -3,7 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="ym"
+ZSH_THEME="ys"
 
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
