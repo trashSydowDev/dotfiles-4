@@ -43,6 +43,8 @@ fi
 if [[ $platform == 'linux' ]]; then
     # Tmux fix for linux
     alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
+    # Ack alias
+    alias ack=ack-grep
     # xcape for linux
     xcape
     # chromeos and ubuntu default boot
