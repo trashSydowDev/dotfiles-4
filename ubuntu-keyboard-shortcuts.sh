@@ -7,3 +7,5 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Control>
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Control><Primary><Alt><Shift>j']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Control><Primary><Alt><Shift>h']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Control><Primary><Alt><Shift>l']"
+
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['F4']"
