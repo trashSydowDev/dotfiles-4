@@ -29,7 +29,6 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'vim-scripts/SearchComplete'
 Bundle 'dandorman/vim-colors.git'
-Bundle 'blinks/vim-bufferline.git'
 
 filetype plugin indent on 
 
