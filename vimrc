@@ -22,7 +22,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
-"Bundle 'ehamberg/vim-cute-python'
 Bundle 'godlygeek/tabular'
 Bundle 'paradigm/vim-multicursor'
 Bundle 'Raimondi/delimitMate'
@@ -30,6 +29,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'vim-scripts/SearchComplete'
 Bundle 'dandorman/vim-colors.git'
+Bundle 'blinks/vim-bufferline.git'
 
 filetype plugin indent on 
 
@@ -106,33 +106,35 @@ set guifont=Consolas:h13
 " Mappings
 "--------------------------------------------------
 let mapleader = ","
-" Fix some command typos:
-cabbrev Q quit
-cabbrev W write
-cabbrev WQ wq
-cabbrev Wq wq
-cabbrev wQ wq
+
 " Easily move lines around:
-nnoremap - dd\|p
-nnoremap _ dd\|k\|P
-" Convert current word to uppercase:
-inoremap <c-u> <esc>lviwU<esc>i
-nnoremap <c-u> <esc>viwU<esc>
+nnoremap [e dd\|k\|P
+nnoremap ]e dd\|p
+
+" Turn paste mode on or off
+nnoremap <silent> [p :set paste<cr>
+nnoremap <silent> ]p :set nopaste<cr>
+
 " Quickly edit .vimrc:
 nnoremap <leader>ev :vs $MYVIMRC<cr>
+
 " Repeat last substitution
 nnoremap <leader>r :s<cr>
+
 " File type useful coding stuff:
 augroup fileTypeMods
   autocmd!
+  " Python
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
   autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python % 
+  " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " English Spell Checking
   autocmd FileType text set spell
   autocmd FileType text set spelllang=en
 augroup END
+
 " Compile or interpret
 func! CompileRunGcc()
   exec "w"
@@ -142,6 +144,7 @@ func! InterpretPython()
   exec "w"
   exec "!python %"
 endfunc
+
 " Tabs
 nnoremap tt :tabnew<CR>
 nnoremap tn :tabnext<CR>
@@ -149,22 +152,23 @@ nnoremap te :tabedit
 nnoremap tc :tabclose<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprevious<CR>
-" Gundo
-nnoremap <leader>u :GundoToggle<CR>
+
 " Solarized
 let g:solarized_termcolors = 256
+
 " Tabularize
 vnoremap <leader>w :Tabularize/
+
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
-" General tweaks:
-nnoremap <leader>g G
-vnoremap <leadeR>g G
-onoremap p i(
+
 " Make H and L go to the beggining and end of a
 " line, respectively.
 noremap H ^
 noremap L $
+
+" General tweaks:
+onoremap p i(
 
 
 "--------------------------------------------------
