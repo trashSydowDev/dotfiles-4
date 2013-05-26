@@ -30,6 +30,7 @@ function mkcd () {
 	mkdir $1;
 	cd $1;
 }
+alias gcc-allegro="gcc alleg5test.c -o alleg5test -L/usr/local/lib -lallegro -lallegro_main"
 
 # Determine which OS zsh is running on
 platform='unknown'
