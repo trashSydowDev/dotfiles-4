@@ -76,6 +76,8 @@ set tabstop=4
 " Better overall tab key behaviour
 set smarttab
 " General
+set hidden     " edit multiple unsaved files at the
+               " same time
 set ic         " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
