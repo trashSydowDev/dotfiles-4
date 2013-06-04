@@ -65,9 +65,10 @@ endif
 set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
-" Indentation and textwidth
+" Indentation, textwidth and colorcolumn
 set autoindent smartindent
 set textwidth=79
+set colorcolumn=79
 " Set tabs as 4 spaces - type :retab for setting a
 " file's tabs to spaces
 set expandtab        
