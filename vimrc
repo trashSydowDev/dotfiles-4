@@ -61,10 +61,8 @@ if has("unix")
   endif
 endif
 
-" Make vim use absolute numbers in insert mode
+" Make vim relativenumbers
 set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
 " Indentation, textwidth and colorcolumn
 set autoindent smartindent
 set textwidth=79
