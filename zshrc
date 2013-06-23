@@ -56,6 +56,7 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'osx' ]]; then
     # Use vim pager
     export PAGER=~/.bin/vimpager
+    alias ctags="`brew --prefix`/bin/ctags"
     alias less=$PAGER
     alias zless=$PAGER
     # Volume for OSX
