@@ -167,6 +167,11 @@ nnoremap <silent><Leader>/ :nohlsearch<CR>
 noremap H ^
 noremap L $
 
+" Open ctags definition in a new tab
+noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+" Open ctags definition in a vertical split - instead of a horizontal one
+noremap <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
 " General tweaks:
 onoremap p i(
 
