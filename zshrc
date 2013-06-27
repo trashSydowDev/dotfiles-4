@@ -43,7 +43,7 @@ fi
 # Linux Stuff
 if [[ $platform == 'linux' ]]; then
     # Tmux fix for linux
-    alias tmux="TERM=screen-256color-bce /usr/local/bin/tmux"
+    alias tmux="TERM=screen-256color-bce `which tmux`"
     # Ack alias
     alias ack=ack-grep
     # xcape for linux
