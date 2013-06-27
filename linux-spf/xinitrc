@@ -1,0 +1,29 @@
+#!/bin/sh
+# Script to configure X, start common apps, and start xmonad.
+# Author: Vic Fryzel
+# http://github.com/vicfryzel/xmonad-config
+
+
+# Configure PATH so that we can access our scripts below
+PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
+
+# Configure X
+xsetroot -cursor_name left_ptr &
+
+# Set wallpaper
+xloadimage -onroot -zoom 56 "/home/bazarov/images/wallpaper/Monday_W2.jpg"
+
+# Start two terminals
+gnome-terminal &
+gnome-terminal &
+
+# Start a browser
+chromium-browser &
+
+# remap Caps-Lock to Control and start xcape
+xmodmap ~/.xmodmap
+xcape
+
+pulseaudio --start &
+
+exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
