@@ -96,7 +96,7 @@ myLayout = avoidStruts (
 -- Colors and borders
 -- Currently based on the ir_black theme.
 --
-myNormalBorderColor  = "#16161D"
+myNormalBorderColor  = "#06060D"
 myFocusedBorderColor = "#cc0c0c"
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
