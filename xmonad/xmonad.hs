@@ -1,4 +1,4 @@
--- Maintained by yamadapc - mostly inspired by
+-- Maintained by yamadapc - mostly inspired by and heavily dependent
 -- <https://github.com/vicfryzel/xmonad-config>
 -- (still in development)
 
