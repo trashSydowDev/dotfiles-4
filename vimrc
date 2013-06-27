@@ -29,6 +29,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'vim-scripts/SearchComplete'
 Bundle 'dandorman/vim-colors.git'
+Bundle 'msutherl/vim-colors-ir_black-256'
 
 filetype plugin indent on 
 
@@ -39,8 +40,11 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong 
                " terminal connection
 syntax enable
-colorscheme solarized
-set background=dark
+"colorscheme solarized
+colorscheme ir_black-256
+" Override colorscheme bg so they look properly under any decent terminal -
+" it's more of a hack than anything else
+highlight Normal ctermbg=NONE 
 set cursorline
 
 " Look good on linux:
@@ -49,15 +53,11 @@ if has("unix")
   if !v:shell_error && s:uname == "Linux"
     set t_Co=256
     if $TERM =~ '256color'
-      " Disable Background Color Erase (BCE) so that 
-      " color schemes work properly when Vim is used 
-      " inside tmux and GNU screen.  See also
+      " Disable Background Color Erase (BCE) so that color schemes work
+      " properly when Vim is used inside tmux and GNU screen.  See also
       " http://snk.tuxfamily.org/log/vim-256color-bce.html
       set t_ut=
     endif
-    " Make transparency possible in gnome-terminal
-    " by overriding solarized default settings.
-    highlight Normal ctermbg=NONE 
   endif
 endif
 
@@ -153,8 +153,8 @@ nnoremap tc :tabclose<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprevious<CR>
 
-" Solarized
-let g:solarized_termcolors = 256
+" Solarized - Not in use anymore
+"let g:solarized_termcolors = 256
 
 " Tabularize
 vnoremap <leader>w :Tabularize/
