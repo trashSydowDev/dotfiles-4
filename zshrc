@@ -16,7 +16,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 # Customize to your needs...
-export PATH=//Users/adam/.bin:opt/local/bin:/opt/local/sbin:/Users/adam/.rvm/gems/ruby-1.8.7-p357@global/bin:/Users/adam/.rvm/gems/ruby-1.8.7-p357@global/bin:/Users/adam/.rvm/rubies/ruby-1.8.7-p357/bin:/Users/adam/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/opt/X11/bin:/usr/local/Cellar/ruby/1.9.3-p327/bin
 
 # Bindings
 bindkey -v
