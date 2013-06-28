@@ -113,11 +113,11 @@ tabConfig = defaultTheme {
 xmobarTitleColor = "#ADAD89"
 
 -- Color of current workspace in xmobar.
-xmobarCurrentWSColor = "#FF5600"
+xmobarCurrentWSColor = "#FFA811"
 
 -- Color of hidden workspaces in xmobar
-xmobarHiddenWSColor = "#C4C387"
-xmobarHiddenWSNoWindowsColor = "#C4C387"
+xmobarHiddenWSColor = "#949397"
+xmobarHiddenWSNoWindowsColor = "#949397"
 
 -- Color of urgen workspaces in xmobar
 xmobarUrgentColor = "#cc0c0c"
