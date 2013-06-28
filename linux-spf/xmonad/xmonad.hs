@@ -38,12 +38,12 @@ myTerminal = "gnome-terminal"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = [ "1:main"
-               , "2:hack"
-               , "3:web"
-               , "4:media"
-               , "5:read"
-               , "6:sys"
+myWorkspaces = [ "main"
+               , "hack"
+               , "web"
+               , "media"
+               , "read"
+               , "sys"
                , "7"
                , "8"
                , "9"
@@ -352,7 +352,7 @@ main = do
     logHook = dynamicLogWithPP $ xmobarPP 
       { ppOutput = hPutStrLn xmproc
       , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100 . wrap "(" ")"
-      , ppCurrent = xmobarColor xmobarCurrentWSColor "" . wrap "<" ">"
+      , ppCurrent = xmobarColor xmobarCurrentWSColor "" . wrap "[" "]"
       , ppHidden = xmobarColor xmobarHiddenWSColor "" . wrap "" "*"
       , ppHiddenNoWindows = xmobarColor xmobarHiddenWSNoWindowsColor ""
       , ppUrgent = xmobarColor xmobarUrgentColor "" . wrap "[" "]"

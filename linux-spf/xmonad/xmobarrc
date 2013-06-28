@@ -1,10 +1,10 @@
 Config { 
-       font = "xft:DejaVu Sans Mono:size=9:antialias=true"
+       font = "xft:DejaVu Sans Mono:size=10:antialias=true"
        , bgColor = "#06060D"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = True
-       , commands = [ Run Weather "SBSP" [ "-t"      , "<tempC>C"
+       , commands = [ Run Weather "SBSP" [ "-t"      , "T:<tempC>C"
                                          , "-L"      , "18"
                                          , "-H"      , "25"
                                          , "--normal", "green"
@@ -12,13 +12,14 @@ Config {
                                          , "--low"   , "lightblue"
                                          ] 83781
 
-                    , Run Cpu [ "-L"      , "3"
+                    , Run Cpu [ "-t"      , "C:<total>%"
+                              , "-L"      , "3"
                               , "-H"      , "50"
                               , "--normal", "green"
                               , "--high"  , "red"
                               ] 10
 
-                    , Run Memory ["-t","mem: <usedratio>%"] 10
+                    , Run Memory ["-t","M:<usedratio>%"] 10
 
                     , Run Date "%b %_d %H:%M" "date" 10
 
@@ -38,5 +39,5 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %cpu% | %memory% | %SBSP% | <fc=#ee9a00>%date%</fc> | %battery%"
+       , template = "%StdinReader% }{ %cpu%  %memory%  %SBSP%  <fc=#ee9a00>%date%</fc>  %battery%"
        }
