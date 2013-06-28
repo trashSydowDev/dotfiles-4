@@ -177,6 +177,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((0, 0xffc7),
      spawn "amixer -q set Master 10%+")
 
+  -- Increase Brightness
+  , ((0, 0xffc4),
+     spawn "xbacklight -inc 10")
+
+  -- Decrease Brightness
+  , ((0, 0xffc3),
+     spawn "xbacklight -dec 10")
+
   -- Audio previous.
   , ((0, 0x1008FF16),
      spawn "")
