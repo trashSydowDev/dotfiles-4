@@ -17,9 +17,6 @@ xloadimage -onroot -zoom 56 "/home/bazarov/images/wallpaper/Monday_W2.jpg"
 gnome-terminal &
 gnome-terminal &
 
-# Start a browser
-chromium-browser &
-
 # remap Caps-Lock to Control and start xcape
 xmodmap ~/.xmodmap
 xcape
