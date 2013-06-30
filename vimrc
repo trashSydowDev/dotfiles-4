@@ -151,7 +151,7 @@ augroup END
 " Compile or interpret
 func! CompileRunGcc()
   exec "w"
-  exec "!gcc --std=c99 -Wall % -o %<; ./%<"
+  exec "!gcc --std=c99 -Wall % -o %<.out; ./%<.out"
 endfunc
 func! InterpretPython()
   exec "w"
