@@ -45,8 +45,6 @@ if [[ $platform == 'linux' ]]; then
     alias tmux="TERM=screen-256color-bce `which tmux`"
     # Ack alias
     alias ack=ack-grep
-    # xcape for linux
-    xcape
     # chromeos and ubuntu default boot
     alias chromeos-defaultboot="sudo cgpt add -i 6 -P 0 -S 1 /dev/sda"
     alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
