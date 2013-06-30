@@ -1,12 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""" This file is mantained by tacla.yamada """"""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 "------------------------------------------------------------------------------
 " Vundle
 "------------------------------------------------------------------------------
-filetype off 
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -16,7 +16,7 @@ call vundle#rc()
 
 " Vundle manages vundle
 Bundle 'gmarik/vundle'
-" Programming-specific plugins 
+" Programming-specific plugins
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 " Easier editing plugins
@@ -41,20 +41,20 @@ Bundle 'vim-scripts/SearchComplete'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/sudo.vim'
 
-filetype plugin indent on 
+filetype plugin indent on
 
 "------------------------------------------------------------------------------
 " Standard config
 "------------------------------------------------------------------------------
 " Looks
-set ttyfast    " indicates we have a strong 
+set ttyfast    " indicates we have a strong
                " terminal connection
 syntax enable
 "colorscheme solarized
 colorscheme ir_black-256
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
-highlight Normal ctermbg=NONE 
+highlight Normal ctermbg=NONE
 set cursorline
 
 " Look good on linux:
@@ -79,7 +79,7 @@ set textwidth=79
 set colorcolumn=79
 " Set tabs as 4 spaces - type :retab for setting a
 " file's tabs to spaces
-set expandtab        
+set expandtab
 set shiftwidth=4
 set tabstop=4
 " Better overall tab key behaviour
@@ -91,7 +91,7 @@ set ic         " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
 set noerrorbells
-set wildmenu   " better shell command managing 
+set wildmenu   " better shell command managing
 set pastetoggle=<F2>
 set encoding=utf-8
 set hlsearch   " Highlight searches
@@ -100,7 +100,7 @@ set autochdir  " Change working directory to
                " whichever file is open or selected
 set noesckeys
 " I personally prefer this. But when it's
-" convenient you can always change it with 
+" convenient you can always change it with
 " :set wrap
 set nowrap
 set nocompatible
@@ -137,7 +137,7 @@ augroup fileTypeMods
   " Python
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
-  autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python % 
+  autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python %
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " English Spell Checking
@@ -148,7 +148,7 @@ augroup END
 " Compile or interpret
 func! CompileRunGcc()
   exec "w"
-  exec "!gcc --std=c99 -Wall -03 % -o %<; ./%<"
+  exec "!gcc --std=c99 -Wall % -o %<; ./%<"
 endfunc
 func! InterpretPython()
   exec "w"
@@ -158,7 +158,7 @@ endfunc
 " Tabs
 nnoremap tt :tabnew<CR>
 nnoremap tn :tabnext<CR>
-nnoremap te :tabedit 
+nnoremap te :tabedit
 nnoremap tc :tabclose<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprevious<CR>
