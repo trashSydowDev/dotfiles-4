@@ -56,6 +56,9 @@ colorscheme ir_black-256
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
 set cursorline
+" Show trailing spaces
+set listchars=trail:.
+set list
 
 " Look good on linux:
 if has("unix")
