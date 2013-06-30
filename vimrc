@@ -10,26 +10,36 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+"------------------------------------------------------------------------------
+" Vundle
+"------------------------------------------------------------------------------
+
 " Vundle manages vundle
 Bundle 'gmarik/vundle'
-" My Bundles
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/vim-easymotion'
+" Programming-specific plugins 
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'godlygeek/tabular'
-Bundle 'paradigm/vim-multicursor'
+" Easier editing plugins
 Bundle 'Raimondi/delimitMate'
-Bundle 'sjl/gundo.vim'
-Bundle 'vim-scripts/sudo.vim'
-Bundle 'vim-scripts/SearchComplete'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-surround'
+Bundle 'godlygeek/tabular'
+" UX plugins
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'dandorman/vim-colors.git'
 Bundle 'msutherl/vim-colors-ir_black-256'
+Bundle 'Lokaltog/vim-powerline'
+" Movement plugins
+Bundle 'paradigm/vim-multicursor'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'sjl/gundo.vim'
+" Auto-complete and snippet plugins
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
+Bundle 'vim-scripts/SearchComplete'
+" File navigation and opening plugins
+Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/sudo.vim'
 
 filetype plugin indent on 
 
