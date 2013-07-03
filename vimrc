@@ -141,6 +141,7 @@ augroup fileTypeMods
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
   autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python %
+  autocmd FileType python colorscheme molokai
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " English Spell Checking
