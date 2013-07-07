@@ -11,7 +11,7 @@ PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 xsetroot -cursor_name left_ptr &
 
 # Set wallpaper
-xloadimage -onroot -zoom 56 "/home/bazarov/images/wallpaper/Monday_W2.jpg"
+xloadimage -onroot -zoom 75 "$HOME/images/wallpaper.jpg"
 
 # Start two terminals
 gnome-terminal &
