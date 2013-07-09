@@ -29,6 +29,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'dandorman/vim-colors.git'
 Bundle 'msutherl/vim-colors-ir_black-256'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/rainbow_parentheses.vim'
 " Movement plugins
 Bundle 'paradigm/vim-multicursor'
 Bundle 'Lokaltog/vim-easymotion'
@@ -196,6 +197,14 @@ onoremap p i(
 set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
+
+"------------------------------------------------------------------------------
+" Rainbow Parentheses
+"------------------------------------------------------------------------------
+au Vimenter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 "------------------------------------------------------------------------------
 " EasyMotion
