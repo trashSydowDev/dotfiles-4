@@ -28,6 +28,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'dandorman/vim-colors.git'
 Bundle 'msutherl/vim-colors-ir_black-256'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 " Movement plugins
