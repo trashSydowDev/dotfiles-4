@@ -15,7 +15,7 @@ plugins=(git)
 # Settings
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
-# Customize to your needs...
+DISABLE_AUTO_TITLE=true # disable tmux window auto-renaming
 
 # Bindings
 bindkey -v
@@ -26,8 +26,8 @@ bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 
 # Functions and aliases
 function mkcd () {
-	mkdir $1;
-	cd $1;
+    mkdir $1;
+    cd $1;
 }
 alias gcc-allegro="gcc -L/usr/local/lib -lallegro -lallegro_main"
 
