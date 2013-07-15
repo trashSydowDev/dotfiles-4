@@ -25,6 +25,22 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 
 # Functions and aliases
+function session-main {
+    if [ ! `tmux attach -t "main"` ] ; then
+        echo "Main session doesn't exist."
+        echo "Creating main session..." ; sleep 1
+        tmux new-session -d -s "main"
+        tmux neww -k -t main:0 -n "m"
+        tmux neww -k -t main:2 -n "edit"
+        tmux neww -k -t main:3 -n "read"
+        tmux neww -k -t main:4 -n "compile/run"
+        tmux neww -k -t main:5 -n "sys" "top -o cpu"
+        tmux neww -k -t main:9 -n "music" "cmus"
+        tmux select-window -t 0
+        tmux attach -t "main"
+    fi
+}
+
 function mkcd () {
     mkdir $1;
     cd $1;
