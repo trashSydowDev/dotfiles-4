@@ -52,8 +52,8 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong
                " terminal connection
 syntax enable
-"colorscheme solarized
-colorscheme ir_black-256
+"colorscheme ir_black-256
+colorscheme jellybeans
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
