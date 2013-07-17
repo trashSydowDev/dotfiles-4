@@ -54,6 +54,8 @@ if [[ $platform == 'linux' ]]; then
 
 # OSX stuff
 elif [[ $platform == 'osx' ]]; then
+    # add npm bin to PATH
+    export PATH=/usr/local/share/npm/bin:$PATH
     # Use vim pager
     export PAGER=~/.bin/vimpager
     alias ctags="`brew --prefix`/bin/ctags"
