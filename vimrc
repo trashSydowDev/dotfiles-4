@@ -19,6 +19,7 @@ Bundle 'gmarik/vundle'
 " Programming-specific plugins
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
+Bundle 'mattn/zencoding-vim'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -200,6 +201,11 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
 
 "------------------------------------------------------------------------------
+" ZenCoding
+"------------------------------------------------------------------------------
+let g:user_zen_leader_key = '<c-k>'
+
+"------------------------------------------------------------------------------
 " Rainbow Parentheses
 "------------------------------------------------------------------------------
 au Vimenter * RainbowParenthesesToggle
@@ -238,7 +244,7 @@ let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes': ['ruby', 'php', 'python', 'c', 'cpp'],
-                               \ 'passive_filetypes': ['puppet'] }
+                               \ 'passive_filetypes': ['html', 'puppet'] }
 
 
 "------------------------------------------------------------------------------
