@@ -44,7 +44,7 @@ myWorkspaces = [ "main"
                , "media"
                , "read"
                , "sys"
-               , "7"
+               , "comm"
                , "8"
                , "9"
                ]
