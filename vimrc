@@ -20,6 +20,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/zencoding-vim'
+Bundle 'digitaltoad/vim-jade'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -140,6 +141,8 @@ nnoremap <leader>r :s<cr>
 " File type useful coding stuff:
 augroup fileTypeMods
   autocmd!
+  " Jade
+  autocmd FileType jade set shiftwidth=2
   " Python
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
