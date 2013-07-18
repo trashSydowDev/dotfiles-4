@@ -60,6 +60,7 @@ colorscheme jellybeans
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
 set cursorline
+set cursorcolumn
 " Show trailing spaces
 set listchars=trail:.
 set list
