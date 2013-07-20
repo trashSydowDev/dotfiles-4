@@ -146,6 +146,12 @@ augroup fileTypeMods
   autocmd!
   " Jade
   autocmd FileType jade set shiftwidth=2
+  " Html
+  autocmd FileType html set shiftwidth=2
+  " Javascript
+  autocmd FileType javascript set shiftwidth=2
+  " CSS
+  autocmd FileType css set shiftwidth=2
   " Python
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
