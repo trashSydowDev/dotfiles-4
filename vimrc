@@ -36,6 +36,7 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 " Movement plugins
 Bundle 'paradigm/vim-multicursor'
 Bundle 'Lokaltog/vim-easymotion'
@@ -188,6 +189,9 @@ nnoremap tp :tabprevious<CR>
 
 " Tabularize
 vnoremap <leader>w :Tabularize/
+
+" Toggle NERDTree
+nnoremap <leader>n :NERDTreeTabsToggle<CR>
 
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
