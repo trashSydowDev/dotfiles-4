@@ -21,6 +21,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/zencoding-vim'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'nono/vim-handlebars'
 Bundle 'airblade/vim-rooter'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
