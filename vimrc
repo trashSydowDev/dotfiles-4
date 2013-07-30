@@ -261,7 +261,7 @@ let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes': ['ruby', 'php', 'python', 'c', 'cpp'],
-                               \ 'passive_filetypes': ['html', 'puppet'] }
+                               \ 'passive_filetypes': ['html', 'javascript', 'puppet'] }
 
 
 "------------------------------------------------------------------------------
