@@ -23,6 +23,8 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'nono/vim-handlebars'
 Bundle 'airblade/vim-rooter'
+Bundle 'tpope/vim-fireplace'
+Bundle 'guns/vim-clojure-static'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -136,6 +138,9 @@ nnoremap ]e dd\|p
 " Turn paste mode on or off
 nnoremap <silent> [p :set paste<cr>
 nnoremap <silent> ]p :set nopaste<cr>
+
+" Toggle rainbow parentheses
+nnoremap <silent> <leader>p :RainbowParenthesesToggle<cr>
 
 " Quickly edit .vimrc:
 nnoremap <leader>ev :vs $MYVIMRC<cr>
