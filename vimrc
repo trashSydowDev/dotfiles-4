@@ -21,7 +21,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/zencoding-vim'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'nono/vim-handlebars'
 Bundle 'airblade/vim-rooter'
+Bundle 'tpope/vim-fireplace'
+Bundle 'guns/vim-clojure-static'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -29,12 +32,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
 " UX plugins
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'dandorman/vim-colors.git'
 Bundle 'msutherl/vim-colors-ir_black-256'
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'chriskempson/base16-vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 " Movement plugins
 Bundle 'paradigm/vim-multicursor'
 Bundle 'Lokaltog/vim-easymotion'
@@ -56,8 +59,9 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong
                " terminal connection
 syntax enable
+colorscheme base16-bright
+set background=dark
 "colorscheme ir_black-256
-colorscheme jellybeans
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -135,6 +139,9 @@ nnoremap ]e dd\|p
 nnoremap <silent> [p :set paste<cr>
 nnoremap <silent> ]p :set nopaste<cr>
 
+" Toggle rainbow parentheses
+nnoremap <silent> <leader>p :RainbowParenthesesToggle<cr>
+
 " Quickly edit .vimrc:
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 
@@ -187,6 +194,9 @@ nnoremap tp :tabprevious<CR>
 
 " Tabularize
 vnoremap <leader>w :Tabularize/
+
+" Toggle NERDTree
+nnoremap <leader>n :NERDTreeTabsToggle<CR>
 
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
@@ -256,7 +266,7 @@ let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes': ['ruby', 'php', 'python', 'c', 'cpp'],
-                               \ 'passive_filetypes': ['html', 'puppet'] }
+                               \ 'passive_filetypes': ['html', 'javascript', 'puppet'] }
 
 
 "------------------------------------------------------------------------------
