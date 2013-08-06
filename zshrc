@@ -56,8 +56,6 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'osx' ]]; then
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
-    # add ruby bin to PATH
-    export PATH=$(brew --prefix ruby)/bin:$PATH
     # Use vim pager
     export PAGER=~/.bin/vimpager
     alias ctags="`brew --prefix`/bin/ctags"
@@ -70,3 +68,5 @@ elif [[ $platform == 'osx' ]]; then
     alias vim='mvim -v'
     alias irs='irssi'
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
