@@ -34,6 +34,9 @@ Bundle 'godlygeek/tabular'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'msutherl/vim-colors-ir_black-256'
 Bundle 'chriskempson/base16-vim'
+Bundle 'noahfrederick/Hemisu'
+Bundle 'euclio/vim-nocturne'
+Bundle 'vim-scripts/CSApprox'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'scrooloose/nerdtree'
@@ -59,9 +62,7 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong
                " terminal connection
 syntax enable
-colorscheme base16-bright
-set background=dark
-"colorscheme ir_black-256
+colorscheme nocturne
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -189,9 +190,6 @@ nnoremap tc :tabclose<CR>
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprevious<CR>
 
-" Solarized - Not in use anymore
-"let g:solarized_termcolors = 256
-
 " Tabularize
 vnoremap <leader>w :Tabularize/
 
@@ -288,6 +286,7 @@ set statusline+=%L            " Total lines
 " PowerLine
 "------------------------------------------------------------------------------
 let g:Powerline_symbols='compatible'
+let g:Powerline_colorscheme='solarized256'
 
 
 "------------------------------------------------------------------------------
