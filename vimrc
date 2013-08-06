@@ -149,6 +149,15 @@ nnoremap <leader>ev :vs $MYVIMRC<cr>
 " Repeat last substitution
 nnoremap <leader>r :s<cr>
 
+" Resize to textwidth
+nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
+
+func! TextWidthResize()
+  exec "vertical resize ".(&textwidth+4) 
+  " The +4 is simply to account for the line numbers - solving this problem
+  " better is a TODO
+endfunc
+
 " File type useful coding stuff:
 augroup fileTypeMods
   autocmd!
