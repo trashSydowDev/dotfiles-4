@@ -39,6 +39,7 @@ Bundle 'euclio/vim-nocturne'
 Bundle 'vim-scripts/CSApprox'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'spolu/dwm.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 " Movement plugins
