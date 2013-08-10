@@ -23,7 +23,6 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'nono/vim-handlebars'
-Bundle 'airblade/vim-rooter'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
 " Easier editing plugins
@@ -297,6 +296,7 @@ set statusline+=%L            " Total lines
 "------------------------------------------------------------------------------
 let g:Powerline_symbols='compatible'
 let g:Powerline_colorscheme='solarized256'
+let g:Powerline_stl_path_style='full'
 
 
 "------------------------------------------------------------------------------
