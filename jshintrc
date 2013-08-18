@@ -1,8 +1,6 @@
 {
     "eqnull": true,
     "expr": true,
-    "latedef": true,
-    "onevar": true,
     "noarg": true,
     "node": true,
     "trailing": true,
