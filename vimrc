@@ -62,6 +62,7 @@ filetype plugin indent on
 " Looks
 set ttyfast    " indicates we have a strong
                " terminal connection
+set ttimeoutlen=50
 syntax enable
 colorscheme nocturne
 " Override colorscheme bg so they look properly under any decent terminal -
