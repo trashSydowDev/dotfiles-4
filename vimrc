@@ -101,19 +101,20 @@ set tabstop=4
 " Better overall tab key behaviour
 set smarttab
 " General
-set hidden     " edit multiple unsaved files at the
-               " same time
-set ic         " ignorecase in search
+set hidden                   " edit multiple unsaved files at the
+                             " same time
+set ic                       " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
+set clipboard=unnamed        " yank and paste with the system clipboard
 set noerrorbells
-set wildmenu   " better shell command managing
+set wildmenu                 " better shell command managing
 set pastetoggle=<F2>
 set encoding=utf-8
-set hlsearch   " Highlight searches
-set incsearch  " Highlight searches as they're typed
-set autochdir  " Change working directory to
-               " whichever file is open or selected
+set hlsearch                 " Highlight searches
+set incsearch                " Highlight searches as they're typed
+set autochdir                " Change working directory to
+                             " whichever file is open or selected
 set noesckeys
 " I personally prefer this. But when it's
 " convenient you can always change it with
