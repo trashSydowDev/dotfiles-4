@@ -69,6 +69,8 @@ if [[ $platform == 'linux' ]]; then
 
 # OSX stuff
 elif [[ $platform == 'osx' ]]; then
+    # add ~/.bin to PATH
+    export PATH=$HOME/.bin:$PATH
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
     # Use vim pager
