@@ -170,6 +170,8 @@ augroup fileTypeMods
   autocmd FileType html set shiftwidth=2
   " Javascript
   autocmd FileType javascript set shiftwidth=2
+  " CoffeeScript
+  autocmd FileType coffee set shiftwidth=2
   " CSS
   autocmd FileType css set shiftwidth=2
   " Python
