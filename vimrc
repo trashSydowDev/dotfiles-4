@@ -33,7 +33,7 @@ Bundle 'godlygeek/tabular'
 " UX plugins
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'msutherl/vim-colors-ir_black-256'
-Bundle 'chriskempson/base16-vim'
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'noahfrederick/Hemisu'
 Bundle 'euclio/vim-nocturne'
 Bundle 'vim-scripts/CSApprox'
@@ -64,7 +64,7 @@ set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=50
 syntax enable
-colorscheme nocturne
+colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -107,7 +107,7 @@ set hidden                   " edit multiple unsaved files at the
 set ic                       " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
-set clipboard=unnamed        " yank and paste with the system clipboard
+"set clipboard=unnamed        " yank and paste with the system clipboard
 set noerrorbells
 set wildmenu                 " better shell command managing
 set pastetoggle=<F2>
@@ -127,7 +127,7 @@ filetype plugin on
 "------------------------------------------------------------------------------
 " GUI
 "------------------------------------------------------------------------------
-set guifont=Monaco:h12
+set guifont=Monaco:h10
 
 
 "------------------------------------------------------------------------------
