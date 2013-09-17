@@ -5,6 +5,7 @@
     "node": true,
     "trailing": true,
     "unused": true,
-    "mocha": true
+    "mocha": true,
+    "laxbreak": true,
+    "laxcomma": true
 }
-
