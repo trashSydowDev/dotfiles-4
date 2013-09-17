@@ -27,6 +27,7 @@ bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 # Functions and aliases
 alias attach-main="tmux new -t 'main'" # attaches to main in a different window
 alias session-main="bash $HOME/dotfiles/bin/session-main.sh"
+alias spec="mocha -t 5000 -R spec"
 
 function mkcd () {
     mkdir $1;
@@ -73,6 +74,9 @@ elif [[ $platform == 'osx' ]]; then
     export PATH=$HOME/.bin:$PATH
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
+    # add brew before the path
+    export PATH=/usr/local/sbin:$PATH
+    export PATH=/usr/local/bin:$PATH
     # Use vim pager
     export PAGER=~/.bin/vimpager
     alias ctags="`brew --prefix`/bin/ctags"
