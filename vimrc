@@ -19,12 +19,16 @@ Bundle 'gmarik/vundle'
 " Programming-specific plugins
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'nono/vim-handlebars'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'kikijump/tslime.vim'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -47,8 +51,9 @@ Bundle 'paradigm/vim-multicursor'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
 " Auto-complete and snippet plugins
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
+Bundle 'Valloric/YouCompleteMe.git'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neosnippet'
 Bundle 'vim-scripts/SearchComplete'
 " File navigation and opening plugins
 Bundle 'kien/ctrlp.vim'
@@ -64,7 +69,7 @@ set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=50
 syntax enable
-colorscheme Tomorrow-Night-Bright
+colorscheme nocturne
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -152,6 +157,9 @@ nnoremap <leader>ev :vs $MYVIMRC<cr>
 " Repeat last substitution
 nnoremap <leader>r :s<cr>
 
+" Jump to definition or declaration (YCM)
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 " Resize to textwidth
 nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
 
@@ -181,9 +189,6 @@ augroup fileTypeMods
   autocmd FileType python colorscheme molokai
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
-  " English Spell Checking
-  autocmd FileType text set spell
-  autocmd FileType text set spelllang=en
 augroup END
 
 " Compile or interpret
@@ -237,7 +242,7 @@ set directory=~/.vim/tmp
 "------------------------------------------------------------------------------
 " ZenCoding
 "------------------------------------------------------------------------------
-let g:user_zen_leader_key = '<c-k>'
+let g:user_emmet_leader_key = '<c-k>'
 
 "------------------------------------------------------------------------------
 " Rainbow Parentheses
@@ -303,64 +308,3 @@ let g:Powerline_symbols='compatible'
 let g:Powerline_colorscheme='solarized256'
 let g:Powerline_stl_path_style='full'
 
-
-"------------------------------------------------------------------------------
-" neocomplcache
-"------------------------------------------------------------------------------
-
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-"------------------------------------------------------------------------------
-" neosnippet
-"------------------------------------------------------------------------------
-imap <leader><TAB> <Plug>(neosnippet_expand_or_jump)
-smap <leader><TAB> <Plug>(neosnippet_expand_or_jump)
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
