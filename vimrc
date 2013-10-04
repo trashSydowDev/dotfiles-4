@@ -29,6 +29,8 @@ Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'kikijump/tslime.vim'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'Shougo/vimshell.vim'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -44,8 +46,6 @@ Bundle 'vim-scripts/CSApprox'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'spolu/dwm.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 " Movement plugins
 Bundle 'paradigm/vim-multicursor'
 Bundle 'Lokaltog/vim-easymotion'
@@ -119,8 +119,6 @@ set pastetoggle=<F2>
 set encoding=utf-8
 set hlsearch                 " Highlight searches
 set incsearch                " Highlight searches as they're typed
-set autochdir                " Change working directory to
-                             " whichever file is open or selected
 set noesckeys
 " I personally prefer this. But when it's
 " convenient you can always change it with
