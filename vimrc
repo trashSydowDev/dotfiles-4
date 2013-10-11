@@ -69,7 +69,7 @@ set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=50
 syntax enable
-colorscheme nocturne
+colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -93,8 +93,8 @@ if has("unix")
   endif
 endif
 
-" Make vim relativenumbers
-set relativenumber
+" Make vim use absolute numbers
+set number
 " Indentation, textwidth and colorcolumn
 set autoindent smartindent
 set textwidth=79

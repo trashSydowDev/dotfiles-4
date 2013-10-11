@@ -2,7 +2,7 @@
     name = yamadapc
     email = tacla.yamada@gmail.com
 [core]
-    editor = vim
+    editor = mvim -f -g -v
     excludesfile = ~/.gitignore
 [alias]
     co = checkout
@@ -14,10 +14,10 @@
     dump = cat-file -p
     d = difftool
 [diff]
-    tool = vimdiff
+    tool = mvimdiff -f -g -v
 [difftool]
     prompt = false
 [push]
     default = simple
 [merge]
-    tool = vimdiff
+    tool = mvimdiff -f -g -v
