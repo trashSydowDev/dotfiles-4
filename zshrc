@@ -91,7 +91,10 @@ elif [[ $platform == 'osx' ]]; then
     alias irs='irssi'
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin                  # Add RVM to PATH for scripting
+
+PATH=$PATH:$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
+PATH=$PATH:$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
