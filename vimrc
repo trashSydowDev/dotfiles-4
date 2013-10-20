@@ -21,6 +21,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'gkz/vim-ls'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'digitaltoad/vim-jade'
@@ -31,6 +32,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'kikijump/tslime.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
+Bundle 'lukerandall/haskellmode-vim'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -72,7 +74,7 @@ syntax enable
 colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
-highlight Normal ctermbg=NONE
+"highlight Normal ctermbg=NONE
 set cursorline
 set cursorcolumn
 " Show trailing spaces
@@ -178,13 +180,15 @@ augroup fileTypeMods
   autocmd FileType javascript set shiftwidth=2
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
+  " LiveScript
+  autocmd FileType ls set shiftwidth=2
+  autocmd FileType ls nnoremap <buffer> <leader>mk :LiveScriptCompile watch<CR>
   " CSS
   autocmd FileType css set shiftwidth=2
   " Python
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
   autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python %
-  autocmd FileType python colorscheme molokai
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
 augroup END
@@ -305,4 +309,10 @@ set statusline+=%L            " Total lines
 let g:Powerline_symbols='compatible'
 let g:Powerline_colorscheme='solarized256'
 let g:Powerline_stl_path_style='full'
+
+"------------------------------------------------------------------------------
+" Haskell Mode Vim
+"------------------------------------------------------------------------------
+let g:haddock_browser = 'open'
+let g:haddock_browser_callformat = '%s %s'
 
