@@ -28,6 +28,7 @@ bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 alias attach-main="tmux new -t 'main'" # attaches to main in a different window
 alias session-main="bash $HOME/dotfiles/bin/session-main.sh"
 alias spec="mocha -t 5000 -R spec"
+alias n="npm run-script"
 
 function mkcd () {
     mkdir $1;
@@ -91,3 +92,6 @@ elif [[ $platform == 'osx' ]]; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
