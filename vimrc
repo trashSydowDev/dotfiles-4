@@ -69,7 +69,7 @@ syntax enable
 colorscheme Tomorrow-Night
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
-"highlight Normal ctermbg=NONE
+highlight Normal ctermbg=NONE
 set cursorline
 set cursorcolumn
 " Show trailing spaces
@@ -136,6 +136,9 @@ set guifont=Monaco:h10
 " Mappings
 "------------------------------------------------------------------------------
 let mapleader = ","
+
+" Easily move around
+nnoremap <leader>j <C-w>j
 
 " Easily move lines around:
 nnoremap [e dd\|k\|P
