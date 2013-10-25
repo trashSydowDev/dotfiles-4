@@ -138,8 +138,9 @@ set guifont=Monaco:h10
 "------------------------------------------------------------------------------
 let mapleader = ","
 
-" Easily move around
-nnoremap <leader>j <C-w>j
+" Easily split windows
+nnoremap <leader>s :split<cr>
+nnoremap <leader>v :vsplit<cr>
 
 " Easily move lines around:
 nnoremap [e dd\|k\|P
