@@ -31,7 +31,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'kikijump/tslime.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
-Bundle 'lukerandall/haskellmode-vim'
+Bundle 'dag/vim2hs'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
@@ -96,11 +96,11 @@ set number
 set autoindent smartindent
 set textwidth=79
 set colorcolumn=79
-" Set tabs as 4 spaces - type :retab for setting a
+" Set tabs as 2 spaces - type :retab for setting a
 " file's tabs to spaces
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 " Better overall tab key behaviour
 set smarttab
 " General
@@ -122,6 +122,8 @@ set noesckeys
 " :set wrap
 set nowrap
 set nocompatible
+set foldlevel=99
+set backspace=indent,eol,start
 filetype plugin on
 
 "------------------------------------------------------------------------------
@@ -173,6 +175,7 @@ augroup fileTypeMods
   autocmd FileType html set shiftwidth=2
   " Javascript
   autocmd FileType javascript set shiftwidth=2
+  autocmd FileType javascript nnoremap <buffer> <leader>mk :w<CR>:!node %<cr>
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
   " LiveScript
@@ -186,6 +189,9 @@ augroup fileTypeMods
   autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python %
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
+  " Haskell
+  autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
+  autocmd FileType haskell set shiftwidth=2
 augroup END
 
 " Compile or interpret
@@ -276,7 +282,9 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_mode_map = { 'mode': 'active',
-                               \ 'active_filetypes': ['ruby', 'php', 'python', 'c', 'cpp'],
+                               \ 'active_filetypes':  ['javascript', 'ruby',
+                               \                       'php', 'python', 'c', 
+                               \                       'cpp', 'haskell'],
                                \ 'passive_filetypes': ['html', 'puppet'] }
 
 
