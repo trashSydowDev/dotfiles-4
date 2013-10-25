@@ -47,6 +47,7 @@ Bundle 'euclio/vim-nocturne'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'spolu/dwm.vim'
+Bundle 'justincampbell/vim-eighties.git'
 " Movement plugins
 Bundle 'Lokaltog/vim-easymotion'
 " Auto-complete and snippet plugins
@@ -320,9 +321,16 @@ let g:haddock_browser = 'open'
 let g:haddock_browser_callformat = '%s %s'
 
 "------------------------------------------------------------------------------
+" vim-eighties
+"------------------------------------------------------------------------------
+let g:eighties_enabled = 1
+let g:eighties_minimum_width = &textwidth
+let g:eighties_extra_width = 4
+let g:eighties_compute = 0
+
+"------------------------------------------------------------------------------
 " neocomplcache
 "------------------------------------------------------------------------------
-
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
