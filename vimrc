@@ -37,9 +37,8 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
+Bundle 'basyura/bitly.vim'
 " UX plugins
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'msutherl/vim-colors-ir_black-256'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'noahfrederick/Hemisu'
 Bundle 'vim-scripts/CSApprox'
