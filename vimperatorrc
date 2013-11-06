@@ -1,0 +1,10 @@
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set editor=/bin/bash\ -lc\ \"mvim\ -f\ $*\"\ mvim
+
+map x d
+map d <C-d>
+map b <C-b>
+map J :tabprevious<cr>
+map K :tabnext<cr>
+map H :back<cr>
+map L :forward<cr>

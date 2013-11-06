@@ -5,7 +5,7 @@
 # Simple shell script to create the necessary symlinks to my home folder, from
 # the dotfiles folder - nothing intelligent going on here
 
-LINKED_FILES=("jshintrc" "slate" "tmux.conf" "vimrc" "zshrc")
+LINKED_FILES=("jshintrc" "slate" "tmux.conf" "vimrc" "zshrc" "vimperatorrc")
 
 function main() {
   for i in ${LINKED_FILES[@]} ; do
