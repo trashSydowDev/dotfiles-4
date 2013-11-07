@@ -15,11 +15,11 @@ function main() {
 }
 
 function setup_vim() {
-  echo $HOME/.vim
-  echo $HOME/.vim/backup
-  echo $HOME/.vim/tmp
-  echo $HOME/.vim/bundle
-  echo $HOME/.vim/undo
+  mkdir $HOME/.vim
+  mkdir $HOME/.vim/backup
+  mkdir $HOME/.vim/tmp
+  mkdir $HOME/.vim/bundle
+  mkdir $HOME/.vim/undo
   cd $HOME/.vim/bundle
   git clone https://github.com/gmarik/vundle $HOME/.vim/bundle
 }
