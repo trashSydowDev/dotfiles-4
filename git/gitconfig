@@ -5,6 +5,8 @@
     editor = mvim -f -g -v
     excludesfile = ~/.gitignore
 [alias]
+    pu = pull
+    ps = push
     co = checkout
     ci = commit
     st = status
