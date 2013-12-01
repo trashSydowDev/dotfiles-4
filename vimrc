@@ -180,6 +180,7 @@ augroup fileTypeMods
   " Javascript
   autocmd FileType javascript set shiftwidth=2
   autocmd FileType javascript nnoremap <buffer> <leader>mk :w<CR>:!node %<cr>
+  autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 0 %<cr>
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
   " LiveScript
