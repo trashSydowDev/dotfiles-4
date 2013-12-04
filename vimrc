@@ -4,15 +4,12 @@
 
 
 "------------------------------------------------------------------------------
-" Vundle
+" Plugins (Vundle)
 "------------------------------------------------------------------------------
 filetype off
+filetype plugin indent on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-"------------------------------------------------------------------------------
-" Vundle
-"------------------------------------------------------------------------------
 
 " Vundle manages vundle
 Bundle 'gmarik/vundle'
@@ -66,7 +63,7 @@ set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=50
 syntax enable
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 highlight Normal ctermbg=NONE
@@ -137,9 +134,10 @@ set guifont=Monaco:h10
 "------------------------------------------------------------------------------
 let mapleader = ","
 
-" Easily split windows
-nnoremap <leader>s :split<cr>
-nnoremap <leader>v :vsplit<cr>
+" Easily split and close windows
+nnoremap <leader>ss :split<cr>
+nnoremap <leader>vv :vsplit<cr>
+nnoremap <leader>cc :close<cr>
 
 " Easily move lines around:
 nnoremap [e dd\|k\|P
@@ -152,7 +150,8 @@ nnoremap <silent> ]p :set nopaste<cr>
 " Toggle rainbow parentheses
 nnoremap <silent> <leader>p :RainbowParenthesesToggle<cr>
 
-" Quickly edit .vimrc:
+" Quickly source or edit .vimrc:
+nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 
 " Repeat last substitution
@@ -197,7 +196,19 @@ augroup fileTypeMods
   " Haskell
   autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
   autocmd FileType haskell set shiftwidth=2
+  " VimScript
+  autocmd FileType vim nnoremap <buffer> <leader>fl :call FillLine('-')<CR>
 augroup END
+
+" Function - FillLine(str) (borrowed from - http://bit.ly/1g4Pi59)
+func! FillLine(str)
+  let tw = &textwidth - 1
+  .s/[[:space:]]*$//
+  let reps = (tw - col("$")) / len(a:str)
+  if reps > 0
+    .s/$/\=(' ').repeat(a:str, reps)/
+  endif
+endfunc
 
 " Compile or interpret
 func! CompileRunGcc()
@@ -210,6 +221,7 @@ func! InterpretPython()
 endfunc
 
 " Tabs
+nnoremap <leader>tt :tab<Space>
 nnoremap tt :tabnew<CR>
 nnoremap tn :tabnext<CR>
 nnoremap te :tabedit
