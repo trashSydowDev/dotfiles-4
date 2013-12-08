@@ -16,10 +16,10 @@
     dump = cat-file -p
     d = difftool
 [diff]
-    tool = mvimdiff -f -g -v
+    tool = vimdiff
 [difftool]
     prompt = false
 [push]
     default = simple
 [merge]
-    tool = mvimdiff -f -g -v
+    tool = vimdiff
