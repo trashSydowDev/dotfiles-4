@@ -7,7 +7,6 @@
 " Plugins (Vundle)
 "------------------------------------------------------------------------------
 filetype off
-filetype plugin indent on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -18,7 +17,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'gkz/vim-ls'
+Bundle 'ninegrid/vim-livescript'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'nono/vim-handlebars'
