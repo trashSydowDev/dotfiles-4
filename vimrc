@@ -183,7 +183,7 @@ augroup fileTypeMods
   autocmd FileType coffee set shiftwidth=2
   " LiveScript
   autocmd FileType ls set shiftwidth=2
-  autocmd FileType ls nnoremap <buffer> <leader>mk :LiveScriptCompile watch<CR>
+  autocmd FileType ls nnoremap <buffer> <leader>mk :LiveScriptCompile vert watch<CR>
   " CSS
   autocmd FileType css set shiftwidth=2
   " Python
