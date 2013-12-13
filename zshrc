@@ -17,6 +17,10 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 DISABLE_AUTO_TITLE=true # disable tmux window auto-renaming
 
+# Environment varibles
+EDITOR="vim"
+SHELL="zsh"
+
 # Bindings
 bindkey -v
 bindkey '^[[A' up-line-or-search
