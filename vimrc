@@ -50,6 +50,7 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
 " File navigation and opening plugins
 Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/sudo.vim'
 
 filetype plugin indent on
@@ -157,7 +158,7 @@ nnoremap <leader>ev :vs $MYVIMRC<cr>
 nnoremap <leader>r :s<cr>
 
 " Jump to definition or declaration (YCM)
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>g :Ack<Space>
 
 " Resize to textwidth
 nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
