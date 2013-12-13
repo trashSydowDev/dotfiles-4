@@ -9,6 +9,7 @@
     ps = push
     co = checkout
     ci = commit
+    cia = commit --amend
     st = status
     br = branch
     l = "!source ~/dotfiles/git/helpers.sh && pretty_git_log"
