@@ -82,6 +82,8 @@ elif [[ $platform == 'osx' ]]; then
     # add brew before the path
     export PATH=/usr/local/sbin:$PATH
     export PATH=/usr/local/bin:$PATH
+    # add gobrew to the path
+    export PATH=$PATH:$HOME/.gobrew/bin
     alias ctags="`brew --prefix`/bin/ctags"
     alias less=$PAGER
     alias zless=$PAGER

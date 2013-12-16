@@ -28,6 +28,7 @@ Bundle 'kikijump/tslime.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'dag/vim2hs'
+Bundle 'jnwhiteh/vim-golang'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
