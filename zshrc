@@ -40,6 +40,11 @@ function mkcd () {
 }
 alias gcc-allegro="gcc -L/usr/local/lib -lallegro -lallegro_main"
 
+# vim + ack
+function vack () {
+    vim +"Ack $1" +"only"
+}
+
 # Marks and jumping
 export MARKPATH=$HOME/.marks
 function jump {
