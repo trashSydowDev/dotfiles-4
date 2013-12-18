@@ -14,6 +14,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " Programming-specific plugins
 Bundle 'tpope/vim-fugitive'
+Bundle 'elzr/vim-json'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
@@ -143,6 +144,11 @@ nnoremap <leader>cc :close<cr>
 " Easily move lines around:
 nnoremap [e dd\|k\|P
 nnoremap ]e dd\|p
+
+" Easily check for and navigate errors
+nnoremap <leader>ee :Errors<cr>
+nnoremap <silent> <leader>en :lNext<cr>
+nnoremap <silent> <leader>eN :lPrev<cr>
 
 " Turn paste mode on or off
 nnoremap <silent> [p :set paste<cr>
@@ -303,7 +309,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes':  ['javascript', 'ruby',
                                \                       'php', 'python', 'c', 
                                \                       'cpp', 'haskell'],
-                               \ 'passive_filetypes': ['html', 'puppet'] }
+                               \ 'passive_filetypes': ['html', 'puppet', 'json'] }
+let g:syntastic_javascript_checkers = ['jshint']
 
 
 "------------------------------------------------------------------------------
