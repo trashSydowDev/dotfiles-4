@@ -108,7 +108,7 @@ set hidden                   " edit multiple unsaved files at the
 set ic                       " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
-"set clipboard=unnamed        " yank and paste with the system clipboard
+set clipboard=unnamed        " yank and paste with the system clipboard
 set noerrorbells
 set wildmenu                 " better shell command managing
 set pastetoggle=<F2>
