@@ -15,7 +15,8 @@
     l = "!source ~/dotfiles/git/helpers.sh && pretty_git_log"
     type = cat-file -t
     dump = cat-file -p
-    d = difftool
+    d = diff
+    dt = difftool
     dc = diff --cached
     aa = add --all
 [diff]
