@@ -11,5 +11,5 @@ FORMAT="$HASH{$RELATIVE_TIME{$AUTHOR{$REFS $SUBJECT"
 function pretty_git_log() {
   git log --graph --pretty="tformat:$FORMAT" $* |
   column -t -s '{' |
-  less -FRS
+  less -RS
 }
