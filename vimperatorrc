@@ -9,4 +9,4 @@ map K :tabnext<cr>
 map H :back<cr>
 map L :forward<cr>
 
-highlight! Hint font-size: 14px; color: black; font-weight: bold; font-family: Helvetica, Arial, sans-serif; border: 1px solid #E3BE23; background-color: #FFEBB6; text-transform: uppercase
+highlight! Hint font-size: 10px; color: black; font-weight: bold; font-family: Helvetica, Arial, sans-serif; border: 1px solid #E3BE23; background-color: #FFEBB6; text-transform: uppercase
