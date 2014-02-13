@@ -72,7 +72,7 @@ highlight Normal ctermbg=NONE
 set cursorline
 set cursorcolumn
 " Show trailing spaces
-set listchars=trail:.
+set listchars=trail:.,tab:\|-
 set list
 
 " Look good on linux:
