@@ -11,6 +11,10 @@ config nudgePercentOf screenSize
 # The base value for resize percent calculation
 config resizePercentOf screenSize
 
+#config windowHintsSpread true
+bind e:cmd hint asdfghjklqwertyuiop
+bind g:cmd grid padding:3 0:6,5
+
 # ------------------------------------------------------------------------------
 # Alias' directive: alias name value
 # ------------------------------------------------------------------------------
