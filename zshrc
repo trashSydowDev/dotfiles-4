@@ -45,10 +45,6 @@ function vack () {
     vim +"Ack $1" +"only"
 }
 
-# Marks and jumping
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-autoload -U compinit && compinit -u
-
 # Determine which OS zsh is running on
 platform='unknown'
 if [[ $(uname) == 'Linux' ]]; then
@@ -85,6 +81,9 @@ elif [[ $platform == 'osx' ]]; then
     function vol () {
       osascript -e "set volume $1"
     }
+    # Marks and jumping
+    [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+    autoload -U compinit && compinit -u
     alias vim='mvim -v'
     alias irs='irssi'
 fi
