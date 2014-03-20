@@ -6,5 +6,6 @@
     "trailing": true,
     "unused": true,
     "laxbreak": true,
-    "laxcomma": true
+    "laxcomma": true,
+    "browser": true
 }
