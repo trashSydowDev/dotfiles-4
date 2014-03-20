@@ -26,13 +26,16 @@ Bundle 'heartsentwined/vim-emblem'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
 Bundle 'derekwyatt/vim-scala'
-Bundle 'kikijump/tslime.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
+Bundle 'lukerandall/haskellmode-vim'
+Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
+Bundle 'bitc/vim-hdevtools'
 Bundle 'jnwhiteh/vim-golang'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
@@ -65,7 +68,7 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=50
-syntax enable
+syntax on
 colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
@@ -109,18 +112,18 @@ set hidden                   " edit multiple unsaved files at the
 set ic                       " ignorecase in search
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
-set clipboard=unnamed        " yank and paste with the system clipboard
+"set clipboard=unnamed        " yank and paste with the system clipboard
 set noerrorbells
 set wildmenu                 " better shell command managing
 set pastetoggle=<F2>
 set encoding=utf-8
-set hlsearch                 " Highlight searches
 set incsearch                " Highlight searches as they're typed
+set hlsearch
 set noesckeys
 " I personally prefer this. But when it's
 " convenient you can always change it with
-" :set wrap
-set nowrap
+" set nowrap
+set wrap
 set nocompatible
 set foldlevel=99
 set backspace=indent,eol,start
@@ -190,6 +193,9 @@ augroup fileTypeMods
   autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 0 %<cr>
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
+  autocmd FileType coffee nnoremap <buffer> <leader>ms :w<CR>:CoffeeWatch<cr>
+  autocmd FileType coffee nnoremap <buffer> <leader>mk :w<CR>:CoffeeRun<cr>
+  autocmd FileType coffee nnoremap <buffer> <leader>ts :w<CR>:!mocha --compilers coffee:coffee-script/register -R spec -t 0 %<cr>
   " LiveScript
   autocmd FileType ls set shiftwidth=2
   autocmd FileType ls nnoremap <buffer> <leader>mk :LiveScriptCompile vert watch<CR>
@@ -199,10 +205,15 @@ augroup fileTypeMods
   autocmd FileType python nnoremap <buffer> <leader>c I# <esc>j0
   autocmd FileType python nnoremap <buffer> <leader>mk :call InterpretPython()<CR>
   autocmd FileType python nnoremap <buffer> <leader>nk :w<CR>:!python %
+  " Ruby
+  autocmd FileType ruby nnoremap <buffer> <leader>mk :!rake<cr>
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " Haskell
   autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>mt :HdevtoolsType<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>mc :HdevtoolsClear<CR>
   autocmd FileType haskell set shiftwidth=2
   " VimScript
   autocmd FileType vim nnoremap <buffer> <leader>fl :call FillLine('-')<CR>
@@ -327,7 +338,6 @@ set statusline+=%*
 set statusline+=%l            " Current line
 set statusline+=/             " Separator
 set statusline+=%L            " Total lines
-
 
 "------------------------------------------------------------------------------
 " PowerLine
