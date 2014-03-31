@@ -9,7 +9,7 @@ LINKED_FILES=("jshintrc" "slate" "tmux.conf" "vimrc" "zshrc" "vimperatorrc")
 
 function main() {
   for i in ${LINKED_FILES[@]} ; do
-    echo -s "$HOME/dotfiles/$i" "$HOME/.$i"
+    ln -s "$HOME/dotfiles/$i" "$HOME/.$i"
   done
   setup_vim
 }
@@ -21,7 +21,7 @@ function setup_vim() {
   mkdir $HOME/.vim/bundle
   mkdir $HOME/.vim/undo
   cd $HOME/.vim/bundle
-  git clone https://github.com/gmarik/vundle $HOME/.vim/bundle
+  git clone https://github.com/gmarik/vundle $HOME/.vim/bundle/vundle
 }
 
 main
