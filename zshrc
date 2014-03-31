@@ -89,7 +89,7 @@ elif [[ $platform == 'osx' ]]; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin                   # Add RVM to PATH for scripting
-PATH=$PATH:/usr/local/Cellar/ruby/2.1.1/bin # Add gems to PATH for scripting
+PATH=/usr/local/Cellar/ruby/2.1.1/bin:$PATH # Add gems to PATH for scripting
 
 PATH=$PATH:$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
 PATH=$PATH:$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
