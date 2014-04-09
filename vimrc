@@ -258,6 +258,7 @@ nnoremap tp :tabprevious<CR>
 " Tabularize
 vnoremap <leader>w :Tabularize/
 vnoremap <leader><leader>; :Tabularize/:\zs/l1r0<cr>
+vnoremap <leader><leader><space> :Tabularize/\w\s\zs/l1r0<cr>
 
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
