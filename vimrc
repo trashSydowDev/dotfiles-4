@@ -142,6 +142,9 @@ set guioptions=
 "------------------------------------------------------------------------------
 let mapleader = ","
 
+" Write RO files
+cnoremap sudow w !sudo tee % >/dev/null
+
 " Easily split and close windows
 nnoremap <leader>ss :split<cr>
 nnoremap <leader>vv :vsplit<cr>
