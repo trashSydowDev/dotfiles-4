@@ -1,4 +1,7 @@
 {
+    "globals": [
+      "exports"
+    ],
     "eqnull": true,
     "expr": true,
     "noarg": true,
