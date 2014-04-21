@@ -41,6 +41,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
+Bundle 'majutsushi/tagbar'
 Bundle 'sjl/gundo.vim'
 " UX plugins
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
@@ -263,6 +264,12 @@ vnoremap <leader>w :Tabularize/
 vnoremap <leader><leader>; :Tabularize/:\zs/l1r0<cr>
 vnoremap <leader><leader><space> :Tabularize/\w\s\zs/l1r0<cr>
 
+" NERDTree
+nnoremap <leader>nt :NERDTree<cr>
+
+" Tagbar
+nnoremap <leader>. :Tagbar<cr>
+
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
 
@@ -375,7 +382,7 @@ let g:eighties_compute = 0
 "------------------------------------------------------------------------------
 " ctrlp
 "------------------------------------------------------------------------------
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components\|vendor'
+let g:ctrlp_custom_ignore = 'DS_Store\|git\|bower_components\|vendor'
 
 "------------------------------------------------------------------------------
 " neocomplcache
