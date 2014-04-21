@@ -50,8 +50,6 @@ Bundle 'vim-scripts/CSApprox'
 Bundle 'euclio/vim-nocturne'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'spolu/dwm.vim'
-Bundle 'justincampbell/vim-eighties.git'
 " Movement plugins
 Bundle 'Lokaltog/vim-easymotion'
 " Auto-complete and snippet plugins
@@ -221,6 +219,8 @@ augroup fileTypeMods
   autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mc :HdevtoolsClear<CR>
   autocmd FileType haskell set shiftwidth=2
+  " Golang
+  autocmd FileType go nnoremap <buffer> <leader>mk :w<CR>:!go run %<CR>
   " VimScript
   autocmd FileType vim nnoremap <buffer> <leader>fl :call FillLine('-')<CR>
   " Git
