@@ -97,5 +97,8 @@ PATH=$PATH:$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scriptin
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 source ~/.fzf.zsh
+
+# golang stuff
 export PATH="$HOME/.gobrew/bin:$PATH"
 eval "$(gobrew init -)"
+export DOCKER_HOST=tcp://localhost:4243
