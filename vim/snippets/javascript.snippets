@@ -13,3 +13,13 @@ snippet fn
   function ${1}(${2}) {
     ${3}
   }
+
+snippet describe
+  describe('${1:description}', function() {
+    ${2}
+  });
+
+snippet it
+  it('${1:description}', function(${2:done}) {
+    ${3}
+  });
