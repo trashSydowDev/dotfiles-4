@@ -227,7 +227,6 @@ augroup fileTypeMods
   autocmd FileType gitcommit set spell
   autocmd FileType gitcommit set textwidth=72
   autocmd FileType gitcommit set colorcolumn=72,50
-  autocmd FileType gitcommit colorscheme hemisu
 augroup END
 
 " Function - FillLine(str) (borrowed from - http://bit.ly/1g4Pi59)
