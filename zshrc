@@ -45,16 +45,12 @@ function vack () {
     vim +"Ack $1" +"only"
 }
 
-# Determine which OS zsh is running on
-platform='unknown'
-if [[ $(uname) == 'Linux' ]]; then
-   platform='linux'
-elif [[ $(uname) == 'Darwin' ]]; then
-   platform='osx'
-fi
+# add ~/.bin to PATH
+mkdir -p $HOME/.bin
+export PATH=$HOME/.bin:$PATH
 
 # Linux Stuff
-if [[ $platform == 'linux' ]]; then
+if [[ $(uname) == 'Linux' ]]; then
     # Tmux fix for linux
     alias tmux="TERM=screen-256color-bce `which tmux`"
     # Ack alias
@@ -64,9 +60,7 @@ if [[ $platform == 'linux' ]]; then
     alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
 
 # OSX stuff
-elif [[ $platform == 'osx' ]]; then
-    # add ~/.bin to PATH
-    export PATH=$HOME/.bin:$PATH
+elif [[ $(uname) == 'Darwin' ]]; then
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
     # add brew before the path
