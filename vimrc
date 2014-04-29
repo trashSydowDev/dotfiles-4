@@ -155,8 +155,8 @@ nnoremap ]e dd\|p
 
 " Easily check for and navigate errors
 nnoremap <leader>ee :Errors<cr>
-nnoremap <silent> <leader>en :lNext<cr>
-nnoremap <silent> <leader>eN :lPrev<cr>
+nnoremap <silent> <leader>en :lnext<cr>
+nnoremap <silent> <leader>eN :lprevious<cr>
 
 " Turn paste mode on or off
 nnoremap <silent> [p :set paste<cr>
