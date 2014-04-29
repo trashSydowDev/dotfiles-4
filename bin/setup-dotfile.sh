@@ -12,6 +12,7 @@ function main() {
     ln -s "$HOME/dotfiles/$i" "$HOME/.$i"
   done
   setup_vim
+  setup_zsh
 }
 
 function setup_vim() {
@@ -22,6 +23,12 @@ function setup_vim() {
   mkdir $HOME/.vim/undo
   cd $HOME/.vim/bundle
   git clone https://github.com/gmarik/vundle $HOME/.vim/bundle/vundle
+}
+
+function setup_zsh() {
+  git clone git@github.com:robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+  echo "ym.zsh-theme" >> $HOME/.oh-my-zsh/.git/info/exclude
+  ln -s $HOME/dotfiles/ym.zsh-theme $HOME/.oh-my-zsh/themes/ym.zsh-theme
 }
 
 main
