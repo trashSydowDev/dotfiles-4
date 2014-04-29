@@ -229,6 +229,9 @@ augroup fileTypeMods
   autocmd FileType gitcommit set colorcolumn=72,50
 augroup END
 
+" Support all markdown extensions
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
+
 " Function - FillLine(str) (borrowed from - http://bit.ly/1g4Pi59)
 func! FillLine(str)
   let tw = &textwidth - 1
