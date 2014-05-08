@@ -35,6 +35,7 @@ Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'dart-lang/dart-vim-plugin'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
@@ -127,6 +128,7 @@ set noesckeys
 set wrap
 set nocompatible
 set foldlevel=99
+set foldmethod=indent
 set backspace=indent,eol,start
 filetype plugin on
 
@@ -227,6 +229,8 @@ augroup fileTypeMods
   autocmd FileType gitcommit set spell
   autocmd FileType gitcommit set textwidth=72
   autocmd FileType gitcommit set colorcolumn=72,50
+  " Dart
+  autocmd FileType dart nnoremap <buffer> <leader>mk :!dart %<CR>
 augroup END
 
 " Support all markdown extensions
@@ -342,7 +346,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes':  ['javascript', 'ruby',
                                \                       'php', 'python', 'c', 
                                \                       'cpp', 'haskell'],
-                               \ 'passive_filetypes': ['html', 'puppet', 'json'] }
+                               \ 'passive_filetypes': ['html', 'puppet', 'json',
+                               \                       'dart'] }
 let g:syntastic_javascript_checkers = ['jshint']
 
 
