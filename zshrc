@@ -33,6 +33,7 @@ alias attach-main="tmux new -t 'main'" # attaches to main in a different window
 alias session-main="bash $HOME/dotfiles/bin/session-main.sh"
 alias spec="mocha -t 5000 -R spec"
 alias ns="npm run-script"
+alias vinstall="vim +BundleInstall +qall"
 
 function mkcd () {
     mkdir $1;
