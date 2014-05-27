@@ -231,6 +231,8 @@ augroup fileTypeMods
   autocmd FileType gitcommit set colorcolumn=72,50
   " Dart
   autocmd FileType dart nnoremap <buffer> <leader>mk :!dart %<CR>
+  " DLang
+  autocmd FileType d nnoremap <buffer> <leader>mk :!rdmd %<CR>
 augroup END
 
 " Support all markdown extensions
