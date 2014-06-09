@@ -69,7 +69,15 @@ filetype plugin indent on
 " Looks
 set ttyfast    " indicates we have a strong
                " terminal connection
-set ttimeoutlen=50
+set ttimeoutlen=10
+" Minimize the escape delay
+if ! has('gui_running')
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
 syntax on
 colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
