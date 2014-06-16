@@ -87,9 +87,13 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin                   # Add RVM to PATH for scripting
 PATH=/usr/local/Cellar/ruby/2.1.1/bin:$PATH # Add gems to PATH for scripting
+PATH=$HOME/.gem/ruby/2.1.1/bin:$PATH
 
 PATH=$PATH:$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
 PATH=$PATH:$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
+
+## todo.txt set-up
+source $HOME/dotfiles/todo/todo-setup.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

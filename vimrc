@@ -35,6 +35,7 @@ Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'leafgarland/typescript-vim'
 Bundle 'dart-lang/dart-vim-plugin'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
@@ -82,7 +83,7 @@ syntax on
 colorscheme Tomorrow-Night-Bright
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
-highlight Normal ctermbg=NONE
+"highlight Normal ctermbg=NONE
 set cursorline
 set cursorcolumn
 " Show trailing spaces
@@ -205,6 +206,7 @@ augroup fileTypeMods
   autocmd FileType javascript set shiftwidth=2
   autocmd FileType javascript nnoremap <buffer> <leader>mk :w<CR>:!node %<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 0 %<cr>
+  autocmd FileType javascript nnoremap <buffer> <leader>co :w<CR>:!mocha --require blanket -R html-cov % > cov.html; open cov.html<CR>
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
   autocmd FileType coffee nnoremap <buffer> <leader>ms :w<CR>:CoffeeWatch<cr>
@@ -241,6 +243,7 @@ augroup fileTypeMods
   autocmd FileType dart nnoremap <buffer> <leader>mk :!dart %<CR>
   " DLang
   autocmd FileType d nnoremap <buffer> <leader>mk :!rdmd %<CR>
+  autocmd FileType d nnoremap <buffer> <leader>ts :!rdmd -unittest %<CR>
 augroup END
 
 " Support all markdown extensions
@@ -263,7 +266,7 @@ func! CompileRunGcc()
 endfunc
 func! InterpretPython()
   exec "w"
-  exec "!python %"
+  exec "!/usr/local/bin/python %"
 endfunc
 
 " Tabs
@@ -313,7 +316,7 @@ set directory=~/.vim/tmp
 "------------------------------------------------------------------------------
 " ZenCoding
 "------------------------------------------------------------------------------
-let g:user_emmet_leader_key = '<c-k>'
+let g:user_emmet_leader_key = '<c-.>'
 
 "------------------------------------------------------------------------------
 " Rainbow Parentheses
@@ -359,7 +362,33 @@ let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'passive_filetypes': ['html', 'puppet', 'json',
                                \                       'dart'] }
 let g:syntastic_javascript_checkers = ['jshint']
+let s:dub_includes = split(system('find ~/.dub/packages | ' .
+                                \ 'grep "packages/[^/]*\(\(/source\)\|\(/src\)\)\?$" | ' .
+                                \ 'grep -v "\(tests\?\|examples\?\|bin\)$"'))
+let s:fdub_includes = []
 
+func! IsSourced(m)
+  return (match(a:m, '/source') != -1) || (match(a:m, '/src') != -1)
+endfunc
+
+for m in s:dub_includes
+  if (IsSourced(m))
+    call add(s:fdub_includes, m)
+  endif
+
+  let s:is_there = 0
+  for n in s:dub_includes
+    if (match(n, m) == 0 && IsSourced(n))
+      let s:is_there = 1
+    endif
+  endfor
+
+  if (s:is_there == 0)
+    call add(s:fdub_includes, m)
+  endif
+endfor
+
+let g:syntastic_d_include_dirs = add(s:fdub_includes, './source')
 
 "------------------------------------------------------------------------------
 " Status Line - except for the first line, this is
