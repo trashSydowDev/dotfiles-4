@@ -13,6 +13,7 @@
     st = status
     br = branch
     l = "!source ~/dotfiles/git/helpers.sh && pretty_git_log"
+    tree = "log --graph --oneline --all"
     type = cat-file -t
     dump = cat-file -p
     d = diff
@@ -30,3 +31,5 @@
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
+[remote "origin"]
+    fetch = refs/pull/*/head:refs/remotes/origin/pr/*
