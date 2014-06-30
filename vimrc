@@ -18,6 +18,7 @@ Bundle 'elzr/vim-json'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'mintplant/vim-literate-coffeescript'
 Bundle 'gkz/vim-ls'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'digitaltoad/vim-jade'
@@ -362,33 +363,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'passive_filetypes': ['html', 'puppet', 'json',
                                \                       'dart'] }
 let g:syntastic_javascript_checkers = ['jshint']
-let s:dub_includes = split(system('find ~/.dub/packages | ' .
-                                \ 'grep "packages/[^/]*\(\(/source\)\|\(/src\)\)\?$" | ' .
-                                \ 'grep -v "\(tests\?\|examples\?\|bin\)$"'))
-let s:fdub_includes = []
-
-func! IsSourced(m)
-  return (match(a:m, '/source') != -1) || (match(a:m, '/src') != -1)
-endfunc
-
-for m in s:dub_includes
-  if (IsSourced(m))
-    call add(s:fdub_includes, m)
-  endif
-
-  let s:is_there = 0
-  for n in s:dub_includes
-    if (match(n, m) == 0 && IsSourced(n))
-      let s:is_there = 1
-    endif
-  endfor
-
-  if (s:is_there == 0)
-    call add(s:fdub_includes, m)
-  endif
-endfor
-
-let g:syntastic_d_include_dirs = add(s:fdub_includes, './source')
 
 "------------------------------------------------------------------------------
 " Status Line - except for the first line, this is
