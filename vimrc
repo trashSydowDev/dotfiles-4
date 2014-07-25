@@ -161,6 +161,9 @@ nnoremap <leader>ss :split<cr>
 nnoremap <leader>vv :vsplit<cr>
 nnoremap <leader>cc :close<cr>
 
+" Increment numbers
+nnoremap <leader>aa <C-a>
+
 " Easily move lines around:
 nnoremap [e dd\|k\|P
 nnoremap ]e dd\|p
