@@ -26,7 +26,7 @@ function setup_vim() {
 }
 
 function setup_zsh() {
-  git clone git@github.com:robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+  git clone http://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
   echo "ym.zsh-theme" >> $HOME/.oh-my-zsh/.git/info/exclude
   ln -s $HOME/dotfiles/ym.zsh-theme $HOME/.oh-my-zsh/themes/ym.zsh-theme
 }
