@@ -35,7 +35,7 @@ Bundle 'lukerandall/haskellmode-vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
 Bundle 'bitc/vim-hdevtools'
-Bundle 'jnwhiteh/vim-golang'
+Bundle 'fatih/vim-go'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'dart-lang/dart-vim-plugin'
 " Easier editing plugins
