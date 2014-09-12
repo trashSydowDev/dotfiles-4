@@ -18,8 +18,8 @@ unsetopt correct_all
 DISABLE_AUTO_TITLE=true # disable tmux window auto-renaming
 
 # Environment varibles
-EDITOR="vim"
-SHELL="zsh"
+export EDITOR="vim"
+export SHELL="zsh"
 
 # Bindings
 bindkey -v
@@ -59,7 +59,6 @@ if [[ $(uname) == 'Linux' ]]; then
     # chromeos and ubuntu default boot
     alias chromeos-defaultboot="sudo cgpt add -i 6 -P 0 -S 1 /dev/sda"
     alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
-
 # OSX stuff
 elif [[ $(uname) == 'Darwin' ]]; then
     # add npm bin to PATH
@@ -85,21 +84,15 @@ elif [[ $(uname) == 'Darwin' ]]; then
     alias irs='irssi'
 fi
 
-PATH=$PATH:$HOME/.rvm/bin                   # Add RVM to PATH for scripting
-PATH=/usr/local/Cellar/ruby/2.1.1/bin:$PATH # Add gems to PATH for scripting
-PATH=$HOME/.gem/ruby/2.1.1/bin:$PATH
-
 PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
 PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
 
-## todo.txt set-up
-source $HOME/dotfiles/todo/todo-setup.sh
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-source ~/.fzf.zsh
+export GOPATH=~/program/golang/
+export PATH=$GOPATH/bin:$PATH
 
-# golang stuff
-export PATH="$HOME/.gobrew/bin:$PATH"
-eval "$(gobrew init -)"
-export DOCKER_HOST=tcp://localhost:4243
+# Base16 Shell
+BASE16_SCHEME="default"
+BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
