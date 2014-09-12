@@ -34,6 +34,7 @@ Bundle 'Shougo/vimshell.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
+Bundle 'jpalardy/vim-slime'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'fatih/vim-go'
 Bundle 'leafgarland/typescript-vim'
@@ -48,6 +49,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'sjl/gundo.vim'
 " UX plugins
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Bundle 'chriskempson/base16-vim'
 Bundle 'noahfrederick/Hemisu'
 Bundle 'vim-scripts/CSApprox'
 Bundle 'euclio/vim-nocturne'
@@ -72,6 +74,7 @@ filetype plugin indent on
 set ttyfast    " indicates we have a strong
                " terminal connection
 set ttimeoutlen=10
+set tenc=utf8
 " Minimize the escape delay
 if ! has('gui_running')
   augroup FastEscape
@@ -81,7 +84,8 @@ if ! has('gui_running')
   augroup END
 endif
 syntax on
-colorscheme Tomorrow-Night-Bright
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-default
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 "highlight Normal ctermbg=NONE
@@ -145,7 +149,7 @@ filetype plugin on
 "------------------------------------------------------------------------------
 " GUI
 "------------------------------------------------------------------------------
-set guifont=Monaco:h10
+set guifont=Monaco:h11
 set guioptions=
 
 "------------------------------------------------------------------------------
@@ -209,13 +213,13 @@ augroup fileTypeMods
   " Javascript
   autocmd FileType javascript set shiftwidth=2
   autocmd FileType javascript nnoremap <buffer> <leader>mk :w<CR>:!node %<cr>
-  autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 0 %<cr>
+  autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 10000 %<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>co :w<CR>:!mocha --require blanket -R html-cov % > cov.html; open cov.html<CR>
   " CoffeeScript
   autocmd FileType coffee set shiftwidth=2
   autocmd FileType coffee nnoremap <buffer> <leader>ms :w<CR>:CoffeeWatch<cr>
   autocmd FileType coffee nnoremap <buffer> <leader>mk :w<CR>:CoffeeRun<cr>
-  autocmd FileType coffee nnoremap <buffer> <leader>ts :w<CR>:!mocha --compilers coffee:coffee-script/register -R spec -t 0 %<cr>
+  autocmd FileType coffee nnoremap <buffer> <leader>ts :w<CR>:!mocha --compilers coffee:coffee-script/register -R spec -t 10000 %<cr>
   " LiveScript
   autocmd FileType ls set shiftwidth=2
   autocmd FileType ls nnoremap <buffer> <leader>mk :LiveScriptCompile vert watch<CR>
@@ -234,6 +238,7 @@ augroup fileTypeMods
   autocmd FileType haskell nnoremap <buffer> <leader>mt :HdevtoolsType<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mc :HdevtoolsClear<CR>
+  autocmd FileType haskell noremap <buffer> <leader>mp :PointFree<CR>
   autocmd FileType haskell set shiftwidth=2
   " Golang
   autocmd FileType go nnoremap <buffer> <leader>mk :w<CR>:!go run %<CR>
@@ -395,17 +400,15 @@ let g:haddock_browser = 'open'
 let g:haddock_browser_callformat = '%s %s'
 
 "------------------------------------------------------------------------------
-" vim-eighties
-"------------------------------------------------------------------------------
-let g:eighties_enabled = 1
-let g:eighties_minimum_width = &textwidth
-let g:eighties_extra_width = 4
-let g:eighties_compute = 0
-
-"------------------------------------------------------------------------------
 " ctrlp
 "------------------------------------------------------------------------------
 let g:ctrlp_custom_ignore = 'DS_Store\|git\|bower_components\|vendor'
+
+"------------------------------------------------------------------------------
+" slime
+"------------------------------------------------------------------------------
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
 
 "------------------------------------------------------------------------------
 " neocomplcache

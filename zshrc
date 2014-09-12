@@ -61,6 +61,7 @@ if [[ $(uname) == 'Linux' ]]; then
     alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
 # OSX stuff
 elif [[ $(uname) == 'Darwin' ]]; then
+    alias tmux="tmux -u"
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
     # add brew before the path
