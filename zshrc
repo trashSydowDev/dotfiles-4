@@ -34,6 +34,9 @@ alias session-main="bash $HOME/dotfiles/bin/session-main.sh"
 alias spec="mocha -t 5000 -R spec"
 alias ns="npm run-script"
 alias vinstall="vim +BundleInstall +qall"
+alias hog="hoogle -c -n 10 "
+
+alias cabalspec="cabal test --show-details=always --test-option=--color"
 
 function mkcd () {
     mkdir $1;
@@ -61,7 +64,9 @@ if [[ $(uname) == 'Linux' ]]; then
     alias ubuntu-defaultboot="sudo cgpt add -i 6 -P 5 -S 1 /dev/sda"
 # OSX stuff
 elif [[ $(uname) == 'Darwin' ]]; then
+    # UTF-8 support in daily use tools
     alias tmux="tmux -u"
+    export LESSCHARSET=UTF-8
     # add npm bin to PATH
     export PATH=/usr/local/share/npm/bin:$PATH
     # add brew before the path
@@ -83,6 +88,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
     autoload -U compinit && compinit -u
     alias vim='mvim -v'
     alias irs='irssi'
+    export DOCKER_HOST=tcp://192.168.59.103:2375
 fi
 
 PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
@@ -94,6 +100,16 @@ export GOPATH=~/program/golang/
 export PATH=$GOPATH/bin:$PATH
 
 # Base16 Shell
-BASE16_SCHEME="default"
+BASE16_SCHEME="atelierforest"
 BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
+
+# added by travis gem
+[ -f /Users/adam/.travis/travis.sh ] && source /Users/adam/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# This loads DVM into a shell session.
+if [ -s /Users/adam/.dvm/scripts/dvm ] ; then
+	. /Users/adam/.dvm/scripts/dvm
+fi

@@ -18,6 +18,7 @@ Bundle 'elzr/vim-json'
 Bundle 'scrooloose/syntastic'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'zah/nimrod.vim'
 Bundle 'mintplant/vim-literate-coffeescript'
 Bundle 'gkz/vim-ls'
 Bundle 'othree/javascript-libraries-syntax.vim'
@@ -28,20 +29,24 @@ Bundle 'wavded/vim-stylus'
 Bundle 'groenewege/vim-less'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-classpath'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'lukerandall/haskellmode-vim'
+Bundle 'wting/rust.vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
 Bundle 'jpalardy/vim-slime'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'fatih/vim-go'
+Bundle 'honza/dockerfile.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'dart-lang/dart-vim-plugin'
 " Easier editing plugins
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/tabular'
@@ -64,6 +69,8 @@ Bundle 'Shougo/neosnippet'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/sudo.vim'
+" Other
+Bundle 'lukaszkorecki/workflowish'
 
 filetype plugin indent on
 
@@ -85,14 +92,14 @@ if ! has('gui_running')
 endif
 syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-default
+colorscheme base16-atelierdune
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 "highlight Normal ctermbg=NONE
 set cursorline
 set cursorcolumn
 " Show trailing spaces
-set listchars=trail:.,tab:\|-
+set listchars=trail:.,tab:--
 set list
 
 " Look good on linux:
@@ -160,11 +167,6 @@ let mapleader = ","
 " Write RO files
 cnoremap sudow w !sudo tee % >/dev/null
 
-" Easily split and close windows
-nnoremap <leader>ss :split<cr>
-nnoremap <leader>vv :vsplit<cr>
-nnoremap <leader>cc :close<cr>
-
 " Increment numbers
 nnoremap <leader>aa <C-a>
 
@@ -185,7 +187,7 @@ nnoremap <silent> ]p :set nopaste<cr>
 nnoremap <silent> <leader>p :RainbowParenthesesToggle<cr>
 
 " Quickly source or edit .vimrc:
-nnoremap <leader>sv :source $MYVIMRC<cr>
+"nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 
 " Repeat last substitution
@@ -193,6 +195,9 @@ nnoremap <leader>r :s<cr>
 
 " Jump to definition or declaration (YCM)
 nnoremap <leader>g :Ack<Space>
+
+" Resize to textwidth
+nnoremap <silent> <leader>ts :SyntasticToggleMode<cr>
 
 " Resize to textwidth
 nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
@@ -235,11 +240,13 @@ augroup fileTypeMods
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " Haskell
   autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
+  autocmd FileType haskell au BufEnter *.hs compiler ghc
   autocmd FileType haskell nnoremap <buffer> <leader>mt :HdevtoolsType<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mc :HdevtoolsClear<CR>
-  autocmd FileType haskell noremap <buffer> <leader>mp :PointFree<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>mp :PointFree<CR>
   autocmd FileType haskell set shiftwidth=2
+  autocmd FileType haskell nmap <buffer> <C-C><C-k> :call EvaluateHaskell()<cr>
   " Golang
   autocmd FileType go nnoremap <buffer> <leader>mk :w<CR>:!go run %<CR>
   " VimScript
@@ -255,8 +262,24 @@ augroup fileTypeMods
   autocmd FileType d nnoremap <buffer> <leader>ts :!rdmd -unittest %<CR>
 augroup END
 
+nnoremap <leader>mo :ConqueTermSplit bash<cr><esc>:resize 10<cr>i
+
+func! EvaluateHaskell()
+  set ft=haskell.script
+  execute "normal! <C-c><C-c>"
+  set ft=haskell
+endfunc
+
 " Support all markdown extensions
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set filetype=markdown
+au BufNewFile,BufRead *.hss set filetype=haskell.script
+
+" Open a new haskell playground at a little posfix
+func! HaskellPlayground()
+  8split playground.hss
+  execute "normal! <C-o>"
+  execute "normal! <C-w>r"
+endfunc
 
 " Function - FillLine(str) (borrowed from - http://bit.ly/1g4Pi59)
 func! FillLine(str)
@@ -293,7 +316,8 @@ vnoremap <leader><leader>; :Tabularize/:\zs/l1r0<cr>
 vnoremap <leader><leader><space> :Tabularize/\w\s\zs/l1r0<cr>
 
 " NERDTree
-nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTreeTabsToggle<cr>
+let g:nerdtree_tabs_open_on_gui_startup = 0
 
 " Tagbar
 nnoremap <leader>. :Tagbar<cr>
@@ -325,7 +349,7 @@ set directory=~/.vim/tmp
 "------------------------------------------------------------------------------
 " ZenCoding
 "------------------------------------------------------------------------------
-let g:user_emmet_leader_key = '<c-.>'
+let g:user_emmet_leader_key = '<C-k>'
 
 "------------------------------------------------------------------------------
 " Rainbow Parentheses
@@ -470,3 +494,5 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 let g:neosnippet#snippets_directory='~/dotfiles/vim/snippets'
+
+Bundle 'munshkr/vim-tidal'
