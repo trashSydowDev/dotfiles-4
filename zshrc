@@ -113,3 +113,5 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 if [ -s /Users/adam/.dvm/scripts/dvm ] ; then
 	. /Users/adam/.dvm/scripts/dvm
 fi
+
+source ~/.profile
