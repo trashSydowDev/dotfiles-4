@@ -31,9 +31,9 @@ Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
 Bundle 'tpope/vim-classpath'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
-Bundle 'lukerandall/haskellmode-vim'
 Bundle 'wting/rust.vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'dag/vim2hs'
@@ -63,10 +63,10 @@ Bundle 'kien/rainbow_parentheses.vim'
 " Movement plugins
 Bundle 'Lokaltog/vim-easymotion'
 " Auto-complete and snippet plugins
-Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 " File navigation and opening plugins
-Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/sudo.vim'
 " Other
@@ -101,6 +101,9 @@ set cursorcolumn
 " Show trailing spaces
 set listchars=trail:.,tab:--
 set list
+set shell=/usr/local/bin/zsh
+let $PATH.=':/Users/adam/.cabal/bin'
+let $PATH.=':/Users/adam/Library/Haskell/bin'
 
 " Look good on linux:
 if has("unix")
@@ -197,7 +200,7 @@ nnoremap <leader>r :s<cr>
 nnoremap <leader>g :Ack<Space>
 
 " Resize to textwidth
-nnoremap <silent> <leader>ts :SyntasticToggleMode<cr>
+nnoremap <silent> <leader>ty :SyntasticToggleMode<cr>
 
 " Resize to textwidth
 nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
@@ -240,13 +243,12 @@ augroup fileTypeMods
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " Haskell
   autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
-  autocmd FileType haskell au BufEnter *.hs compiler ghc
   autocmd FileType haskell nnoremap <buffer> <leader>mt :HdevtoolsType<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mc :HdevtoolsClear<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mp :PointFree<CR>
   autocmd FileType haskell set shiftwidth=2
-  autocmd FileType haskell nmap <buffer> <C-C><C-k> :call EvaluateHaskell()<cr>
+  autocmd FileType haskell nmap <buffer> <C-C><C-k> :set ft=haskell.script<cr><C-c><C-c>:set ft=haskell<cr>
   " Golang
   autocmd FileType go nnoremap <buffer> <leader>mk :w<CR>:!go run %<CR>
   " VimScript
@@ -262,24 +264,11 @@ augroup fileTypeMods
   autocmd FileType d nnoremap <buffer> <leader>ts :!rdmd -unittest %<CR>
 augroup END
 
-nnoremap <leader>mo :ConqueTermSplit bash<cr><esc>:resize 10<cr>i
-
-func! EvaluateHaskell()
-  set ft=haskell.script
-  execute "normal! <C-c><C-c>"
-  set ft=haskell
-endfunc
+nnoremap <leader>mo <C-w>s<C-w>J:VimShell<cr><esc>:resize 10<cr>i
 
 " Support all markdown extensions
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set filetype=markdown
 au BufNewFile,BufRead *.hss set filetype=haskell.script
-
-" Open a new haskell playground at a little posfix
-func! HaskellPlayground()
-  8split playground.hss
-  execute "normal! <C-o>"
-  execute "normal! <C-w>r"
-endfunc
 
 " Function - FillLine(str) (borrowed from - http://bit.ly/1g4Pi59)
 func! FillLine(str)
@@ -418,15 +407,9 @@ let g:Powerline_colorscheme='solarized256'
 let g:Powerline_stl_path_style='full'
 
 "------------------------------------------------------------------------------
-" Haskell Mode Vim
-"------------------------------------------------------------------------------
-let g:haddock_browser = 'open'
-let g:haddock_browser_callformat = '%s %s'
-
-"------------------------------------------------------------------------------
 " ctrlp
 "------------------------------------------------------------------------------
-let g:ctrlp_custom_ignore = 'DS_Store\|git\|bower_components\|vendor'
+nnoremap <C-p> :Unite file_rec<cr>
 
 "------------------------------------------------------------------------------
 " slime
@@ -434,56 +417,12 @@ let g:ctrlp_custom_ignore = 'DS_Store\|git\|bower_components\|vendor'
 let g:slime_target = "tmux"
 let g:slime_paste_file = tempname()
 
-"------------------------------------------------------------------------------
-" neocomplcache
-"------------------------------------------------------------------------------
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+let g:necoghc_enable_detailed_browse = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 "------------------------------------------------------------------------------
 " neosnippet
@@ -494,5 +433,3 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 let g:neosnippet#snippets_directory='~/dotfiles/vim/snippets'
-
-Bundle 'munshkr/vim-tidal'
