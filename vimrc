@@ -32,6 +32,7 @@ Bundle 'guns/vim-clojure-static'
 Bundle 'tpope/vim-classpath'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'Shougo/unite.vim'
+Bundle 'eagletmt/unite-haddock'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'wting/rust.vim'
@@ -93,6 +94,7 @@ endif
 syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-atelierdune
+set background=dark
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 "highlight Normal ctermbg=NONE
@@ -242,6 +244,8 @@ augroup fileTypeMods
   " C
   autocmd FileType c nnoremap <buffer> <leader>mk :call CompileRunGcc()<CR>
   " Haskell
+  autocmd FileType haskell nnoremap <buffer> <leader>md :Unite haddock<cr>
+  autocmd FileType haskell nnoremap <buffer> <leader>mf :Unite hoogle<cr>
   autocmd FileType haskell nnoremap <buffer> <leader>mk :w<CR>:!runhaskell %<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mt :HdevtoolsType<CR>
   autocmd FileType haskell nnoremap <buffer> <leader>mi :HdevtoolsInfo<CR>
