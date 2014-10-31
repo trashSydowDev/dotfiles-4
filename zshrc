@@ -81,6 +81,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
     alias zless=$PAGER
     # Volume for OSX
     function vol () {
+    alias love=/opt/homebrew-cask/Caskroom/love/0.9.1/love.app/Contents/MacOS/love
       osascript -e "set volume $1"
     }
     # Marks and jumping
