@@ -15,6 +15,13 @@ function main() {
   setup_zsh
 }
 
+function setup_bin() {
+  mkdir -p $HOME/.bin
+  for i in $HOME/dotfiles/bin/* ; do
+    ln -s $HOME/dotfiles/bin/$i $HOME/.bin/$i
+  done
+}
+
 function setup_vim() {
   mkdir $HOME/.vim
   mkdir $HOME/.vim/backup

@@ -1,0 +1,2 @@
+#!/bin/bash
+w3m http://hackage.haskell.org/packages/search?terms=$1

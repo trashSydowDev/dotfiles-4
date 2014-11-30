@@ -1,0 +1,2 @@
+#!/bin/sh
+PAGER="col -b | mview -v -c 'set ft=man nomod nolist' - " man $*
