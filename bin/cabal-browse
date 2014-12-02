@@ -1,0 +1,4 @@
+#!/bin/bash
+# Opens a package's page on hackage
+# Author: yamadapc <github.com/yamadapc> 2014
+open "http://hackage.haskell.org/package/$1"
