@@ -13,7 +13,7 @@ config resizePercentOf screenSize
 
 #config windowHintsSpread true
 bind e:cmd hint asdfghjklqwertyuiop
-bind g:cmd grid padding:3 0:6,5
+bind g:cmd grid padding:3 0:8,6
 
 # ------------------------------------------------------------------------------
 # Alias' directive: alias name value
