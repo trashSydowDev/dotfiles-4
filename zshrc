@@ -49,9 +49,6 @@ function vack () {
     vim +"Ack $1" +"only"
 }
 
-# add ~/.bin to PATH
-mkdir -p $HOME/.bin
-export PATH=$HOME/.bin:$PATH
 
 # Linux Stuff
 if [[ $(uname) == 'Linux' ]]; then
@@ -116,3 +113,8 @@ if [ -s /Users/adam/.dvm/scripts/dvm ] ; then
 fi
 
 source ~/.profile
+
+# add ~/.bin to PATH
+mkdir -p $HOME/.bin
+export PATH=$HOME/.bin:$PATH
+
