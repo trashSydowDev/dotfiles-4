@@ -1,0 +1,4 @@
+#!/bin/bash
+cabal info $1 |
+grep -i "versions available" |
+perl -n -e '/([^,\s]+),$/ && print $1'
