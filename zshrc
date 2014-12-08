@@ -76,6 +76,16 @@ elif [[ $(uname) == 'Darwin' ]]; then
     alias ctags="`brew --prefix`/bin/ctags"
     alias less=$PAGER
     alias zless=$PAGER
+    fzf-autojump-widget() {
+      cd $(
+        cat /Users/adam/.local/share/autojump/autojump.txt |
+        sort -n |
+        ggrep -oP '^[^\s]+\s+(\K.*)$' |
+        fzf --reverse +s
+      )
+    }
+    zle     -N    fzf-autojump-widget
+    bindkey '^F' fzf-autojump-widget
     # Volume for OSX
     function vol () {
     alias love=/opt/homebrew-cask/Caskroom/love/0.9.1/love.app/Contents/MacOS/love
@@ -86,7 +96,9 @@ elif [[ $(uname) == 'Darwin' ]]; then
     autoload -U compinit && compinit -u
     alias vim='mvim -v'
     alias irs='irssi'
-    export DOCKER_HOST=tcp://192.168.59.103:2375
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=/Users/adam/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
 fi
 
 PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
@@ -95,10 +107,11 @@ PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export GOPATH=~/program/golang/
-export PATH=$GOPATH/bin:$PATH
+export GOROOT=`go env GOROOT`
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Base16 Shell
-BASE16_SCHEME="atelierforest"
+BASE16_SCHEME="summerfruit"
 BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
@@ -113,6 +126,10 @@ if [ -s /Users/adam/.dvm/scripts/dvm ] ; then
 fi
 
 source ~/.profile
+source ~/.fzf.zsh
+
+# OPAM configuration
+. /Users/adam/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # add ~/.bin to PATH
 mkdir -p $HOME/.bin
