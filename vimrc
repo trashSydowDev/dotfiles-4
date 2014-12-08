@@ -23,20 +23,26 @@ Bundle 'mintplant/vim-literate-coffeescript'
 Bundle 'gkz/vim-ls'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'lambdatoast/elm.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'heartsentwined/vim-emblem'
+Bundle 'dbakker/vim-lint'
+Bundle 'elixir-lang/vim-elixir'
 Bundle 'wavded/vim-stylus'
 Bundle 'groenewege/vim-less'
 Bundle 'tpope/vim-fireplace'
 Bundle 'guns/vim-clojure-static'
+Bundle 'guns/vim-sexp'
 Bundle 'tpope/vim-classpath'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'Shougo/unite.vim'
+Bundle 'osyo-manga/unite-quickfix'
 Bundle 'eagletmt/unite-haddock'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'Shougo/vimshell.vim'
 Bundle 'wting/rust.vim'
 Bundle 'eagletmt/neco-ghc'
+Bundle 'eagletmt/ghcmod-vim'
 Bundle 'dag/vim2hs'
 Bundle 'jpalardy/vim-slime'
 Bundle 'bitc/vim-hdevtools'
@@ -71,7 +77,8 @@ Bundle 'Shougo/neosnippet-snippets'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/sudo.vim'
 " Other
-Bundle 'lukaszkorecki/workflowish'
+Bundle 'szw/vim-g'
+Bundle 'yuratomo/w3m.vim'
 
 filetype plugin indent on
 
@@ -93,8 +100,8 @@ if ! has('gui_running')
 endif
 syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-atelierdune
 set background=dark
+colorscheme base16-summerfruit
 " Override colorscheme bg so they look properly under any decent terminal -
 " it's more of a hack than anything else
 "highlight Normal ctermbg=NONE
@@ -102,6 +109,7 @@ set cursorline
 set cursorcolumn
 " Show trailing spaces
 set listchars=trail:.,tab:--
+set tags=./tags,tags,codex.tags
 set list
 set shell=/usr/local/bin/zsh
 let $PATH.=':/Users/adam/.cabal/bin'
@@ -137,7 +145,8 @@ set smarttab
 " General
 set hidden                   " edit multiple unsaved files at the
                              " same time
-set ic                       " ignorecase in search
+set ignorecase               " be case-insensitive in search
+set smartcase                " but be case-sensitive with any upper-case chars
 set complete=.,w,b,u,U,t,i,d
 set completeopt-=preview
 "set clipboard=unnamed        " yank and paste with the system clipboard
@@ -163,6 +172,7 @@ filetype plugin on
 "------------------------------------------------------------------------------
 set guifont=Monaco:h11
 set guioptions=
+highlight Comment cterm=italic
 
 "------------------------------------------------------------------------------
 " Mappings
@@ -201,8 +211,13 @@ nnoremap <leader>r :s<cr>
 " Jump to definition or declaration (YCM)
 nnoremap <leader>g :Ack<Space>
 
+vnoremap <leader>if :Googlef<cr>
+vnoremap <leader>ig :Google<cr>
+nnoremap <leader>ig :Google<space>
+
 " Resize to textwidth
 nnoremap <silent> <leader>ty :SyntasticToggleMode<cr>
+nnoremap <silent> <leader>sc :SyntasticCheck<cr>
 
 " Resize to textwidth
 nnoremap <silent> <leader>tw :call TextWidthResize()<CR>
@@ -253,6 +268,7 @@ augroup fileTypeMods
   autocmd FileType haskell nnoremap <buffer> <leader>mp :PointFree<CR>
   autocmd FileType haskell set shiftwidth=2
   autocmd FileType haskell nmap <buffer> <C-C><C-k> :set ft=haskell.script<cr><C-c><C-c>:set ft=haskell<cr>
+  autocmd FileType haskell nmap <buffer> <C-C><C-r> :set ft=haskell.script<cr>:SlimeSend1 :reload<cr>:set ft=haskell<cr>
   " Golang
   autocmd FileType go nnoremap <buffer> <leader>mk :w<CR>:!go run %<CR>
   " VimScript
@@ -295,13 +311,10 @@ func! InterpretPython()
 endfunc
 
 " Tabs
-nnoremap <leader>tt :tab<Space>
 nnoremap tt :tabnew<CR>
 nnoremap tn :tabnext<CR>
-nnoremap te :tabedit
-nnoremap tc :tabclose<CR>
-nnoremap tn :tabnext<CR>
 nnoremap tp :tabprevious<CR>
+nnoremap tc :tabclose<CR>
 
 " Tabularize
 vnoremap <leader>w :Tabularize/
@@ -314,6 +327,37 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 
 " Tagbar
 nnoremap <leader>. :Tagbar<cr>
+let g:tagbar_type_haskell = {
+    \ 'ctagsbin'  : 'hasktags',
+    \ 'ctagsargs' : '-x -c -o-',
+    \ 'kinds'     : [
+        \  'm:modules:0:1',
+        \  'd:data: 0:1',
+        \  'd_gadt: data gadt:0:1',
+        \  't:type names:0:1',
+        \  'nt:new types:0:1',
+        \  'c:classes:0:1',
+        \  'cons:constructors:1:1',
+        \  'c_gadt:constructor gadt:1:1',
+        \  'c_a:constructor accessors:1:1',
+        \  'ft:function types:1:1',
+        \  'fi:function implementations:0:1',
+        \  'o:others:0:1'
+    \ ],
+    \ 'sro'        : '.',
+    \ 'kind2scope' : {
+        \ 'm' : 'module',
+        \ 'c' : 'class',
+        \ 'd' : 'data',
+        \ 't' : 'type'
+    \ },
+    \ 'scope2kind' : {
+        \ 'module' : 'm',
+        \ 'class'  : 'c',
+        \ 'data'   : 'd',
+        \ 'type'   : 't'
+    \ }
+\ }
 
 " Clear search
 nnoremap <silent><Leader>/ :nohlsearch<CR>
@@ -331,6 +375,10 @@ noremap <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " General tweaks:
 onoremap p i(
 
+"------------------------------------------------------------------------------
+" vim2hs
+"------------------------------------------------------------------------------
+let g:haskell_conceal_enumerations = 0
 
 "------------------------------------------------------------------------------
 " Backup (without bloat)
@@ -377,17 +425,18 @@ endif
 "------------------------------------------------------------------------------
 " Syntastic
 "------------------------------------------------------------------------------
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_enable_signs = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'active_filetypes':  ['javascript', 'ruby',
-                               \                       'php', 'python', 'c', 
-                               \                       'cpp', 'haskell'],
+                               \                       'php', 'python', 'c',
+                               \                       'cpp'],
                                \ 'passive_filetypes': ['html', 'puppet', 'json',
                                \                       'dart'] }
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_aggregate_errors = 1
 
 "------------------------------------------------------------------------------
 " Status Line - except for the first line, this is
@@ -431,9 +480,16 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 "------------------------------------------------------------------------------
 " neosnippet
 "------------------------------------------------------------------------------
-imap <leader><TAB> <Plug>(neosnippet_expand_or_jump)
-smap <leader><TAB> <Plug>(neosnippet_expand_or_jump)
+imap <C-l> <Plug>(neosnippet_expand_or_jump)
+smap <C-l> <Plug>(neosnippet_expand_or_jump)
+xmap <C-l> <Plug>(neosnippet_expand_target)
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-let g:neosnippet#snippets_directory='~/dotfiles/vim/snippets'
+"let g:neosnippet#snippets_directory='~/dotfiles/vim/snippets'
+
+"------------------------------------------------------------------------------
+" VimShell
+"------------------------------------------------------------------------------
+let g:vimshell_user_prompt = 'getcwd()'
+let g:vimshell_prompt =  '$ '
