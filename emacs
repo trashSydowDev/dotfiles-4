@@ -67,9 +67,13 @@
 (global-winner-mode)
 (cua-mode 1) ;; copy/paste/cut commands with reasonable bindings
 (electric-pair-mode 1) ;; auto-insert matching parentheses/brackets/etc.
-(global-linum-mode 1) ;; display line numbers
 (setq-default indent-tabs-mode nil) ;; use spaces, not tabs
 (ido-mode 1)
+
+; Line numbers
+(require 'linum)
+(global-linum-mode 1) ;; display line numbers
+(setq linum-format "%d ")
 
 ; Fix crashing on PDF viewing
 (add-hook 'doc-view-mode-hook (lambda () (linum-mode -1)))
@@ -103,6 +107,7 @@
 ;; Looks
 (load-theme 'ample)
 (global-hl-line-mode 1)
+(set-face-attribute 'hl-line nil :background "color-235")
 
 ; Highlight trailing whitespace
 (require 'whitespace)
