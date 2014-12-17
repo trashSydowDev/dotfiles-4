@@ -100,9 +100,9 @@
 
 ; Switch H with ^ and L with $
 (define-key evil-motion-state-map "H" 'evil-first-non-blank)
-(define-key evil-motion-state-map "^" 'evil-window-top)
-(define-key evil-motion-state-map "$" 'evil-window-bottom)
 (define-key evil-motion-state-map "L" 'end-of-line)
+(evil-leader/set-key "H" 'evil-window-top)
+(evil-leader/set-key "L" 'evil-window-bottom)
 
 ;; Looks
 (load-theme 'ample)
