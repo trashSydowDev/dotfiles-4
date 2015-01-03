@@ -51,27 +51,34 @@
 (require-package 'flycheck-haskell)
 (require-package 'exec-path-from-shell)
 (require-package 'haskell-mode)
+(require-package 'shm)
 (require-package 'magit)
 (require-package 'smart-mode-line)
 (require-package 'clojure-mode)
 (require-package 'projectile)
 (require-package 'helm)
 (require-package 'cider)
+(require-package 'js2-mode)
+(require-package 'company-tern)
+(require-package 'rust-mode)
+(require-package 'flycheck-rust)
+(require-package 'google-this)
+(require-package 'yasnippet)
 
 ;; Basic Settings
 (setq ring-bell-function 'ignore)
 
-(require 'exec-path-from-shell)
+(require 'exec-path-from-shell) ; load "$PATH" from zsh
 (exec-path-from-shell-initialize)
 
-(global-company-mode)
+(global-company-mode) ; auto-completion
 (define-globalized-minor-mode global-winner-mode winner-mode
   (lambda () (winner-mode 1)))
-(global-winner-mode)
-(cua-mode 1) ;; copy/paste/cut commands with reasonable bindings
-(electric-pair-mode 1) ;; auto-insert matching parentheses/brackets/etc.
-(setq-default indent-tabs-mode nil) ;; use spaces, not tabs
-(ido-mode 1)
+(global-winner-mode) ; layout changes undo/redo
+(cua-mode 1) ; copy/paste/cut commands with reasonable bindings
+(electric-pair-mode 1) ; auto-insert matching parentheses/brackets/etc.
+(setq-default indent-tabs-mode nil) ; use spaces, not tabs
+(ido-mode 1) ; more interactivity
 
 ; Line numbers
 (require 'linum)
@@ -92,7 +99,7 @@
 (require 'evil-nerd-commenter)
 (require 'evil-easymotion)
 (evil-mode 1)
-(global-evil-leader-mode)
+(global-evil-leader-mode 1)
 (global-evil-surround-mode)
 (set-variable 'evil-esc-delay 0) ; Fix escape delays
 
@@ -111,6 +118,7 @@
 (load-theme 'ample)
 (global-hl-line-mode 1)
 (set-face-attribute 'hl-line nil :background "color-235")
+(set-terminal-coding-system 'utf-8-auto-unix)
 
 ; Highlight trailing whitespace
 (require 'whitespace)
@@ -133,8 +141,8 @@
 ; Highlight 79th column
 (require 'fill-column-indicator)
 (setq-default fill-column 79)
-(define-globalized-minor-mode global-fci-mode
-  fci-mode (lambda () (fci-mode 1)))
+(define-globalized-minor-mode global-fci-mode fci-mode
+  (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 
 ; A better mode-line
@@ -149,7 +157,7 @@
 
 ;; Persistent undo
 (setq undo-tree-history-directory-alist
-  '(("." . "~/.emacs.d/undo")))
+  `(("." . ,(expand-file-name "~/.emacs.d/undo/"))))
 (setq undo-tree-auto-save-history 1)
 
 ;; Helm mode
@@ -161,12 +169,20 @@
 (require 'projectile)
 (projectile-global-mode 1)
 
+;; Haskell mode
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
 (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(haskell-indentation-ifte-offset 4)
+(haskell-indentation-layout-offset 4)
+(haskell-indentation-left-offset 4)
+(haskell-process-type (quote cabal-repl))
 
+;; JS editing
+(add-hook 'js2-mode-hook
+          (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook
           '(lambda () (set-variable 'indent-tabs-mode nil)))
 
