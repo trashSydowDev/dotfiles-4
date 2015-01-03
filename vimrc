@@ -172,7 +172,9 @@ filetype plugin on
 "------------------------------------------------------------------------------
 set guifont=Monaco:h11
 set guioptions=
-highlight Comment cterm=italic
+if $TERM =~ 'italic'
+  highlight Comment cterm=italic
+endif
 
 "------------------------------------------------------------------------------
 " Mappings
