@@ -114,6 +114,26 @@
 (evil-leader/set-key "H" 'evil-window-top)
 (evil-leader/set-key "L" 'evil-window-bottom)
 
+; Better window rotation
+(defun window-rotate-downwards-prime ()
+  "Swaps a window with its 'cyclic ordering' neighbor"
+  :repeat nil
+  (let ((current-window (car (window-list)))
+        (target-window (cadr (window-list))))
+    (if target-window
+        (or (swap-window-buffers current-window target-window)
+            (select-window target-window)))))
+
+(defun swap-window-buffers (w1 w2)
+  "Swaps two windows' buffers."
+  (let ((b1 (window-buffer w1))
+        (b2 (window-buffer w2)))
+    (set-window-buffer w1 b2)
+    (set-window-buffer w2 b1)))
+
+; Google things
+(evil-leader/set-key "ig" 'google-this-noconfirm)
+
 ;; Looks
 (load-theme 'ample)
 (global-hl-line-mode 1)
