@@ -82,6 +82,10 @@
 (setq-default indent-tabs-mode nil) ; use spaces, not tabs
 (ido-mode 1) ; more interactivity
 
+; Rainbow delimiters
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ; Line numbers
 (require 'linum)
 (global-linum-mode 1) ;; display line numbers
