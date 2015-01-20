@@ -203,15 +203,17 @@
 (projectile-global-mode 1)
 
 ;; Haskell mode
+(require 'haskell-mode)
+(require 'haskell-indentation)
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
 (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(haskell-indentation-ifte-offset 4)
-(haskell-indentation-layout-offset 4)
-(haskell-indentation-left-offset 4)
-(haskell-process-type (quote cabal-repl))
+(setq haskell-indentation-ifte-offset 4)
+(setq haskell-indentation-layout-offset 4)
+(setq haskell-indentation-left-offset 4)
+(setq haskell-process-type (quote cabal-repl))
 
 ;; JS editing
 (add-hook 'js2-mode-hook
