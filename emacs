@@ -105,11 +105,9 @@
 (require 'evil-leader)
 (require 'evil-nerd-commenter)
 (require 'evil-surround)
-(require 'evil-tabs)
 (evil-mode 1)
 (global-evil-leader-mode 1)
 (global-evil-surround-mode)
-(global-evil-tabs-mode 1)
 (set-variable 'evil-esc-delay 0) ; Fix escape delays
 
 (evilnc-default-hotkeys)
@@ -124,8 +122,12 @@
 (evil-leader/set-key "L" 'evil-window-bottom)
 
 ; Easy tabs switching
+(require 'elscreen)
+(require 'evil-tabs)
+(global-evil-tabs-mode 1)
 (evil-leader/set-key "tt" 'elscreen-create)
 (evil-leader/set-key "tn" 'elscreen-next)
+(evil-leader/set-key "tc" 'elscreen-kill)
 (evil-leader/set-key "tp" 'elscreen-previous)
 (setq elscreen-prefix-key "")
 (setq elscreen-tab-display-control nil)
