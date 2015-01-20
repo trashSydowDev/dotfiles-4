@@ -25,6 +25,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
  '(hl-line ((t (:background "color-235"))))
  '(whitespace-tab ((t (:foreground "color-240" :weight bold))))
  '(whitespace-trailing ((t (:background "color-124" :foreground "red" :weight normal)))))
@@ -126,6 +127,8 @@
 (evil-leader/set-key "tt" 'elscreen-create)
 (evil-leader/set-key "tn" 'elscreen-next)
 (evil-leader/set-key "tp" 'elscreen-previous)
+(setq elscreen-prefix-key "")
+(setq elscreen-tab-display-control nil)
 
 ; Better window rotation
 (defun window-rotate-downwards-prime ()
