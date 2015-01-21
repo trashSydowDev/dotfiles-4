@@ -79,6 +79,7 @@
   (lambda () (winner-mode 1)))
 (global-winner-mode) ; layout changes undo/redo
 (cua-mode 1) ; copy/paste/cut commands with reasonable bindings
+(show-paren-mode 1) ; highlight matching parens on hover
 (electric-pair-mode 1) ; auto-insert matching parentheses/brackets/etc.
 (setq-default indent-tabs-mode nil) ; use spaces, not tabs
 (ido-mode 1) ; more interactivity
