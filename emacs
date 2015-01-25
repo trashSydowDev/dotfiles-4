@@ -65,12 +65,14 @@
 (require-package 'helm-itunes)
 (require-package 'helm-open-github)
 (require-package 'js2-mode)
+(require-package 'js2-refactor)
 (require-package 'magit)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
 (require-package 'rust-mode)
 (require-package 'shm)
 (require-package 'smart-mode-line)
+(require-package 'tern)
 (require-package 'yasnippet)
 
 ;; Basic Settings
@@ -243,11 +245,17 @@
 (setq haskell-indentation-left-offset 4)
 (setq haskell-process-type (quote cabal-repl))
 
-;; JS editing
+;; JavaScript mode
+(require 'company)
+(require 'js2-mode)
+(add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook
           (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook
           '(lambda () (set-variable 'indent-tabs-mode nil)))
+(setq js2-highlight-level 3)
+(add-to-list 'company-backends 'company-tern)
+(setq-default js2-basic-offset 2)
 
 ;; Flycheck mode
 (require 'flycheck)
