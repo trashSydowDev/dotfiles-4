@@ -59,6 +59,11 @@
 (require-package 'google-this)
 (require-package 'haskell-mode)
 (require-package 'helm)
+(require-package 'helm-dash)
+(require-package 'helm-hayoo)
+(require-package 'helm-hoogle)
+(require-package 'helm-itunes)
+(require-package 'helm-open-github)
 (require-package 'js2-mode)
 (require-package 'magit)
 (require-package 'projectile)
@@ -176,6 +181,23 @@
                     :foreground "#183bc8"
                     :weight 'normal)
 (global-whitespace-mode 1)
+
+; Helm Dash.app
+(require 'helm-dash)
+(evil-leader/set-key "mf" 'helm-dash)
+
+(setq helm-dash-docsets-path "~/.docsets/")
+(defvar helm-dash-docsets)
+(defun helm-setup-docsets (hook docsets)
+  (add-hook hook (lambda () (setq-local helm-dash-docsets 'docsets))))
+
+(add-hook 'haskell-mode-hook
+          (lambda () (setq-local helm-dash-docsets '("Haskell"))))
+(add-hook 'emacs-lisp-mode-hook
+          (lambda () (setq-local helm-dash-docsets '("Emacs_Lisp"))))
+(add-hook 'js2-mode-hook
+          (lambda () (setq-local helm-dash-docsets
+                                 '("JavaScript" "Lo-Dash" "EmberJS" "NodeJS"))))
 
 ; Highlight 79th column
 (require 'fill-column-indicator)
