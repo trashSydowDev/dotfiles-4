@@ -15,6 +15,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-term-color-vector
    [unspecified "#272935" "#da4939" "#a5c261" "#ffc66d" "#6d9cbe" "#b6b3eb" "#6d9cbe" "#f4f1ed"] t)
+ '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
@@ -66,6 +67,7 @@
 (require-package 'helm-open-github)
 (require-package 'js2-mode)
 (require-package 'js2-refactor)
+(require-package 'json-mode)
 (require-package 'magit)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
@@ -121,8 +123,9 @@
 (global-evil-surround-mode)
 (set-variable 'evil-esc-delay 0) ; Fix escape delays
 
-(evilnc-default-hotkeys)
 (evil-leader/set-leader ",")
+(evil-leader/set-key "cc" 'evilnc-comment-or-uncomment-lines)
+(evil-leader/set-key "c" 'evilnc-comment-operator)
 (evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
 
@@ -251,7 +254,8 @@
 ;; JavaScript mode
 (require 'company)
 (require 'js2-mode)
-(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js-mode-hook
+          (lambda () (js2-mode)))
 (add-hook 'js2-mode-hook
           (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook
