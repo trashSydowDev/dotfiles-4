@@ -74,6 +74,7 @@
 (require-package 'js2-mode)
 (require-package 'js2-refactor)
 (require-package 'json-mode)
+(require-package 'nlinum)
 (require-package 'magit)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
@@ -113,9 +114,9 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ; Line numbers
-(require 'linum)
-(add-hook 'prog-mode-hook 'linum-mode) ;; display line numbers
-(setq linum-format "%d ")
+(require 'nlinum)
+(add-hook 'prog-mode-hook 'nlinum-mode) ;; display line numbers
+(setq nlinum-format "%d ")
 
 ; Fix crashing on PDF viewing
 (add-hook 'doc-view-mode-hook (lambda () (linum-mode -1)))
