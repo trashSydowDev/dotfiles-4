@@ -16,9 +16,15 @@
  '(ansi-term-color-vector
    [unspecified "#272935" "#da4939" "#a5c261" "#ffc66d" "#6d9cbe" "#b6b3eb" "#6d9cbe" "#f4f1ed"] t)
  '(coffee-tab-width 2)
+ '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
+ '(debug-on-error (quote t))
+ '(haskell-indentation-ifte-offset 4)
+ '(haskell-indentation-layout-offset 4)
+ '(haskell-indentation-left-offset 4)
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(whitespace-display-mappings (quote ((space-mark 32 [46]) (tab-mark 9 [124 45])))))
 (custom-set-faces
@@ -72,7 +78,10 @@
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
 (require-package 'rust-mode)
+(require-package 'scss-mode)
+(require-package 'skewer-mode)
 (require-package 'shm)
+(require-package 'slime)
 (require-package 'smart-mode-line)
 (require-package 'tern)
 (require-package 'yasnippet)
@@ -94,6 +103,9 @@
 (show-paren-mode 1) ; highlight matching parens on hover
 (electric-pair-mode 1) ; auto-insert matching parentheses/brackets/etc.
 (setq-default indent-tabs-mode nil) ; use spaces, not tabs
+(setq tab-width 2)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 (ido-mode 1) ; more interactivity
 
 ; Rainbow delimiters
@@ -102,7 +114,7 @@
 
 ; Line numbers
 (require 'linum)
-(global-linum-mode 1) ;; display line numbers
+(add-hook 'prog-mode-hook 'linum-mode) ;; display line numbers
 (setq linum-format "%d ")
 
 ; Fix crashing on PDF viewing
@@ -111,6 +123,9 @@
 ; Better buffer navigation
 (global-set-key (kbd "C-x C-h") 'previous-buffer)
 (global-set-key (kbd "C-x C-l") 'next-buffer)
+
+;; Magit
+(add-hook 'magit-commit-mode-hook 'flyspell-mode-on)
 
 ;; Evil mode
 (require 'evil)
@@ -124,7 +139,6 @@
 (set-variable 'evil-esc-delay 0) ; Fix escape delays
 
 (evil-leader/set-leader ",")
-(evil-leader/set-key "cc" 'evilnc-comment-or-uncomment-lines)
 (evil-leader/set-key "c" 'evilnc-comment-operator)
 (evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
@@ -146,22 +160,10 @@
 (setq elscreen-prefix-key "")
 (setq elscreen-tab-display-control nil)
 
-; Better window rotation
-(defun window-rotate-downwards-prime ()
-  "Swaps a window with its 'cyclic ordering' neighbor"
-  :repeat nil
-  (let ((current-window (car (window-list)))
-        (target-window (cadr (window-list))))
-    (if target-window
-        (or (swap-window-buffers current-window target-window)
-            (select-window target-window)))))
-
-(defun swap-window-buffers (w1 w2)
-  "Swaps two windows' buffers."
-  (let ((b1 (window-buffer w1))
-        (b2 (window-buffer w2)))
-    (set-window-buffer w1 b2)
-    (set-window-buffer w2 b1)))
+;; Make the interface as bare as possible
+(when is-gui (scroll-bar-mode 0))
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ; Google things
 (evil-leader/set-key "ig" 'google-this-noconfirm)
@@ -190,22 +192,53 @@
                     :weight 'normal)
 (global-whitespace-mode 1)
 
-; Helm Dash.app
+; Set-up the browser as W3M
+(setq browse-url-browser-function 'w3m-browse-url-other-window)
+(defun w3m-browse-url-other-window (url &optional new-window)
+  "Opens an URL in W3M in a different window"
+  (let ((w3m-pop-up-windows t)
+        (target-window (if (one-window-p)
+                           (split-window)
+                         (get-lru-window))))
+    (with-selected-window target-window
+      (w3m-browse-url url new-window))))
+
+(defun switch-default-browser ()
+  "Switches the browse-url function between internal and external browsers"
+  (interactive)
+  (let ((use-w3m (equal browse-url-browser-function
+                        'browse-url-default-browser)))
+    (if use-w3m
+        (setq browse-url-browser-function 'w3m-browse-url-other-window)
+      (setq browse-url-browser-function 'browse-url-default-browser))
+    (message "Browser set to: %s" (if use-w3m "W3M" "External Browser"))))
+(evil-leader/set-key "bs" 'switch-default-browser)
+
+; Helm Dash
 (require 'helm-dash)
 (evil-leader/set-key "mf" 'helm-dash)
 
 (setq helm-dash-docsets-path "~/.docsets/")
 (defvar helm-dash-docsets)
 (defun helm-setup-docsets (hook docsets)
-  (add-hook hook (lambda () (setq-local helm-dash-docsets 'docsets))))
+  (dolist (element docsets)
+    (if (and (not (member element (helm-dash-installed-docsets)))
+             (member element (helm-dash-available-docsets)))
+        (helm-dash-install-docset element)
+      (message (format "Skipping the installation of the docset %s"
+                       element))))
+  (add-hook hook `(lambda () (setq-local helm-dash-docsets ',docsets))))
 
-(add-hook 'haskell-mode-hook
-          (lambda () (setq-local helm-dash-docsets '("Haskell"))))
-(add-hook 'emacs-lisp-mode-hook
-          (lambda () (setq-local helm-dash-docsets '("Emacs_Lisp"))))
-(add-hook 'js2-mode-hook
-          (lambda () (setq-local helm-dash-docsets
-                                 '("JavaScript" "Lo-Dash" "EmberJS" "NodeJS"))))
+(helm-setup-docsets 'haskell-mode-hook '("Haskell"))
+(helm-setup-docsets 'emacs-lisp-mode-hook '("Emacs Lisp"))
+(helm-setup-docsets 'js2-mode-hook
+                    '("Javascript" "Lo-Dash" "EmberJS" "NodeJS" "MarionetteJS"
+                      "BackboneJS" "Chai"))
+(helm-setup-docsets 'coffee-mode-hook
+                    '("jQuery" "jQuery UI" "BackboneJS" "NodeJS" "EmberJS"
+                      "MarionetteJS" "CoffeeScript" "Chai"))
+(helm-setup-docsets 'scss-mode-hook
+                    '("Sass" "CSS" "HTML"))
 
 ; Highlight 79th column
 (require 'fill-column-indicator)
@@ -218,11 +251,6 @@
 (require 'smart-mode-line)
 (sml/setup)
 (sml/apply-theme 'dark)
-
-;; Make the interface as bare as possible
-(when is-gui (scroll-bar-mode 0))
-(menu-bar-mode -1)
-(tool-bar-mode -1)
 
 ;; Persistent undo
 (setq undo-tree-history-directory-alist
@@ -237,6 +265,7 @@
 ;; Projectile mode
 (require 'projectile)
 (projectile-global-mode 1)
+(evil-leader/set-key "ag" 'helm-projectile-ag)
 
 ;; Haskell mode
 (require 'haskell-mode)
@@ -254,15 +283,19 @@
 ;; JavaScript mode
 (require 'company)
 (require 'js2-mode)
-(add-hook 'js-mode-hook
-          (lambda () (js2-mode)))
-(add-hook 'js2-mode-hook
-          (lambda () (tern-mode t)))
-(add-hook 'js2-mode-hook
-          '(lambda () (set-variable 'indent-tabs-mode nil)))
+(add-hook 'js-mode-hook (lambda () (js2-mode)))
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js2-mode-hook '(lambda () (set-variable 'indent-tabs-mode nil)))
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
 (setq js2-highlight-level 3)
 (add-to-list 'company-backends 'company-tern)
 (setq-default js2-basic-offset 2)
+
+;; Emacs Lisp mode
+(evil-leader/set-key-for-mode 'emacs-lisp-mode
+  "mk" 'eval-buffer)
 
 ;; Flycheck mode
 (require 'flycheck)
