@@ -74,8 +74,8 @@ elif [[ $(uname) == 'Darwin' ]]; then
     # add gobrew to the path
     export PATH=$PATH:$HOME/.gobrew/bin
     alias ctags="`brew --prefix`/bin/ctags"
-    alias less=$PAGER
-    alias zless=$PAGER
+    # use vim as the default pager
+    export PAGER=vimpager
     fzf-autojump-widget() {
       cd $(
         cat /Users/adam/.local/share/autojump/autojump.txt |
@@ -101,8 +101,8 @@ elif [[ $(uname) == 'Darwin' ]]; then
     export DOCKER_TLS_VERIFY=1
 fi
 
-PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
-PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
+export PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
+export PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
