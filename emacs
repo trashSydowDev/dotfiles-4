@@ -6,7 +6,7 @@
                          ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
-;; -----------------------------------------------------------------------------
+; -----------------------------------------------------------------------------
 ;; auto customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -20,7 +20,6 @@
  '(custom-safe-themes
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
- '(debug-on-error (quote t))
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
  '(haskell-indentation-left-offset 4)
@@ -42,8 +41,7 @@
   (unless (package-installed-p package)
     (unless (assoc package package-archive-contents)
       (package-refresh-contents))
-    (package-install package))
-  (require package))
+    (package-install package)))
 
 (require-package 'ample-theme)
 (require-package 'cider)
@@ -51,6 +49,8 @@
 (require-package 'company)
 (require-package 'company-ghc)
 (require-package 'company-tern)
+(require-package 'elm-mode)
+(require-package 'emmet-mode)
 (require-package 'evil)
 (require-package 'evil-easymotion)
 (require-package 'evil-jumper)
@@ -63,6 +63,7 @@
 (require-package 'flycheck)
 (require-package 'flycheck-haskell)
 (require-package 'flycheck-rust)
+(require-package 'fsharp-mode)
 (require-package 'google-this)
 (require-package 'haskell-mode)
 (require-package 'helm)
@@ -70,9 +71,9 @@
 (require-package 'helm-hayoo)
 (require-package 'helm-hoogle)
 (require-package 'helm-itunes)
-(require-package 'helm-open-github)
 (require-package 'js2-mode)
 (require-package 'js2-refactor)
+(require-package 'jsx-mode)
 (require-package 'json-mode)
 (require-package 'nlinum)
 (require-package 'magit)
@@ -87,11 +88,21 @@
 (require-package 'tern)
 (require-package 'yasnippet)
 
+; Tidal
+;(setq load-path (cons "~/program/github.com/yaxu/Tidal/" load-path))
+;(require 'tidal)
+;(setq tidal-interpreter "/usr/bin/ghci")
+
 ;; Basic Settings
 (setq ring-bell-function 'ignore)
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq confirm-nonexistent-file-or-buffer nil)
+(tooltip-mode -1)
+(setq redisplay-dont-pause t)
+(setq debug-on-error nil)
 
 (require 'exec-path-from-shell) ; load "$PATH" from zsh
-(exec-path-from-shell-initialize)
+(add-hook 'after-init-hook 'exec-path-from-shell-initialize)
 
 (add-hook 'after-init-hook 'global-company-mode) ; auto-completion
 ; undo layout changes
@@ -108,6 +119,7 @@
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 (ido-mode 1) ; more interactivity
+(evil-leader/set-key "j" 'helm-imenu)
 
 ; Rainbow delimiters
 (require 'rainbow-delimiters)
@@ -115,11 +127,11 @@
 
 ; Line numbers
 (require 'nlinum)
-(add-hook 'prog-mode-hook 'nlinum-mode) ;; display line numbers
+(add-hook 'prog-mode-hook (lambda () (nlinum-mode 1)))
 (setq nlinum-format "%d ")
 
 ; Fix crashing on PDF viewing
-(add-hook 'doc-view-mode-hook (lambda () (linum-mode -1)))
+(add-hook 'doc-view-mode-hook (lambda () (nlinum-mode -1)))
 (defvar is-gui (display-graphic-p) "Whether we're running graphical Emacs")
 ; Better buffer navigation
 (global-set-key (kbd "C-x C-h") 'previous-buffer)
@@ -237,7 +249,7 @@
                       "BackboneJS" "Chai"))
 (helm-setup-docsets 'coffee-mode-hook
                     '("jQuery" "jQuery UI" "BackboneJS" "NodeJS" "EmberJS"
-                      "MarionetteJS" "CoffeeScript" "Chai"))
+                      "MarionetteJS" "CoffeeScript" "Chai" "MomentJS"))
 (helm-setup-docsets 'scss-mode-hook
                     '("Sass" "CSS" "HTML"))
 
@@ -266,9 +278,12 @@
 ;; Projectile mode
 (require 'projectile)
 (projectile-global-mode 1)
+(require 'helm-projectile)
+(helm-projectile-on)
 (evil-leader/set-key "ag" 'helm-projectile-ag)
 
 ;; Haskell mode
+(require 'projectile)
 (require 'haskell-mode)
 (require 'haskell-indentation)
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
@@ -280,23 +295,37 @@
 (setq haskell-indentation-layout-offset 4)
 (setq haskell-indentation-left-offset 4)
 (setq haskell-process-type (quote cabal-repl))
+(evil-leader/set-key-for-mode 'haskell-mode "mt" 'haskell-process-do-type)
+(evil-leader/set-key-for-mode 'haskell-mode "mi" 'haskell-process-do-info)
+(evil-leader/set-key-for-mode 'haskell-mode "mk" 'haskell-process-cabal)
+
+;; FSharp mode
+(require 'fsharp-mode)
+(evil-leader/set-key-for-mode 'fsharp-mode "mk" 'fsharp-eval-region)
+
+;; Markup and CSS modes
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ;; JavaScript mode
-(require 'company)
 (require 'js2-mode)
-(add-hook 'js-mode-hook (lambda () (js2-mode)))
+(require 'company)
+(add-hook 'js-mode-hook 'js2-mode)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook '(lambda () (set-variable 'indent-tabs-mode nil)))
 (add-hook 'js2-mode-hook 'skewer-mode)
+(setq js2-basic-offset 2)
+(setq js2-highlight-level 3)
+
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
-(setq js2-highlight-level 3)
 (add-to-list 'company-backends 'company-tern)
-(setq-default js2-basic-offset 2)
 
-;; Emacs Lisp mode
-(evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "mk" 'eval-buffer)
+;; JSX mode
+(require 'jsx-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
+(setq jsx-indent-level 2)
 
 ;; Flycheck mode
 (require 'flycheck)
@@ -313,7 +342,7 @@
 (setq backup-directory-alist
   `((".*" . "~/.emacs.d/backups")))
 (setq auto-save-file-name-transforms
-  `((".*" "~/.emacs.d/auto-save") t) )
+  `((".*" "~/.emacs.d/auto-save" t)))
 
 (put 'upcase-region 'disabled nil)
 
