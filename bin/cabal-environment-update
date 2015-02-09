@@ -1,0 +1,11 @@
+#!/bin/bash
+cabal sandbox init
+cabal install --only-dep -j --enable-test
+cabal configure --enable-test
+dash-haskell -c *.cabal -o docsets
+codex update
+echo "Now type:"
+echo "    (setq helm-dash-docsets-path \"`pwd`/docsets\")"
+echo "    (mapcar 'helm-dash-activate-docset (helm-dash-installed-docsets))"
+echo "(setq helm-dash-docsets-path \"`pwd`/docsets\") (mapcar 'helm-dash-activate-docset (helm-dash-installed-docsets))" | pbcopy
+echo "I've copied it into your clipboard"
