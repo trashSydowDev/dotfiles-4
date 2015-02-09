@@ -438,6 +438,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
                                \ 'passive_filetypes': ['html', 'puppet', 'json',
                                \                       'dart'] }
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_coffee_coffeelint_args = "--csv --file ./coffeelint.json"
 let g:syntastic_aggregate_errors = 1
 
 "------------------------------------------------------------------------------
