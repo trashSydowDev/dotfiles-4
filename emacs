@@ -196,7 +196,7 @@
     (tab-mark 9 [187 9] [9655 9] [92 9])))
 (setq whitespace-style '(face tabs trailing tab-mark))
 (set-face-attribute 'whitespace-tab nil
-                    :background "#f0f0f0"
+                    ;:background "black"
                     :foreground "#00a8a8"
                     :weight 'bold)
 (set-face-attribute 'whitespace-trailing nil
