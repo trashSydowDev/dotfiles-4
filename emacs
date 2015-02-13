@@ -64,6 +64,7 @@
 (require-package 'flycheck-haskell)
 (require-package 'flycheck-rust)
 (require-package 'fsharp-mode)
+(require-package 'git-gutter+)
 (require-package 'google-this)
 (require-package 'haskell-mode)
 (require-package 'helm)
@@ -172,6 +173,11 @@
 (evil-leader/set-key "tp" 'elscreen-previous)
 (setq elscreen-prefix-key "")
 (setq elscreen-tab-display-control nil)
+
+(evil-leader/set-key "[n" 'nlinum-mode)
+(evil-leader/set-key "[g" 'git-gutter+-mode)
+(evil-leader/set-key "[s" 'flyspell-mode)
+(evil-leader/set-key "gs" 'magit-status)
 
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
