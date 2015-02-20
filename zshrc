@@ -49,6 +49,9 @@ function vack () {
     vim +"Ack $1" +"only"
 }
 
+# emacsclient GUI
+alias egui="emacsclient -c -a emacs"
+
 
 # Linux Stuff
 if [[ $(uname) == 'Linux' ]]; then
