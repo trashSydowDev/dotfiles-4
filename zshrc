@@ -135,3 +135,9 @@ source ~/.fzf.zsh
 mkdir -p $HOME/.bin
 export PATH=$HOME/.bin:$PATH
 
+# setup NIX. We need to have the Yesemite branch from
+# https://github.com/joelteon/nixpkgs.git it seems
+# see http://www.chrisjr.org/posts/2014/12/22/nix-osx-haskell/#getting-started-with-nix-on-yosemite
+source ~/.nix-profile/etc/profile.d/nix.sh
+NIXDIR=~/nix
+export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
