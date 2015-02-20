@@ -353,7 +353,8 @@
 (evil-leader/set-key-for-mode 'haskell-mode "r" 'shm/raise)
 (evil-leader/set-key-for-mode 'haskell-mode "s" 'shm/delete-indentation)
 (evil-leader/set-key-for-mode 'haskell-mode "y" 'shm/yank)
-(evil-leader/set-key-for-mode 'haskell-mode "d" 'shm/kill)
+(evil-leader/set-key-for-mode 'haskell-mode "d" 'shm/kill-node)
+(evil-leader/set-key-for-mode 'haskell-mode "D" 'shm/kill-line)
 (evil-leader/set-key-for-mode 'haskell-mode "is" 'shm/case-split)
 
 ;; FSharp mode
