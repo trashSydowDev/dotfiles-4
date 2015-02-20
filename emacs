@@ -26,14 +26,21 @@
  '(haskell-indentation-left-offset 4)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(safe-local-variable-values
+   (quote
+    ((haskell-process-use-ghci . t)
+     (haskell-process-type . cabal-repl))))
  '(whitespace-display-mappings (quote ((space-mark 32 [46]) (tab-mark 9 [124 45])))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(col-highlight ((t (:background "gray19"))))
  '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
- '(hl-line ((t (:background "color-235")))))
+ '(hl-line ((t (:background "gray-19"))))
+ '(shm-current-face ((t (:background "black"))))
+ '(shm-quarantine-face ((t (:background "color-235")))))
 ;; -----------------------------------------------------------------------------
 
 (defun require-package (package)
@@ -45,6 +52,7 @@
 (require-package 'ample-theme)
 (require-package 'cider)
 (require-package 'clojure-mode)
+(require-package 'col-highlight)
 (require-package 'company)
 (require-package 'company-ghc)
 (require-package 'company-tern)
@@ -73,16 +81,16 @@
 (require-package 'helm-itunes)
 (require-package 'js2-mode)
 (require-package 'js2-refactor)
-(require-package 'jsx-mode)
 (require-package 'json-mode)
-(require-package 'nlinum)
+(require-package 'jsx-mode)
 (require-package 'magit)
+(require-package 'nlinum)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
 (require-package 'rust-mode)
 (require-package 'scss-mode)
-(require-package 'skewer-mode)
 (require-package 'shm)
+(require-package 'skewer-mode)
 (require-package 'slime)
 (require-package 'smart-mode-line)
 (require-package 'tern)
@@ -100,6 +108,23 @@
 (tooltip-mode -1)
 (setq redisplay-dont-pause t)
 (setq debug-on-error nil)
+
+(defun history-switch-to-prev-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(defun history-switch-to-next-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) -1)))
+
+(global-set-key (kbd "C-x C-p") 'history-switch-to-prev-buffer)
+(global-set-key (kbd "C-x C-n") 'history-switch-to-next-buffer)
+
+(require 'dired)
+(require-package 'dired-subtree)
+(require 'dired-subtree)
+(define-key dired-mode-map "i" 'dired-subtree-insert)
+(define-key dired-mode-map "c" 'dired-subtree-remove)
 
 (require 'exec-path-from-shell) ; load "$PATH" from zsh
 (add-hook 'after-init-hook 'exec-path-from-shell-initialize)
@@ -122,6 +147,9 @@
 (defvaralias 'cperl-indent-level 'tab-width)
 (ido-mode 1) ; more interactivity
 (evil-leader/set-key "j" 'helm-imenu)
+
+(evil-leader/set-key "zt" 'yafolding-toggle-element)
+(evil-leader/set-key "za" 'yafolding-toggle-all)
 
 ; Expand region
 (require-package 'expand-region)
@@ -196,8 +224,11 @@
 ;; Looks
 (load-theme 'ample)
 (global-hl-line-mode 1)
-(set-face-attribute 'hl-line nil :background "color-235")
+(set-face-attribute 'hl-line nil :background "gray-19")
 (set-terminal-coding-system 'utf-8-auto-unix)
+(require 'col-highlight)
+(evil-leader/set-key "[h" 'toggle-highlight-column-when-idle)
+(col-highlight-set-interval 0)
 
 ; Highlight trailing whitespace
 (require 'whitespace)
@@ -283,6 +314,7 @@
 ;; Helm mode
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-r") 'remember)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;; Projectile mode
@@ -296,7 +328,13 @@
 (require 'projectile)
 (require 'haskell-mode)
 (require 'haskell-indentation)
+(require 'shm)
+(require 'shm-case-split)
+(define-key shm-map (kbd ")") nil)
+(define-key shm-map (kbd "]") nil)
+(define-key shm-map (kbd "}") nil)
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
+(add-hook 'haskell-mode-hook 'structured-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
 (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
@@ -307,7 +345,16 @@
 (setq haskell-process-type (quote cabal-repl))
 (evil-leader/set-key-for-mode 'haskell-mode "mt" 'haskell-process-do-type)
 (evil-leader/set-key-for-mode 'haskell-mode "mi" 'haskell-process-do-info)
-(evil-leader/set-key-for-mode 'haskell-mode "mk" 'haskell-process-cabal)
+(evil-leader/set-key-for-mode 'haskell-mode "mk" 'ha/kell-process-cabal)
+(evil-leader/set-key-for-mode 'haskell-mode "h" 'shm/backward-node)
+(evil-leader/set-key-for-mode 'haskell-mode "l" 'shm/forward-node)
+(evil-leader/set-key-for-mode 'haskell-mode "k" 'shm/goto-parent)
+(evil-leader/set-key-for-mode 'haskell-mode "j" 'shm/goto-parent-end)
+(evil-leader/set-key-for-mode 'haskell-mode "r" 'shm/raise)
+(evil-leader/set-key-for-mode 'haskell-mode "s" 'shm/delete-indentation)
+(evil-leader/set-key-for-mode 'haskell-mode "y" 'shm/yank)
+(evil-leader/set-key-for-mode 'haskell-mode "d" 'shm/kill)
+(evil-leader/set-key-for-mode 'haskell-mode "is" 'shm/case-split)
 
 ;; FSharp mode
 (require 'fsharp-mode)
@@ -316,7 +363,18 @@
 ;; Markup and CSS modes
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'handlebars-mode-hook 'emmet-mode) ;; enable Emmet on Handlebars
+(add-hook 'css-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
+
+;; org mode
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-log-done 'time)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (R . t)
+   (sh . t)))
 
 ;; JavaScript mode
 (require 'js2-mode)
@@ -325,6 +383,13 @@
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook '(lambda () (set-variable 'indent-tabs-mode nil)))
 (add-hook 'js2-mode-hook 'skewer-mode)
+(evil-leader/set-key;; -for-mode 'js2-mode
+  "mk" 'node-run-buffer)
+
+(defun node-run-buffer ()
+  (interactive)
+  (shell-command "node" (buffer-file-name)))
+
 (setq js2-basic-offset 2)
 (setq js2-highlight-level 3)
 
