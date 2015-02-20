@@ -123,6 +123,11 @@
 (ido-mode 1) ; more interactivity
 (evil-leader/set-key "j" 'helm-imenu)
 
+; Expand region
+(require-package 'expand-region)
+(require 'expand-region)
+(global-set-key (kbd "C-;") #'er/expand-region)
+
 ; Rainbow delimiters
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -140,7 +145,7 @@
 (global-set-key (kbd "C-x C-l") 'next-buffer)
 
 ;; Magit
-(add-hook 'magit-commit-mode-hook 'flyspell-mode-on)
+(add-hook 'magit-commit-mode-hook 'flyspell-mode)
 
 ;; Evil mode
 (require 'evil)
@@ -241,13 +246,7 @@
 (setq helm-dash-docsets-path "~/.docsets/")
 (defvar helm-dash-docsets)
 (defun helm-setup-docsets (hook docsets)
-  (dolist (element docsets)
-    (if (and (not (member element (helm-dash-installed-docsets)))
-             (member element (helm-dash-available-docsets)))
-        (helm-dash-install-docset element)
-      (message (format "Skipping the installation of the docset %s"
-                       element))))
-  (add-hook hook `(lambda () (setq-local helm-dash-docsets ',docsets))))
+  (add-hook hook `(lambda () (setq-local helm-dash-common-docsets ',docsets))))
 
 (helm-setup-docsets 'haskell-mode-hook '("Haskell"))
 (helm-setup-docsets 'emacs-lisp-mode-hook '("Emacs Lisp"))
@@ -257,8 +256,12 @@
 (helm-setup-docsets 'coffee-mode-hook
                     '("jQuery" "jQuery UI" "BackboneJS" "NodeJS" "EmberJS"
                       "MarionetteJS" "CoffeeScript" "Chai" "MomentJS"))
+(helm-setup-docsets 'html-mode-hook
+                    '("Sass" "CSS" "HTML" "Compass"))
+(helm-setup-docsets 'css-mode-hook
+                    '("Sass" "CSS" "HTML" "Compass"))
 (helm-setup-docsets 'scss-mode-hook
-                    '("Sass" "CSS" "HTML"))
+                    '("Sass" "CSS" "HTML" "Compass"))
 
 ; Highlight 79th column
 (require 'fill-column-indicator)
