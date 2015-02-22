@@ -154,7 +154,7 @@
 ; Expand region
 (require-package 'expand-region)
 (require 'expand-region)
-(global-set-key (kbd "C-;") #'er/expand-region)
+(evil-leader/set-key ";" #'er/expand-region)
 
 ; Rainbow delimiters
 (require 'rainbow-delimiters)
@@ -299,7 +299,7 @@
 (setq-default fill-column 79)
 (define-globalized-minor-mode global-fci-mode fci-mode
   (lambda () (fci-mode 1)))
-(global-fci-mode 1)
+(evil-leader/set-key "[f" 'fci-mode)
 
 ; A better mode-line
 (require 'smart-mode-line)
