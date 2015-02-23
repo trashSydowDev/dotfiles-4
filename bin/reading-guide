@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Outputs a ORG mode todo list of all the files in a directory
+echo '#+title:'
+echo '#+author:'
+echo '#+date:'
+echo '#+startup: overview'
+find $1 | awk -F\/ '{ for(i = 0; i < NF; i++) {printf("*");} print " TODO " $0 }'
