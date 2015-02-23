@@ -210,6 +210,7 @@
 
 (evil-leader/set-key "[n" 'nlinum-mode)
 (evil-leader/set-key "[g" 'git-gutter+-mode)
+(evil-leader/set-key "[t" 'toggle-truncate-lines)
 (evil-leader/set-key "[s" 'flyspell-mode)
 (evil-leader/set-key "gs" 'magit-status)
 
@@ -370,6 +371,8 @@
 ;; org mode
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(evil-leader/set-key-for-mode 'org-mode ">>" 'org-do-demote)
+(evil-leader/set-key-for-mode 'org-mode "<<" 'org-do-promote)
 (setq org-log-done 'time)
 (org-babel-do-load-languages
  'org-babel-load-languages
