@@ -19,13 +19,16 @@
  '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e53cc4144192bb4e4ed10a3fa3e7442cae4c3d231df8822f6c02f1220a0d259a" "41b6698b5f9ab241ad6c30aea8c9f53d539e23ad4e3963abff4b57c0f8bf6730" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "2b5aa66b7d5be41b18cc67f3286ae664134b95ccc4a86c9339c886dfd736132d" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" default)))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
  '(global-whitespace-mode t)
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
  '(haskell-indentation-left-offset 4)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(org-agenda-files
+   (quote
+    ("~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
@@ -36,9 +39,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(col-highlight ((t (:background "color-18"))))
+ '(default ((t (:background nil))))
+ '(col-highlight ((t (:background "color-19"))))
  '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
- '(hl-line ((t (:background "color-18"))))
+ '(hl-line ((t (:background "color-19"))))
  '(shm-current-face ((t (:background "black"))))
  '(shm-quarantine-face ((t (:background "color-235")))))
 ;; -----------------------------------------------------------------------------
@@ -56,6 +60,8 @@
 (require-package 'company)
 (require-package 'company-ghc)
 (require-package 'company-tern)
+(require-package 'edit-server)
+(require-package 'edit-server-htmlize)
 (require-package 'elm-mode)
 (require-package 'emmet-mode)
 (require-package 'evil)
@@ -109,6 +115,9 @@
 (setq redisplay-dont-pause t)
 (setq debug-on-error nil)
 
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'hyper)
+
 (defun history-switch-to-prev-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
@@ -147,6 +156,7 @@
 (defvaralias 'cperl-indent-level 'tab-width)
 (ido-mode 1) ; more interactivity
 (evil-leader/set-key "j" 'helm-imenu)
+(evil-leader/set-key "," 'helm-imenu) ; Redundancy for SHM mode
 
 (evil-leader/set-key "zt" 'yafolding-toggle-element)
 (evil-leader/set-key "za" 'yafolding-toggle-all)
@@ -274,11 +284,11 @@
 ; Helm Dash
 (require 'helm-dash)
 (evil-leader/set-key "mf" 'helm-dash)
-
 (setq helm-dash-docsets-path "~/.docsets/")
-(defvar helm-dash-docsets)
 (defun helm-setup-docsets (hook docsets)
-  (add-hook hook `(lambda () (setq-local helm-dash-common-docsets ',docsets))))
+  (add-hook hook `(lambda ()
+                    (setq-local helm-dash-common-docsets ',docsets)
+                    (setq helm-current-buffer (current-buffer)))))
 
 (helm-setup-docsets 'haskell-mode-hook '("Haskell"))
 (helm-setup-docsets 'emacs-lisp-mode-hook '("Emacs Lisp"))
@@ -295,6 +305,14 @@
 (helm-setup-docsets 'scss-mode-hook
                     '("Sass" "CSS" "HTML" "Compass"))
 
+; Function for updating cabal docsets with `dash-haskell`
+(defun helm-dash-cabal-update-docsets ()
+  (interactive)
+  (let* ((cabal-file (haskell-cabal-find-file))
+         (command (format "dash-haskell -c %s -o ~/.docsets" cabal-file)))
+    (shell-command command)))
+
+
 ; Highlight 79th column
 (require 'fill-column-indicator)
 (setq-default fill-column 79)
@@ -303,9 +321,13 @@
 (evil-leader/set-key "[f" 'fci-mode)
 
 ; A better mode-line
+(require 'server)
 (require 'smart-mode-line)
 (sml/setup)
 (sml/apply-theme 'dark)
+; Display the server name in the modeline
+(add-hook 'after-init-hooko
+          (lambda () (setq mode-line-front-space (concat server-name))))
 
 ;; Persistent undo
 (setq undo-tree-history-directory-alist
@@ -349,8 +371,8 @@
 (evil-leader/set-key-for-mode 'haskell-mode "mk" 'ha/kell-process-cabal)
 (evil-leader/set-key-for-mode 'haskell-mode "h" 'shm/backward-node)
 (evil-leader/set-key-for-mode 'haskell-mode "l" 'shm/forward-node)
-(evil-leader/set-key-for-mode 'haskell-mode "k" 'shm/goto-parent)
-(evil-leader/set-key-for-mode 'haskell-mode "j" 'shm/goto-parent-end)
+(evil-leader/set-key-for-mode 'haskell-mode "p" 'shm/goto-parent)
+(evil-leader/set-key-for-mode 'haskell-mode "n" 'shm/goto-parent-end)
 (evil-leader/set-key-for-mode 'haskell-mode "r" 'shm/raise)
 (evil-leader/set-key-for-mode 'haskell-mode "s" 'shm/delete-indentation)
 (evil-leader/set-key-for-mode 'haskell-mode "y" 'shm/yank)
