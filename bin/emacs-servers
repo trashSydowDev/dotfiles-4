@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+function main {
+  local serverdir="${TMPDIR:-/tmp}/emacs${UID}"
+  local -a servers
+  for file in ${serverdir}/*; do
+    if [[ -S ${file} ]]; then
+      servers+=("${file##*/}")  
+    fi
+  done
+
+  echo "${servers[@]}"
+}
+
+main
