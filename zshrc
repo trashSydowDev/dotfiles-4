@@ -49,6 +49,18 @@ function vack () {
     vim +"Ack $1" +"only"
 }
 
+function ep {
+    emacsclient -t -s $(basename $(projectroot)) $@
+}
+
+function ep-start {
+    emacs --daemon=$(basename $(projectroot)) $@
+}
+
+function ep-stop {
+    emacsclient -t -s $(basename $(projectroot)) -e '(save-buffers-kill-emacs)'
+}
+
 # emacsclient GUI
 alias egui="emacsclient -c -a emacs"
 
@@ -144,3 +156,7 @@ export PATH=$HOME/.bin:$PATH
 source ~/.nix-profile/etc/profile.d/nix.sh
 NIXDIR=~/nix
 export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
+
+
+source ~/.xsh
+
