@@ -78,6 +78,7 @@
 (require-package 'flycheck-rust)
 (require-package 'fsharp-mode)
 (require-package 'git-gutter+)
+(require-package 'git-messenger)
 (require-package 'google-this)
 (require-package 'haskell-mode)
 (require-package 'helm)
@@ -114,9 +115,10 @@
 (tooltip-mode -1)
 (setq redisplay-dont-pause t)
 (setq debug-on-error nil)
+(evil-leader/set-key "ds" 'delete-trailing-whitespace)
 
 (setq mac-option-modifier 'meta)
-(setq mac-command-modifier 'hyper)
+(setq mac-command-modifier 'super)
 
 (defun history-switch-to-prev-buffer ()
   (interactive)
@@ -141,6 +143,8 @@
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ; auto-completion
 (setq company-idle-delay 0)
+(evil-leader/set-key "ya" 'helm-yas-complete)
+
 ; undo layout changes
 (define-globalized-minor-mode global-winner-mode winner-mode
   (lambda () (winner-mode 1)))
@@ -223,6 +227,9 @@
 (evil-leader/set-key "[t" 'toggle-truncate-lines)
 (evil-leader/set-key "[s" 'flyspell-mode)
 (evil-leader/set-key "gs" 'magit-status)
+(evil-leader/set-key "ghh" 'github-browse-file)
+(evil-leader/set-key "ghb" 'github-browse-file-blame)
+(evil-leader/set-key "gm" 'git-messenger:popup-message)
 
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
@@ -335,6 +342,7 @@
 (setq undo-tree-auto-save-history 1)
 
 ;; Helm mode
+(global-set-key (kbd "C-x M-x") 'execute-extended-command)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-r") 'remember)
