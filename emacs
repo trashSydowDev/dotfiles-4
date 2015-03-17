@@ -91,6 +91,7 @@
 (require-package 'json-mode)
 (require-package 'jsx-mode)
 (require-package 'magit)
+(require-package 'neotree)
 (require-package 'nlinum)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
@@ -230,6 +231,7 @@
 (evil-leader/set-key "ghh" 'github-browse-file)
 (evil-leader/set-key "ghb" 'github-browse-file-blame)
 (evil-leader/set-key "gm" 'git-messenger:popup-message)
+(evil-leader/set-key "nt" 'neotree-toggle)
 
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
