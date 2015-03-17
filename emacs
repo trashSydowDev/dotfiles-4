@@ -62,12 +62,14 @@
 (require-package 'company-tern)
 (require-package 'edit-server)
 (require-package 'edit-server-htmlize)
+(require-package 'elfeed)
 (require-package 'elm-mode)
 (require-package 'emmet-mode)
 (require-package 'evil)
 (require-package 'evil-easymotion)
 (require-package 'evil-jumper)
 (require-package 'evil-leader)
+(require-package 'evil-matchit)
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-surround)
 (require-package 'evil-tabs)
@@ -232,6 +234,7 @@
 (evil-leader/set-key "ghb" 'github-browse-file-blame)
 (evil-leader/set-key "gm" 'git-messenger:popup-message)
 (evil-leader/set-key "nt" 'neotree-toggle)
+(evil-leader/set-key "fw" 'elfeed)
 
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
@@ -335,7 +338,7 @@
 (sml/setup)
 (sml/apply-theme 'dark)
 ; Display the server name in the modeline
-(add-hook 'after-init-hooko
+(add-hook 'after-init-hook
           (lambda () (setq mode-line-front-space (concat server-name))))
 
 ;; Persistent undo
@@ -349,6 +352,8 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-r") 'remember)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
+(helm-autoresize-mode 1)
+(setq helm-display-header-line nil)
 
 ;; Projectile mode
 (require 'projectile)
