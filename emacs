@@ -19,7 +19,7 @@
  '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
+    ("0f6e58d1814b4138c5a88241f96547d35883cbb3df6cf9ec8ef44856ece04c13" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
  '(global-whitespace-mode t)
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
@@ -43,8 +43,10 @@
  '(col-highlight ((t (:background "color-19"))))
  '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
  '(hl-line ((t (:background "color-19"))))
+ '(linum ((t (:background "color-18" :foreground "#363636" :slant italic))))
  '(shm-current-face ((t (:background "black"))))
- '(shm-quarantine-face ((t (:background "color-235")))))
+ '(shm-quarantine-face ((t (:background "color-235"))))
+ '(whitespace-tab ((t (:background "color-233" :foreground "color-19" :weight bold)))))
 ;; -----------------------------------------------------------------------------
 
 (defun require-package (package)
@@ -104,6 +106,7 @@
 (require-package 'slime)
 (require-package 'smart-mode-line)
 (require-package 'tern)
+(require-package 'ujelly-theme)
 (require-package 'yasnippet)
 
 ; Tidal
@@ -245,7 +248,7 @@
 (evil-leader/set-key "ig" 'google-this-noconfirm)
 
 ;; Looks
-(load-theme 'ample)
+(load-theme 'ujelly)
 (global-hl-line-mode 1)
 (set-face-attribute 'hl-line nil :background "gray-19")
 (set-terminal-coding-system 'utf-8-auto-unix)
