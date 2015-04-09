@@ -157,6 +157,8 @@ source ~/.nix-profile/etc/profile.d/nix.sh
 NIXDIR=~/nix
 export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
 
-
 source ~/.xsh
+eval "$( HALCYON_NO_SELF_UPDATE=1 "/app/halcyon/halcyon" paths )"
 
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
