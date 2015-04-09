@@ -5,3 +5,7 @@ tags
 codex.tags
 \#*\#
 .\#
+
+
+# srclib build cache
+.srclib-cache/

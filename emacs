@@ -83,6 +83,7 @@
 (require-package 'fsharp-mode)
 (require-package 'git-gutter+)
 (require-package 'git-messenger)
+(require-package 'go-mode)
 (require-package 'google-this)
 (require-package 'haskell-mode)
 (require-package 'helm)
@@ -107,7 +108,12 @@
 (require-package 'smart-mode-line)
 (require-package 'tern)
 (require-package 'ujelly-theme)
+(require-package 'yafolding)
 (require-package 'yasnippet)
+
+; Source Graph
+(add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
+(require 'sourcegraph)
 
 ; Tidal
 ;(setq load-path (cons "~/program/github.com/yaxu/Tidal/" load-path))
@@ -168,6 +174,8 @@
 (evil-leader/set-key "j" 'helm-imenu)
 (evil-leader/set-key "," 'helm-imenu) ; Redundancy for SHM mode
 
+(add-hook 'after-init-hook
+          (lambda () (yafolding-mode 1)))
 (evil-leader/set-key "zt" 'yafolding-toggle-element)
 (evil-leader/set-key "za" 'yafolding-toggle-all)
 
@@ -357,6 +365,7 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (helm-autoresize-mode 1)
 (setq helm-display-header-line nil)
+(setq helm-split-window-in-side-p t)
 
 ;; Projectile mode
 (require 'projectile)
@@ -375,7 +384,6 @@
 (define-key shm-map (kbd "]") nil)
 (define-key shm-map (kbd "}") nil)
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
 (add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
@@ -420,13 +428,19 @@
    (R . t)
    (sh . t)))
 
+;; Go mode
+(require 'go-mode)
+(setenv "GOPATH" "/Users/adam/program/golang/")
+
 ;; JavaScript mode
 (require 'js2-mode)
+(require 'js2-refactor)
 (require 'company)
 (add-hook 'js-mode-hook 'js2-mode)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook '(lambda () (set-variable 'indent-tabs-mode nil)))
 (add-hook 'js2-mode-hook 'skewer-mode)
+(js2r-add-keybindings-with-prefix "C-c C-j")
 (evil-leader/set-key;; -for-mode 'js2-mode
   "mk" 'node-run-buffer)
 
