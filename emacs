@@ -31,7 +31,8 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+    ("~/notes-git/toggl.org" "~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+ '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
@@ -205,6 +206,7 @@
 
 ;; Magit
 (add-hook 'magit-commit-mode-hook 'flyspell-mode)
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Evil mode
 (require 'evil)
@@ -434,6 +436,7 @@
 ;; Go mode
 (require 'go-mode)
 (setenv "GOPATH" "/Users/adam/program/golang/")
+(evil-leader/set-key-for-mode 'go-mode "gf" 'gofmt)
 
 ;; JavaScript mode
 (require 'js2-mode)
@@ -481,6 +484,7 @@
   `((".*" "~/.emacs.d/auto-save" t)))
 
 (put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 (provide '.emacs)
 ;;; emacs ends here
