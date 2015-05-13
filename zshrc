@@ -121,7 +121,7 @@ export PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripti
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-export GOPATH=~/program/golang/
+export GOPATH="/Users/adam/program/golang/"
 export GOROOT=`go env GOROOT`
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
