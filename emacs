@@ -66,6 +66,7 @@
 (require-package 'company)
 (require-package 'company-ghc)
 (require-package 'company-tern)
+(require-package 'edbi)
 (require-package 'edit-server)
 (require-package 'edit-server-htmlize)
 (require-package 'elfeed)
@@ -119,15 +120,11 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
 (require 'sourcegraph)
 
-; Tidal
-;(setq load-path (cons "~/program/github.com/yaxu/Tidal/" load-path))
-;(require 'tidal)
-;(setq tidal-interpreter "/usr/bin/ghci")
-
 ;; Basic Settings
 (setq ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-nonexistent-file-or-buffer nil)
+(setq tab-width 2)
 (tooltip-mode -1)
 (setq redisplay-dont-pause t)
 (setq debug-on-error nil)
@@ -160,6 +157,8 @@
 (add-hook 'after-init-hook 'global-company-mode) ; auto-completion
 (setq company-idle-delay 0)
 (evil-leader/set-key "ya" 'helm-yas-complete)
+; Don't ignore case in suggestions
+(setq company-dabbrev-downcase nil)
 
 ; undo layout changes
 (define-globalized-minor-mode global-winner-mode winner-mode
@@ -251,6 +250,7 @@
 (evil-leader/set-key "gm" 'git-messenger:popup-message)
 (evil-leader/set-key "nt" 'neotree-toggle)
 (evil-leader/set-key "fw" 'elfeed)
+(evil-leader/set-key "w" 'align-regexp)
 
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
@@ -433,9 +433,16 @@
    (R . t)
    (sh . t)))
 
+(add-to-list 'org-structure-template-alist
+             `("S" ,(concat "#+title: \n"
+                            "#+author: Pedro Tacla Yamada\n"
+                            "#+date: \n"
+                            "#+startup: overview\n")))
+
 ;; Go mode
 (require 'go-mode)
 (setenv "GOPATH" "/Users/adam/program/golang/")
+(setenv "PATH" (concat (getenv "PATH") ":" "/Users/adam/program/golang/"))
 (evil-leader/set-key-for-mode 'go-mode "gf" 'gofmt)
 
 ;; JavaScript mode
