@@ -31,7 +31,10 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("~/notes-git/toggl.org" "~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+    ("~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
@@ -66,6 +69,7 @@
 (require-package 'company)
 (require-package 'company-ghc)
 (require-package 'company-tern)
+(require-package 'dash-at-point)
 (require-package 'edbi)
 (require-package 'edit-server)
 (require-package 'edit-server-htmlize)
@@ -180,6 +184,8 @@
 (add-hook 'after-init-hook
           (lambda () (yafolding-mode 1)))
 (evil-leader/set-key "zt" 'yafolding-toggle-element)
+(evil-leader/set-key "zc" 'yafolding-hide-element)
+(evil-leader/set-key "zo" 'yafolding-show-element)
 (evil-leader/set-key "za" 'yafolding-toggle-all)
 
 ; Expand region
@@ -317,6 +323,10 @@
   (add-hook hook `(lambda ()
                     (setq-local helm-dash-common-docsets ',docsets)
                     (setq helm-current-buffer (current-buffer)))))
+
+; Dash at point
+(require 'dash-at-point)
+(evil-leader/set-key "ms" 'dash-at-point)
 
 (helm-setup-docsets 'haskell-mode-hook '("Haskell"))
 (helm-setup-docsets 'emacs-lisp-mode-hook '("Emacs Lisp"))
