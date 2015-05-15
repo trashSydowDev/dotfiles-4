@@ -12,6 +12,7 @@
     "laxcomma": true,
     "browser": true,
     "predef": [
-      "-Promise"
+      "-Promise",
+      "fetch"
     ]
 }
