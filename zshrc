@@ -153,12 +153,40 @@ export PATH=$HOME/.bin:$PATH
 # setup NIX. We need to have the Yesemite branch from
 # https://github.com/joelteon/nixpkgs.git it seems
 # see http://www.chrisjr.org/posts/2014/12/22/nix-osx-haskell/#getting-started-with-nix-on-yosemite
-source ~/.nix-profile/etc/profile.d/nix.sh
-NIXDIR=~/nix
-export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
+#source ~/.nix-profile/etc/profile.d/nix.sh
+#NIXDIR=~/nix
+#export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
 
-source ~/.xsh
 eval "$( HALCYON_NO_SELF_UPDATE=1 "/app/halcyon/halcyon" paths )"
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+
+PERL_MB_OPT="--install_base \"/Users/adam/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/adam/perl5"; export PERL_MM_OPT;
+
+# unregister broken GHC packages. Run this a few times to resolve dependency rot in installed packages.
+# ghc-pkg-clean -f cabal/dev/packages*.conf also works.
+function ghc-pkg-clean() {
+  for p in `ghc-pkg check $* 2>&1  | grep problems | awk '{print $6}' | sed -e 's/:$//'`
+  do
+    echo unregistering $p; ghc-pkg $* unregister $p
+  done
+}
+
+# remove all installed GHC/cabal packages, leaving ~/.cabal binaries and docs in place.
+# When all else fails, use this to get out of dependency hell and start over.
+function ghc-pkg-reset() {
+  if [[ $(readlink -f /proc/$$/exe) =~ zsh ]]; then
+    read 'ans?Erasing all your user ghc and cabal packages - are you sure (y/N)? '
+  else # assume bash/bash compatible otherwise
+    read -p 'Erasing all your user ghc and cabal packages - are you sure (y/N)? ' ans
+  fi
+
+  [[ x$ans =~ "xy" ]] && ( \
+    echo 'erasing directories under ~/.ghc'; command rm -rf `find ~/.ghc/* -maxdepth 1 -type d`; \
+    echo 'erasing ~/.cabal/lib'; command rm -rf ~/.cabal/lib; \
+  )
+}
+
+alias cabalupgrades="cabal list --installed  | egrep -iv '(synopsis|homepage|license)'"
