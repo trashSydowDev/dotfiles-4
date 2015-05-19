@@ -40,6 +40,7 @@
    (quote
     ((haskell-process-use-ghci . t)
      (haskell-process-type . cabal-repl))))
+ '(tab-width 2)
  '(whitespace-display-mappings (quote ((space-mark 32 [46]) (tab-mark 9 [124 45])))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
