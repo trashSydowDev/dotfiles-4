@@ -11,7 +11,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git zsh-syntax-highlighting, github)
+plugins=(git zsh-syntax-highlighting github aws cabal)
 # Settings
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
@@ -89,8 +89,6 @@ elif [[ $(uname) == 'Darwin' ]]; then
     # add gobrew to the path
     export PATH=$PATH:$HOME/.gobrew/bin
     alias ctags="`brew --prefix`/bin/ctags"
-    # use vim as the default pager
-    export PAGER=vimpager
     fzf-autojump-widget() {
       cd $(
         cat /Users/adam/.local/share/autojump/autojump.txt |
