@@ -66,7 +66,7 @@
 (require-package 'ample-theme)
 (require-package 'cider)
 (require-package 'clojure-mode)
-(require-package 'coffee-mode')
+(require-package 'coffee-mode)
 (require-package 'col-highlight)
 (require-package 'company)
 (require-package 'company-dcd)
