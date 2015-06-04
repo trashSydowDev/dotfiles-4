@@ -111,6 +111,7 @@
 (require-package 'helm-hayoo)
 (require-package 'helm-hoogle)
 (require-package 'helm-itunes)
+(require-package 'helm-projectile)
 (require-package 'js2-mode)
 (require-package 'js2-refactor)
 (require-package 'json-mode)
@@ -150,6 +151,7 @@
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
+(global-set-key (kbd "s-o") 'other-frame)
 
 (defun history-switch-to-prev-buffer ()
   (interactive)
