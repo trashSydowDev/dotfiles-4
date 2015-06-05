@@ -1,0 +1,3 @@
+# -*- mode: snippet -*-
+#name : log
+console.log("${1:variable}", ${1:variable})
