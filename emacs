@@ -164,6 +164,10 @@
 (global-set-key (kbd "C-x C-p") 'history-switch-to-prev-buffer)
 (global-set-key (kbd "C-x C-n") 'history-switch-to-next-buffer)
 
+(defun insert-current-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
+
 (require 'dired)
 (require-package 'dired-subtree)
 (require 'dired-subtree)
@@ -176,7 +180,13 @@
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ; auto-completion
 (setq company-idle-delay 0)
+
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        "~/dotfiles/emacs-snippets"))
 (evil-leader/set-key "ya" 'helm-yas-complete)
+
 ; Don't ignore case in suggestions
 (setq company-dabbrev-downcase nil)
 
