@@ -41,6 +41,10 @@
     ((haskell-process-use-ghci . t)
      (haskell-process-type . cabal-repl))))
  '(tab-width 2)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
+ '(web-mode-sql-indent-offset 2)
  '(whitespace-display-mappings (quote ((space-mark 32 [46]) (tab-mark 9 [124 45])))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -63,6 +67,7 @@
       (package-refresh-contents))
     (package-install package)))
 
+(require-package 'yasnippet)
 (require-package 'ample-theme)
 (require-package 'cider)
 (require-package 'clojure-mode)
@@ -133,7 +138,6 @@
 (require-package 'ujelly-theme)
 (require-package 'web-mode)
 (require-package 'yafolding)
-(require-package 'yasnippet)
 
 ; Source Graph
 (add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
@@ -530,6 +534,7 @@
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)
 (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
+(add-hook 'html-mode-hook '(lambda () (flycheck-mode 0)))
 
 ;; save backups to the temporary directory
 (setq backup-directory-alist
