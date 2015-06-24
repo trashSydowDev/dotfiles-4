@@ -12,6 +12,7 @@
     "laxcomma": true,
     "browser": true,
     "esnext": true,
+    "eqnull": true,
     "predef": [
       "-Promise",
       "fetch"
