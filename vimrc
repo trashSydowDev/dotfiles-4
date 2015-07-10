@@ -240,6 +240,7 @@ augroup fileTypeMods
   " Javascript
   autocmd FileType javascript set shiftwidth=2
   autocmd FileType javascript nnoremap <buffer> <leader>mk :w<CR>:!node %<cr>
+  autocmd FileType javascript nnoremap <buffer> <leader>mj :w<CR>:!node --harmony %<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>ts :w<CR>:!mocha -R spec -t 10000 %<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>co :w<CR>:!mocha --require blanket -R html-cov % > cov.html; open cov.html<CR>
   " CoffeeScript
