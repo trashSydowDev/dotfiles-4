@@ -38,7 +38,8 @@
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
-    ((haskell-process-use-ghci . t)
+    ((haskell-indent-spaces . 4)
+     (haskell-process-use-ghci . t)
      (haskell-process-type . cabal-repl))))
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
@@ -67,7 +68,6 @@
       (package-refresh-contents))
     (package-install package)))
 
-(require-package 'yasnippet)
 (require-package 'ample-theme)
 (require-package 'cider)
 (require-package 'clojure-mode)
@@ -139,6 +139,7 @@
 (require-package 'ujelly-theme)
 (require-package 'web-mode)
 (require-package 'yafolding)
+(require-package 'yasnippet)
 
 ; Source Graph
 (add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
@@ -153,6 +154,7 @@
 (setq redisplay-dont-pause t)
 (setq debug-on-error nil)
 (evil-leader/set-key "ds" 'delete-trailing-whitespace)
+(evil-leader/set-key "sl" 'sort-lines)
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
