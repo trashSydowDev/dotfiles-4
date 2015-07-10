@@ -126,6 +126,7 @@
 (require-package 'neotree)
 (require-package 'nlinum)
 (require-package 'paradox)
+(require-package 'pbcopy)
 (require-package 'projectile)
 (require-package 'rainbow-delimiters)
 (require-package 'rust-mode)
@@ -156,6 +157,8 @@
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
 (global-set-key (kbd "s-o") 'other-frame)
+
+(turn-on-pbcopy)
 
 (defun history-switch-to-prev-buffer ()
   (interactive)
