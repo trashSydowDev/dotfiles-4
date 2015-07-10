@@ -155,8 +155,6 @@ export PATH=$HOME/.bin:$PATH
 #NIXDIR=~/nix
 #export NIX_PATH=$NIXDIR/nixpkgs:nixpkgs=$NIXDIR/nixpkgs
 
-eval "$( HALCYON_NO_SELF_UPDATE=1 "/app/halcyon/halcyon" paths )"
-
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
