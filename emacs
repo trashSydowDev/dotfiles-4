@@ -19,10 +19,11 @@
  '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
-    ("0f6e58d1814b4138c5a88241f96547d35883cbb3df6cf9ec8ef44856ece04c13" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c35c0effa648fd320300f3d45696c640a92bdc7cf0429d002a96bda2b42ce966" default)))
  '(elfeed-feeds
    (quote
     ("http://feeds.feedburner.com/CssTricks" "http://www.theverge.com/rss/full.xml" "http://firstround.com/review/rss" "http://techblog.netflix.com/feeds/posts/default" "http://blog.capwatkins.com/feed" "http://feeds.feedburner.com/theeffectiveengineer" "http://blog.crisp.se/feed" "http://www.estadao.com.br/rss/ultimas.xml" "http://feeds.folha.uol.com.br/poder/rss091.xml" "http://rt.com/news/today/rss/" "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://feeds.feedburner.com/StartupManagement" "http://randsinrepose.com/feed/" "http://www.martinfowler.com/feed.atom" "http://blog.cloudflare.com/rss" "http://news.ycombinator.com/rss" "https://www.hakkalabs.co/feed" "http://chrisdone.com/rss.xml" "https://github.com/blog.atom" "http://code.google.com/feeds/updates.xml" "http://lambda-the-ultimate.org/rss.xml" "http://ember.zone/rss/" "http://planet.haskell.org/rss20.xml" "http://ocharles.org.uk/blog/posts.rss" "http://feeds.feedburner.com/ezyang" "http://feeds.feedburner.com/linuxjournalcom" "http://feeds.feedburner.com/HighScalability")))
+ '(flycheck-haskell-ghc-executable "/Users/adam/ghc-7.8.4.app/Contents/bin/ghc")
  '(global-whitespace-mode t)
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
@@ -102,7 +103,6 @@
 (require-package 'flycheck-haskell)
 (require-package 'flycheck-rust)
 (require-package 'fsharp-mode)
-(require-package 'git-commit-mode)
 (require-package 'git-gutter+)
 (require-package 'git-messenger)
 (require-package 'github-browse-file)
