@@ -69,6 +69,7 @@
       (package-refresh-contents))
     (package-install package)))
 
+(require-package 'ac-haskell-process)
 (require-package 'ample-theme)
 (require-package 'cider)
 (require-package 'clojure-mode)
