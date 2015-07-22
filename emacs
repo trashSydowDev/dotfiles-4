@@ -28,6 +28,11 @@
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
  '(haskell-indentation-left-offset 4)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-type (quote cabal-repl))
+ '(haskell-process-use-presentation-mode nil)
+ '(haskell-stylish-on-save t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(org-agenda-files
