@@ -74,6 +74,8 @@
       (package-refresh-contents))
     (package-install package)))
 
+(require 'grep) ;; Required by helm-ag
+
 (require-package 'ac-haskell-process)
 (require-package 'ample-theme)
 (require-package 'cider)
@@ -143,13 +145,14 @@
 (require-package 'smart-mode-line)
 (require-package 'tern)
 (require-package 'ujelly-theme)
+(require-package 'w3m)
 (require-package 'web-mode)
 (require-package 'yafolding)
 (require-package 'yasnippet)
 
-; Source Graph
-(add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
-(require 'sourcegraph)
+;; ; Source Graph
+;; (add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
+;; (require 'sourcegraph)
 
 ;; Basic Settings
 (setq ring-bell-function 'ignore)
@@ -501,7 +504,6 @@
 (require 'js2-mode)
 (require 'js2-refactor)
 (require 'company)
-(add-hook 'js-mode-hook 'js2-mode)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (add-hook 'js2-mode-hook '(lambda () (set-variable 'indent-tabs-mode nil)))
 (add-hook 'js2-mode-hook 'skewer-mode)
@@ -534,6 +536,9 @@
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (setq jsx-indent-level 2)
+
+;; Julius
+(add-to-list 'auto-mode-alist '("\\.julius\\'" . js2-mode))
 
 ;; Flycheck mode
 (require 'flycheck)
