@@ -30,11 +30,12 @@
  '(haskell-indentation-left-offset 4)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
- '(haskell-process-type (quote cabal-repl))
+ '(haskell-process-type (quote stack-ghci))
  '(haskell-process-use-presentation-mode nil)
  '(haskell-stylish-on-save t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(json-reformat:indent-width 2)
  '(org-agenda-files
    (quote
     ("~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
@@ -45,8 +46,7 @@
  '(safe-local-variable-values
    (quote
     ((haskell-indent-spaces . 4)
-     (haskell-process-use-ghci . t)
-     (haskell-process-type . cabal-repl))))
+     (haskell-process-use-ghci . t))))
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
@@ -97,7 +97,7 @@
 (require-package 'elm-mode)
 (require-package 'emmet-mode)
 (require-package 'evil)
-(require-package 'evil-easymotion)
+;(require-package 'evil-easymotion)
 (require-package 'evil-jumper)
 (require-package 'evil-leader)
 (require-package 'evil-matchit)
@@ -161,7 +161,7 @@
 (setq tab-width 2)
 (tooltip-mode -1)
 (setq redisplay-dont-pause t)
-(setq debug-on-error nil)
+;(setq debug-on-error nil)
 (evil-leader/set-key "ds" 'delete-trailing-whitespace)
 (evil-leader/set-key "sl" 'sort-lines)
 
@@ -254,12 +254,13 @@
 (global-set-key (kbd "C-x C-l") 'next-buffer)
 
 ;; Magit
+(require 'magit)
 (add-hook 'magit-commit-mode-hook 'flyspell-mode)
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Evil mode
 (require 'evil)
-(require 'evil-easymotion)
+;; (require 'evil-easymotion)
 (require 'evil-leader)
 (require 'evil-nerd-commenter)
 (require 'evil-surround)
@@ -270,7 +271,7 @@
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key "c" 'evilnc-comment-operator)
-(evilem-default-keybindings "SPC")
+;(evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
 
 ; Switch H with ^ and L with $
@@ -363,7 +364,7 @@
 ; Helm Dash
 (require 'helm-dash)
 (evil-leader/set-key "mf" 'helm-dash)
-(setq helm-dash-docsets-path "~/.docsets/")
+(setq helm-dash-docsets-path "/Users/yamadapc/.docsets/")
 (defun helm-setup-docsets (hook docsets)
   (add-hook hook `(lambda ()
                     (setq-local helm-dash-common-docsets ',docsets)
@@ -451,7 +452,6 @@
 (setq haskell-indentation-ifte-offset 4)
 (setq haskell-indentation-layout-offset 4)
 (setq haskell-indentation-left-offset 4)
-(setq haskell-process-type (quote cabal-repl))
 (evil-leader/set-key-for-mode 'haskell-mode "mt" 'haskell-process-do-type)
 (evil-leader/set-key-for-mode 'haskell-mode "mi" 'haskell-process-do-info)
 (evil-leader/set-key-for-mode 'haskell-mode "mk" 'ha/kell-process-cabal)
@@ -531,6 +531,25 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;; CoffeeScript mode
+(require 'coffee-mode)
+
+(defun coffee-log-this (start end)
+  (interactive "r")
+  (let ((expr (buffer-substring-no-properties start end)))
+    (forward-line -1)
+    (move-end-of-line 1)
+    (newline-and-indent)
+    (insert (concat "console.log('"
+                    (replace-regexp-in-string "'" "\\\\'" expr)
+                    " =', "
+                    expr
+                    ")"))
+    (coffee-indent-line)
+    (forward-line 1)))
+
+(evil-leader/set-key-for-mode 'coffee-mode "lt" 'coffee-log-this)
 
 ;; JSX mode
 (require 'jsx-mode)
