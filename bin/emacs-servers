@@ -4,11 +4,9 @@ function main {
   local -a servers
   for file in ${serverdir}/*; do
     if [[ -S ${file} ]]; then
-      servers+=("${file##*/}")  
+      echo "${file##*/}"
     fi
   done
-
-  echo "${servers[@]}"
 }
 
 main
