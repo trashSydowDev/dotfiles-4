@@ -19,7 +19,7 @@
  '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c35c0effa648fd320300f3d45696c640a92bdc7cf0429d002a96bda2b42ce966" default)))
+    ("3f78849e36a0a457ad71c1bda01001e3e197fe1837cb6eaa829eb37f0a4bdad5" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c35c0effa648fd320300f3d45696c640a92bdc7cf0429d002a96bda2b42ce966" default)))
  '(elfeed-feeds
    (quote
     ("http://feeds.feedburner.com/CssTricks" "http://www.theverge.com/rss/full.xml" "http://firstround.com/review/rss" "http://techblog.netflix.com/feeds/posts/default" "http://blog.capwatkins.com/feed" "http://feeds.feedburner.com/theeffectiveengineer" "http://blog.crisp.se/feed" "http://www.estadao.com.br/rss/ultimas.xml" "http://feeds.folha.uol.com.br/poder/rss091.xml" "http://rt.com/news/today/rss/" "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://feeds.feedburner.com/StartupManagement" "http://randsinrepose.com/feed/" "http://www.martinfowler.com/feed.atom" "http://blog.cloudflare.com/rss" "http://news.ycombinator.com/rss" "https://www.hakkalabs.co/feed" "http://chrisdone.com/rss.xml" "https://github.com/blog.atom" "http://code.google.com/feeds/updates.xml" "http://lambda-the-ultimate.org/rss.xml" "http://ember.zone/rss/" "http://planet.haskell.org/rss20.xml" "http://ocharles.org.uk/blog/posts.rss" "http://feeds.feedburner.com/ezyang" "http://feeds.feedburner.com/linuxjournalcom" "http://feeds.feedburner.com/HighScalability")))
