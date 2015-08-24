@@ -54,11 +54,13 @@ function ep {
 }
 
 function ep-start {
-    emacs --daemon=$(basename $(projectroot)) $@
+    projectroot &&
+      emacs --daemon=$(basename $(projectroot)) $@
 }
 
 function ep-stop {
-    emacsclient -t -s $(basename $(projectroot)) -e '(save-buffers-kill-emacs)'
+    projectroot &&
+      emacsclient -t -s $(basename $(projectroot)) -e '(save-buffers-kill-emacs)'
 }
 
 # emacsclient GUI
@@ -91,7 +93,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
     alias ctags="`brew --prefix`/bin/ctags"
     fzf-autojump-widget() {
       cd $(
-        cat /Users/adam/.local/share/autojump/autojump.txt |
+        cat $HOME/.local/share/autojump/autojump.txt |
         sort -n |
         ggrep -oP '^[^\s]+\s+(\K.*)$' |
         fzf --reverse +s
@@ -110,7 +112,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
     alias vim='mvim -v'
     alias irs='irssi'
     export DOCKER_HOST=tcp://192.168.59.103:2376
-    export DOCKER_CERT_PATH=/Users/adam/.boot2docker/certs/boot2docker-vm
+    export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
     export DOCKER_TLS_VERIFY=1
 fi
 
@@ -119,7 +121,7 @@ export PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripti
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-export GOPATH="/Users/adam/program/golang/"
+export GOPATH="/Users/yamadapc/program/g.toggl.com/toggl_api"
 export GOROOT=`go env GOROOT`
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
@@ -129,20 +131,20 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
 # added by travis gem
-[ -f /Users/adam/.travis/travis.sh ] && source /Users/adam/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # This loads DVM into a shell session.
-if [ -s /Users/adam/.dvm/scripts/dvm ] ; then
-	. /Users/adam/.dvm/scripts/dvm
+if [ -s $HOME/.dvm/scripts/dvm ] ; then
+	. $HOME/.dvm/scripts/dvm
 fi
 
 source ~/.profile
 source ~/.fzf.zsh
 
 # OPAM configuration
-. /Users/adam/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # add ~/.bin to PATH
 mkdir -p $HOME/.bin
@@ -158,8 +160,8 @@ export PATH=$HOME/.bin:$PATH
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-PERL_MB_OPT="--install_base \"/Users/adam/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/adam/perl5"; export PERL_MM_OPT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 # unregister broken GHC packages. Run this a few times to resolve dependency rot in installed packages.
 # ghc-pkg-clean -f cabal/dev/packages*.conf also works.
@@ -186,3 +188,6 @@ function ghc-pkg-reset() {
 }
 
 alias cabalupgrades="cabal list --installed  | egrep -iv '(synopsis|homepage|license)'"
+
+# added by travis gem
+[ -f /Users/yamadapc/.travis/travis.sh ] && source /Users/yamadapc/.travis/travis.sh
