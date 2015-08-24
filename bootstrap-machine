@@ -1,0 +1,10 @@
+brew install vim --with-lua
+brew install emacs --with-cocoa
+brew install git
+brew cask install google-chrome
+brew cask install 1password
+brew cask install fantastical
+brew cask install arq
+brew install zsh
+chsh -s /bin/zsh
+sudo chsh -s /bin/zsh
