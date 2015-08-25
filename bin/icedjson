@@ -1,0 +1,2 @@
+#!/bin/bash
+iced -e "console.log(JSON.stringify(require(process.argv[4])))" $1
