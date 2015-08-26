@@ -11,7 +11,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git zsh-syntax-highlighting aws cabal)
+plugins=(zsh-syntax-highlighting)
 # Settings
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
@@ -91,16 +91,20 @@ elif [[ $(uname) == 'Darwin' ]]; then
     # add gobrew to the path
     export PATH=$PATH:$HOME/.gobrew/bin
     alias ctags="`brew --prefix`/bin/ctags"
+
     fzf-autojump-widget() {
       cd $(
-        cat $HOME/.local/share/autojump/autojump.txt |
+        autojump -s | ghead -n -7
         sort -n |
-        ggrep -oP '^[^\s]+\s+(\K.*)$' |
+        egrep -oP '^[^\s]+\s+(\K.*)$' |
         fzf --reverse +s
       )
     }
-    zle     -N    fzf-autojump-widget
+
+    zle     -N   fzf-autojump-widget
     bindkey '^F' fzf-autojump-widget
+    bindkey -s '^O' 'cd -\n'
+
     # Volume for OSX
     function vol () {
     alias love=/opt/homebrew-cask/Caskroom/love/0.9.1/love.app/Contents/MacOS/love
@@ -141,6 +145,7 @@ if [ -s $HOME/.dvm/scripts/dvm ] ; then
 fi
 
 source ~/.profile
+export FZF_TMUX=-1
 source ~/.fzf.zsh
 
 # OPAM configuration
