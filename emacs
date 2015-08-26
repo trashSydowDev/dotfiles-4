@@ -39,6 +39,7 @@
  '(org-agenda-files
    (quote
     ("~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+ '(org-confirm-babel-evaluate nil)
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
@@ -476,7 +477,9 @@
 (add-hook 'handlebars-mode-hook 'emmet-mode) ;; enable Emmet on Handlebars
 (add-hook 'css-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
 
-;; org mode
+;; org-mode
+(require 'org)
+(require 'babel)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (evil-leader/set-key-for-mode 'org-mode ">>" 'org-do-demote)
@@ -485,8 +488,16 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (ruby . t)
+   (emacs-lisp . t)
+   (python . t)
+   (js . t)
    (R . t)
+   (sql . t)
+   (haskell . t)
    (sh . t)))
+
+(setq org-src-fontify-natively t)
 
 (add-to-list 'org-structure-template-alist
              `("S" ,(concat "#+title: \n"
