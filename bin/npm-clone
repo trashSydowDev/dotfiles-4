@@ -1,0 +1,2 @@
+#!/bin/bash
+npm info -j $1 | jq -r '.homepage' | xargs hub clone
