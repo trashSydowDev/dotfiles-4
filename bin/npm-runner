@@ -1,0 +1,2 @@
+#!/bin/bash
+npm run `npm view -j | jq -r '.scripts | keys | .[]' | fzf`
