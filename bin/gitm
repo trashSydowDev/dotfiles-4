@@ -1,0 +1,5 @@
+#!/bin/bash gitm
+output=`echo $2 | strip-protocol | split-host`
+host=`echo $output | awk '{print $1}'`
+repo=`echo $output | awk '{print $2}'`
+git clone $2 $HOME/program/$host/$repo
