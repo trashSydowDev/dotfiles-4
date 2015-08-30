@@ -1,0 +1,2 @@
+#!/bin/bash
+docker-machine start docker-vm && eval $(docker-machine env docker-vm)
