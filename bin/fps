@@ -1,2 +1,2 @@
 #!/bin/bash
-ps aux | fzf -e
+ps aux | tail -n +2 | fzf -e

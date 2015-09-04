@@ -1,2 +1,2 @@
 #!/bin/bash
-ps aux | fzf -e | awk '{print $2}' | xargs kill
+ps aux | tail -n +2 | fzf -e | awk '{print $2}' | xargs kill
