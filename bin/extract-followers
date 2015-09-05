@@ -1,0 +1,5 @@
+#!/bin/bash
+curl -L -s https://github.com/yamadapc/followers |
+grep gravatar |
+grep "\"@[^\"]*\"" -o |
+sed 's/["@]//g'
