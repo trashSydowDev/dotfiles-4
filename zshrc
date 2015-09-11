@@ -96,8 +96,8 @@ elif [[ $(uname) == 'Darwin' ]]; then
       cd $(
         autojump -s | ghead -n -7
         sort -n |
-        egrep -oP '^[^\s]+\s+(\K.*)$' |
-        fzf --reverse +s
+        awk '{print $2}' |
+        fzf +s
       )
     }
 
@@ -130,7 +130,7 @@ export GOROOT=`go env GOROOT`
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Base16 Shell
-BASE16_SCHEME="summerfruit"
+BASE16_SCHEME="atelierforest"
 BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
