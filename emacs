@@ -24,6 +24,7 @@
    (quote
     ("http://feeds.feedburner.com/CssTricks" "http://www.theverge.com/rss/full.xml" "http://firstround.com/review/rss" "http://techblog.netflix.com/feeds/posts/default" "http://blog.capwatkins.com/feed" "http://feeds.feedburner.com/theeffectiveengineer" "http://blog.crisp.se/feed" "http://www.estadao.com.br/rss/ultimas.xml" "http://feeds.folha.uol.com.br/poder/rss091.xml" "http://rt.com/news/today/rss/" "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://feeds.feedburner.com/StartupManagement" "http://randsinrepose.com/feed/" "http://www.martinfowler.com/feed.atom" "http://blog.cloudflare.com/rss" "http://news.ycombinator.com/rss" "https://www.hakkalabs.co/feed" "http://chrisdone.com/rss.xml" "https://github.com/blog.atom" "http://code.google.com/feeds/updates.xml" "http://lambda-the-ultimate.org/rss.xml" "http://ember.zone/rss/" "http://planet.haskell.org/rss20.xml" "http://ocharles.org.uk/blog/posts.rss" "http://feeds.feedburner.com/ezyang" "http://feeds.feedburner.com/linuxjournalcom" "http://feeds.feedburner.com/HighScalability")))
  '(flycheck-haskell-ghc-executable "/Users/adam/ghc-7.8.4.app/Contents/bin/ghc")
+ '(flycheck-highlighting-mode (quote lines))
  '(global-whitespace-mode t)
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
@@ -35,15 +36,16 @@
  '(haskell-stylish-on-save t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(js2-highlight-level 3)
  '(json-reformat:indent-width 2)
- '(org-agenda-files
-   (quote
-    ("~/notes-git/mongodb.org" "~/notes-git/toggl.org" "~/notes-git/toggl.org" "~/notes-git/main.org" "~/notes-git/ecs-deployment.org" "~/notes-git/ember-js.org" "~/notes-git/nix.org")))
+ '(menu-bar-mode nil)
+ '(org-agenda-files (quote ("~/personal-notes/main.org")))
  '(org-confirm-babel-evaluate nil)
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
  '(paradox-github-token t)
+ '(pivotal-api-token "(getenv \"PIVOTAL_API_TOKEN\")")
  '(safe-local-variable-values
    (quote
     ((haskell-indent-spaces . 4)
@@ -60,10 +62,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
- '(col-highlight ((t (:background "color-19"))))
+ '(col-highlight ((t (:background "color-236"))))
  '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
- '(hl-line ((t (:background "color-19"))))
+ '(hl-line ((t (:background "color-236"))))
  '(linum ((t (:background "color-18" :foreground "#363636" :slant italic))))
+ '(org-column ((t (:background "black"))))
  '(shm-current-face ((t (:background "black"))))
  '(shm-quarantine-face ((t (:background "color-235"))))
  '(whitespace-tab ((t (:background "color-233" :foreground "color-19" :weight bold)))))
@@ -222,7 +225,7 @@
 (setq tab-width 2)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
-(ido-mode 1) ; more interactivity
+;; (ido-everywhere 1)
 (evil-leader/set-key "j" 'helm-imenu)
 (evil-leader/set-key "," 'helm-imenu) ; Redundancy for SHM mode
 
@@ -480,6 +483,10 @@
 ;; org-mode
 (require 'org)
 (require 'babel)
+(setq org-directory (concat (getenv "HOME") "/personal-notes"))
+(setq org-default-notes-file (concat org-directory "/main.org"))
+(define-key org-mode-map (kbd "M-p") 'org-move-subtree-up)
+(define-key org-mode-map (kbd "M-n") 'org-move-subtree-down)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (evil-leader/set-key-for-mode 'org-mode ">>" 'org-do-demote)
@@ -525,6 +532,17 @@
 (defun node-run-buffer ()
   (interactive)
   (shell-command "node" (buffer-file-name)))
+
+(evil-leader/set-key-for-mode 'coffee-mode
+  "ts" 'coffee-test-buffer)
+
+(defun coffee-test-buffer ()
+  (interactive)
+  (let ((require-arg
+        (if (= "iced" (file-name-extension (buffer-file-name)))
+            "--require iced-coffee-script/register"
+        "--require coffee-script/register")))
+    (shell-command "mocha" require-arg (buffer-file-name))))
 
 (setq js2-basic-offset 2)
 (setq js2-highlight-level 3)
@@ -573,6 +591,19 @@
     (coffee-indent-line)
     (forward-line 1)))
 
+(defun coffee-string-this (start end)
+  (interactive "r")
+  (let ((expr (buffer-substring-no-properties start end)))
+    (forward-line -1)
+    (move-end-of-line 1)
+    (newline-and-indent)
+    (insert (concat "'"
+                    (replace-regexp-in-string "'" "\\\\'" expr)
+                    " ='"))
+    (coffee-indent-line)
+    (forward-line 1)))
+
+(evil-leader/set-key-for-mode 'coffee-mode "st" 'coffee-string-this)
 (evil-leader/set-key-for-mode 'coffee-mode "lt" 'coffee-log-this)
 
 ;; JSX mode
