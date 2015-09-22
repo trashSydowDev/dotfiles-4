@@ -15,12 +15,13 @@ function main() {
   setup_zsh
   setup_git
   setup_emacs
+  setup_bin
 }
 
 function setup_bin() {
   mkdir -p $HOME/.bin
   for i in $HOME/dotfiles/bin/* ; do
-    ln -s $HOME/dotfiles/bin/$i $HOME/.bin/$i
+    ln -s $i $HOME/.bin/`basename $i`
   done
 }
 
