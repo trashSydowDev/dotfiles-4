@@ -173,8 +173,8 @@
 (setq mac-command-modifier 'super)
 (global-set-key (kbd "s-o") 'other-frame)
 
-(global-set-key (kbd "C-c o")
-                '(lambda () (interactive) (find-file "~/personal-notes/main.org")))
+(global-set-key (kbd "C-c o") '(lambda () (interactive)
+                                 (find-file "~/personal-notes/main.org")))
 
 (turn-on-pbcopy)
 
