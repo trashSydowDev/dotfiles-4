@@ -583,7 +583,6 @@
 (defun coffee-log-this (start end)
   (interactive "r")
   (let ((expr (buffer-substring-no-properties start end)))
-    (forward-line -1)
     (move-end-of-line 1)
     (newline-and-indent)
     (insert (concat "console.log('"
@@ -591,8 +590,7 @@
                     " =', "
                     expr
                     ")"))
-    (coffee-indent-line)
-    (forward-line 1)))
+    (forward-line -1)))
 
 (defun coffee-string-this (start end)
   (interactive "r")
