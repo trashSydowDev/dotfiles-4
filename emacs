@@ -101,11 +101,12 @@
 (require-package 'elm-mode)
 (require-package 'emmet-mode)
 (require-package 'evil)
-;(require-package 'evil-easymotion)
+(require-package 'evil-easymotion)
 (require-package 'evil-jumper)
 (require-package 'evil-leader)
 (require-package 'evil-matchit)
 (require-package 'evil-nerd-commenter)
+(require-package 'evil-org)
 (require-package 'evil-surround)
 (require-package 'evil-tabs)
 (require-package 'exec-path-from-shell)
@@ -267,7 +268,7 @@
 
 ;; Evil mode
 (require 'evil)
-;; (require 'evil-easymotion)
+(require 'evil-easymotion)
 (require 'evil-leader)
 (require 'evil-nerd-commenter)
 (require 'evil-surround)
@@ -278,7 +279,7 @@
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key "c" 'evilnc-comment-operator)
-;(evilem-default-keybindings "SPC")
+(evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
 
 ; Switch H with ^ and L with $
@@ -485,6 +486,7 @@
 
 ;; org-mode
 (require 'org)
+(require 'evil-org)
 (require 'babel)
 (setq org-directory (concat (getenv "HOME") "/personal-notes"))
 (setq org-default-notes-file (concat org-directory "/main.org"))
@@ -589,8 +591,7 @@
                     (replace-regexp-in-string "'" "\\\\'" expr)
                     " =', "
                     expr
-                    ")"))
-    (forward-line -1)))
+                    ")"))))
 
 (defun coffee-string-this (start end)
   (interactive "r")
