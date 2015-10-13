@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -L -s -H "Authorization: Basic `echo $TOGGL_API_TOKEN\:api_token | base64`" "https://toggl.com$1"
