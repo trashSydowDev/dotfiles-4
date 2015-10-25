@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -X PUT -L -s https://api.github.com/user/following/$1 -u token:$GITHUB_API_TOKEN
