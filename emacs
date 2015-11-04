@@ -31,7 +31,7 @@
  '(haskell-indentation-left-offset 4)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
- '(haskell-process-type (quote stack-ghci))
+ '(haskell-process-type (quote auto))
  '(haskell-process-use-presentation-mode nil)
  '(haskell-stylish-on-save t)
  '(indent-tabs-mode nil)
