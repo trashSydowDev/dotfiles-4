@@ -31,6 +31,7 @@ bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 # Functions and aliases
 alias attach-main="tmux new -t 'main'" # attaches to main in a different window
 alias session-main="bash $HOME/dotfiles/bin/session-main.sh"
+alias ssh="TERM=xterm ssh"
 alias spec="mocha -t 5000 -R spec"
 alias ns="npm run-script"
 alias vinstall="vim +BundleInstall +qall"
