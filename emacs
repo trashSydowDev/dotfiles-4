@@ -311,6 +311,16 @@
 (evil-leader/set-key "fw" 'elfeed)
 (evil-leader/set-key "w" 'align-regexp)
 
+;; Inflection
+(require 'string-inflection)
+(evil-leader/set-key "ic" 'string-inflection-cycle)
+(evil-leader/set-key "iac" 'string-inflection-all-cycle)
+(evil-leader/set-key "iaf" 'string-inflection-all-cycle-function)
+(evil-leader/set-key "ilc" 'string-inflection-camelcase)
+(evil-leader/set-key "ilf" 'string-inflection-camelcase-function)
+(evil-leader/set-key "ijc" 'string-inflection-java-style-cycle)
+(evil-leader/set-key "ijf" 'string-inflection-java-style-cycle-function)
+
 ;; Make the interface as bare as possible
 (when is-gui (scroll-bar-mode 0))
 (menu-bar-mode -1)
