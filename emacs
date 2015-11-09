@@ -529,8 +529,9 @@
 
 ;; Go mode
 (require 'go-mode)
-(setenv "GOPATH" "/Users/adam/program/golang/")
-(setenv "PATH" (concat (getenv "PATH") ":" "/Users/adam/program/golang/"))
+(defvar-local dotemacs-gopath (concat (getenv "HOME") "/program/golang"))
+(setenv "GOPATH" dotemacs-gopath)
+(setenv "PATH" (concat (getenv "PATH") ":" dotemacs-gopath))
 (evil-leader/set-key-for-mode 'go-mode "gf" 'gofmt)
 
 ;; JavaScript mode
