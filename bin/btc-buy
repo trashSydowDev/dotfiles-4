@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -L -s https://api.coinbase.com/v2/prices/buy | jq -r '.data.amount'

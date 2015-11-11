@@ -1,0 +1,5 @@
+#!/bin/bash
+btc-buy | xargs -I % printf "Buy: % " &
+btc-sell | xargs -I % printf "Sell: % " &
+wait
+printf "\n"
