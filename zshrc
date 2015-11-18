@@ -51,17 +51,17 @@ function vack () {
 }
 
 function ep {
-    emacsclient -t -s $(basename $(projectroot)) $@
+    emacsclient -t -s $(basename $(projectroot -t)) $@
 }
 
 function ep-start {
     projectroot &&
-      emacs --daemon=$(basename $(projectroot)) $@
+      emacs --daemon=$(basename $(projectroot -t)) $@
 }
 
 function ep-stop {
     projectroot &&
-      emacsclient -t -s $(basename $(projectroot)) -e '(save-buffers-kill-emacs)'
+      emacsclient -t -s $(basename $(projectroot -t)) -e '(save-buffers-kill-emacs)'
 }
 
 # emacsclient GUI
