@@ -121,7 +121,7 @@ elif [[ $(uname) == 'Darwin' ]]; then
     export DOCKER_TLS_VERIFY=1
 fi
 
-export PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
+#export PATH=$HOME/Library/Haskell/bin:$PATH # Add GHC path to PATH for scripting
 export PATH=$HOME/.cabal/bin:$PATH          # Add Cabal path to PATH for scripting
 
 ### Added by the Heroku Toolbelt
