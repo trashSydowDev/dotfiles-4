@@ -18,4 +18,5 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[magenta]%}o"
 PROMPT="%{$terminfo[bold]$fg[blue]%}%{$reset_color%}\
 %{$terminfo[bold]$fg[green]%}${current_dir}%{$reset_color%}\
 %{$reset_color%}%B $ %b"
+
 RPROMPT="%(?..%{$fg[red]%}%?) ${git_info}"

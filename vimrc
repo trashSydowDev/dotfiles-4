@@ -79,7 +79,6 @@ Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/sudo.vim'
 " Other
 Bundle 'szw/vim-g'
-Bundle 'yuratomo/w3m.vim'
 
 filetype plugin indent on
 
