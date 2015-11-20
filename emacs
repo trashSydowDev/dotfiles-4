@@ -34,8 +34,10 @@
  '(haskell-process-type (quote auto))
  '(haskell-process-use-presentation-mode nil)
  '(haskell-stylish-on-save t)
+ '(hindent-style "johan-tibell")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(js-indent-level 2)
  '(js2-highlight-level 3)
  '(json-reformat:indent-width 2)
  '(menu-bar-mode nil)
@@ -48,7 +50,8 @@
  '(pivotal-api-token "(getenv \"PIVOTAL_API_TOKEN\")")
  '(safe-local-variable-values
    (quote
-    ((haskell-indent-spaces . 4)
+    ((hamlet/basic-offset . 2)
+     (haskell-indent-spaces . 4)
      (haskell-process-use-ghci . t))))
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
@@ -470,6 +473,7 @@
 (setq haskell-indentation-ifte-offset 4)
 (setq haskell-indentation-layout-offset 4)
 (setq haskell-indentation-left-offset 4)
+(define-key haskell-mode-map (kbd "C-c C-j") 'haskell-mode-jump-to-def-or-tag)
 (evil-leader/set-key-for-mode 'haskell-mode "mt" 'haskell-process-do-type)
 (evil-leader/set-key-for-mode 'haskell-mode "mi" 'haskell-process-do-info)
 (evil-leader/set-key-for-mode 'haskell-mode "mk" 'ha/kell-process-cabal)
