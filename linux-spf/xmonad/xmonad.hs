@@ -88,8 +88,9 @@ myLayout = avoidStruts (
     Tall 1 (3/100) (2/3) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
     tabbed shrinkText tabConfig |||
-    Full |||
-    Grid)
+    Full -- |||
+    -- Grid
+    )
 
 
 ------------------------------------------------------------------------
@@ -134,7 +135,7 @@ myBorderWidth = 2
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
-myModMask = mod1Mask
+myModMask = mod4Mask
  
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   ----------------------------------------------------------------------
