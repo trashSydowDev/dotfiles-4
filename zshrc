@@ -71,7 +71,7 @@ alias egui="emacsclient -c -a emacs"
 # Linux Stuff
 if [[ $(uname) == 'Linux' ]]; then
     # Tmux fix for linux
-    alias tmux="TERM=screen-256color-bce `which tmux`"
+    #alias tmux="TERM=screen-256color-bce `which tmux`"
     # Ack alias
     alias ack=ack-grep
     # chromeos and ubuntu default boot
@@ -197,3 +197,9 @@ alias cabalupgrades="cabal list --installed  | egrep -iv '(synopsis|homepage|lic
 
 # added by travis gem
 [ -f /Users/yamadapc/.travis/travis.sh ] && source /Users/yamadapc/.travis/travis.sh
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+function git-ignore() {
+  curl -L -s https://www.gitignore.io/api/$@
+}
