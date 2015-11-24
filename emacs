@@ -107,7 +107,7 @@
 (require-package 'elm-mode)
 (require-package 'emmet-mode)
 (require-package 'evil)
-(require-package 'evil-easymotion)
+;(require-package 'evil-easymotion)
 (require-package 'evil-jumper)
 (require-package 'evil-leader)
 (require-package 'evil-matchit)
@@ -297,7 +297,7 @@
 
 ;; Evil mode
 (require 'evil)
-(require 'evil-easymotion)
+;(require 'evil-easymotion)
 (require 'evil-leader)
 (require 'evil-nerd-commenter)
 (require 'evil-surround)
@@ -308,7 +308,7 @@
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key "c" 'evilnc-comment-operator)
-(evilem-default-keybindings "SPC")
+;(evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
 
 ; Switch H with ^ and L with $
