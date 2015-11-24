@@ -1,4 +1,3 @@
-set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set editor=/bin/bash\ -lc\ \"mvim\ -f\ $*\"\ mvim
 
 map x :tabclose<cr>
