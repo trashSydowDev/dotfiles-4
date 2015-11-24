@@ -2,7 +2,7 @@
     name = yamadapc
     email = tacla.yamada@gmail.com
 [core]
-    editor = mvim -v
+    editor = vim
     excludesfile = ~/.gitignore
 [alias]
     pu = pull
