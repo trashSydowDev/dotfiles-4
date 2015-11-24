@@ -19,4 +19,4 @@ PROMPT="%{$terminfo[bold]$fg[blue]%}%{$reset_color%}\
 %{$terminfo[bold]$fg[green]%}${current_dir}%{$reset_color%}\
 %{$reset_color%}%B $ %b"
 
-RPROMPT="%F{blue}%*%f%(?..%{$fg[red]%}%?) ${git_info}"
+RPROMPT="%F{blue}%*%f%(?..%{$fg[red]%}%?) ${git_info}%{$reset_color}"
