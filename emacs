@@ -71,7 +71,7 @@
  '(col-highlight ((t (:background "color-236"))))
  '(elscreen-tab-other-screen-face ((t (:background "gray15" :foreground "white" :underline t))))
  '(hl-line ((t (:background "color-236"))))
- '(linum ((t (:background "color-18" :foreground "#363636" :slant italic))))
+ '(linum ((t (:background "color-234" :foreground "#363636" :slant italic))))
  '(org-column ((t (:background "black"))))
  '(shm-current-face ((t (:background "black"))))
  '(shm-quarantine-face ((t (:background "color-235"))))
