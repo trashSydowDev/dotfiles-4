@@ -99,7 +99,7 @@ if ! has('gui_running')
   augroup END
 endif
 syntax on
-let base16colorspace=256  " Access colors present in 256 colorspace
+"let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
 colorscheme base16-summerfruit
 " Override colorscheme bg so they look properly under any decent terminal -
@@ -111,7 +111,7 @@ set cursorcolumn
 set listchars=trail:.,tab:--
 set tags=./tags,tags,codex.tags
 set list
-set shell=/usr/local/bin/zsh
+set shell=/usr/bin/zsh
 let $PATH.=':/Users/adam/.cabal/bin'
 let $PATH.=':/Users/adam/Library/Haskell/bin'
 
