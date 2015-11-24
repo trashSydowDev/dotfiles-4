@@ -159,6 +159,8 @@
 (require-package 'web-mode)
 (require-package 'yafolding)
 (require-package 'yasnippet)
+(require-package 'string-inflection)
+(require-package 'babel)
 
 ;; ; Source Graph
 ;; (add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
