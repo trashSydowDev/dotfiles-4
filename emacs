@@ -31,7 +31,7 @@
  '(haskell-indentation-left-offset 4)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
- '(haskell-process-type (quote auto))
+ '(haskell-process-type (quote stack-ghci))
  '(haskell-process-use-presentation-mode nil)
  '(haskell-stylish-on-save t)
  '(hindent-style "johan-tibell")
@@ -50,7 +50,10 @@
  '(pivotal-api-token "(getenv \"PIVOTAL_API_TOKEN\")")
  '(safe-local-variable-values
    (quote
-    ((hamlet/basic-offset . 2)
+    ((haskell-indent-spaces . 2)
+     (haskell-process-args-ghci "ghci")
+     (haskell-process-path-ghci . "stack")
+     (hamlet/basic-offset . 2)
      (haskell-indent-spaces . 4)
      (haskell-process-use-ghci . t))))
  '(tab-width 2)
@@ -109,7 +112,6 @@
 (require-package 'evil-leader)
 (require-package 'evil-matchit)
 (require-package 'evil-nerd-commenter)
-(require-package 'evil-org)
 (require-package 'evil-surround)
 (require-package 'evil-tabs)
 (require-package 'exec-path-from-shell)
@@ -192,6 +194,12 @@
 
 (global-set-key (kbd "C-x C-p") 'history-switch-to-prev-buffer)
 (global-set-key (kbd "C-x C-n") 'history-switch-to-next-buffer)
+
+(defun docker-machine-env ()
+  (interactive)
+  (shell-command "eval $(docker-machine env docker-vm)"))
+
+(evil-leader/set-key "mk" 'compile)
 
 (defun insert-current-date ()
   (interactive)
@@ -325,9 +333,9 @@
 (evil-leader/set-key "ijf" 'string-inflection-java-style-cycle-function)
 
 ;; Make the interface as bare as possible
-(when is-gui (scroll-bar-mode 0))
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(scroll-bar-mode 0)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
 
 ; Google things
 (evil-leader/set-key "ig" 'google-this-noconfirm)
@@ -465,6 +473,7 @@
 (define-key shm-map (kbd ")") nil)
 (define-key shm-map (kbd "]") nil)
 (define-key shm-map (kbd "}") nil)
+(add-hook 'haskell-mode-hook 'hindent-mode)
 (add-hook 'haskell-mode-hook 'ac-haskell-process-setup)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
@@ -500,7 +509,6 @@
 
 ;; org-mode
 (require 'org)
-(require 'evil-org)
 (require 'babel)
 (setq org-directory (concat (getenv "HOME") "/personal-notes"))
 (setq org-default-notes-file (concat org-directory "/main.org"))
@@ -537,6 +545,7 @@
 (setenv "GOPATH" dotemacs-gopath)
 (setenv "PATH" (concat (getenv "PATH") ":" dotemacs-gopath))
 (evil-leader/set-key-for-mode 'go-mode "gf" 'gofmt)
+(evil-leader/set-key-for-mode 'go-mode "ai" 'go-import-add)
 
 ;; JavaScript mode
 (require 'js2-mode)
@@ -580,6 +589,36 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;; JavaScript Flow Type Checking
+(require-package 'f)
+(require 'f)
+(require 'json)
+(require 'flycheck)
+(defun flycheck-parse-flow (output checker buffer)
+  (let ((json-array-type 'list))
+    (let ((o (json-read-from-string output)))
+      (mapcar #'(lambda (errp)
+                  (let ((err (cadr (assoc 'message errp))))
+                    (flycheck-error-new
+                     :line (cdr (assoc 'line err))
+                     :column (cdr (assoc 'start err))
+                     :level 'error
+                     :message (cdr (assoc 'descr err))
+                     :filename (f-relative
+                                (cdr (assoc 'path err))
+                                (f-dirname (file-truename
+                                            (buffer-file-name))))
+                     :buffer buffer
+                     :checker checker)))
+              (cdr (assoc 'errors o))))))
+
+(flycheck-define-checker javascript-flow
+  "Static type checking using Flow."
+  :command ("flow" "--json" source-original)
+  :error-parser flycheck-parse-flow
+  :modes (js2-mode js-mode jsx-mode))
+(add-to-list 'flycheck-checkers 'javascript-flow)
 
 ;; HTML mode
 (defun unhtml (start end)
