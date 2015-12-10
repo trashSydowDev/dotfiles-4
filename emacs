@@ -29,6 +29,7 @@
  '(haskell-indentation-ifte-offset 4)
  '(haskell-indentation-layout-offset 4)
  '(haskell-indentation-left-offset 4)
+ '(haskell-interactive-popup-errors nil)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-type (quote stack-ghci))
@@ -56,6 +57,7 @@
      (hamlet/basic-offset . 2)
      (haskell-indent-spaces . 4)
      (haskell-process-use-ghci . t))))
+ '(shm-indent-spaces 4)
  '(tab-width 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
@@ -309,6 +311,8 @@
 (evilem-default-keybindings "SPC")
 (evil-leader/set-key "e" 'flycheck-list-errors)
 
+(add-to-list 'evil-emacs-state-modes 'flycheck-error-list-mode)
+
 ; Switch H with ^ and L with $
 (define-key evil-motion-state-map "H" 'evil-first-non-blank)
 (define-key evil-motion-state-map "L" 'end-of-line)
@@ -486,6 +490,7 @@
 (require 'haskell-indentation)
 (require 'shm)
 (require 'shm-case-split)
+(add-to-list 'evil-emacs-state-modes 'haskell-error-mode)
 (define-key shm-map (kbd ")") nil)
 (define-key shm-map (kbd "]") nil)
 (define-key shm-map (kbd "}") nil)
@@ -501,7 +506,9 @@
 (define-key haskell-mode-map (kbd "C-c C-j") 'haskell-mode-jump-to-def-or-tag)
 (evil-leader/set-key-for-mode 'haskell-mode "mt" 'haskell-process-do-type)
 (evil-leader/set-key-for-mode 'haskell-mode "mi" 'haskell-process-do-info)
-(evil-leader/set-key-for-mode 'haskell-mode "mk" 'ha/kell-process-cabal)
+(evil-leader/set-key-for-mode 'haskell-mode "mk" 'haskell-process-cabal)
+(evil-leader/set-key-for-mode 'haskell-mode "ai" 'haskell-add-import)
+(evil-leader/set-key-for-mode 'haskell-mode "ad" 'haskell-cabal-add-dependency)
 (evil-leader/set-key-for-mode 'haskell-mode "h" 'shm/backward-node)
 (evil-leader/set-key-for-mode 'haskell-mode "l" 'shm/forward-node)
 (evil-leader/set-key-for-mode 'haskell-mode "p" 'shm/goto-parent)
@@ -629,12 +636,12 @@
                      :checker checker)))
               (cdr (assoc 'errors o))))))
 
-(flycheck-define-checker javascript-flow
-  "Static type checking using Flow."
-  :command ("flow" "--json" source-original)
-  :error-parser flycheck-parse-flow
-  :modes (js2-mode js-mode jsx-mode))
-(add-to-list 'flycheck-checkers 'javascript-flow)
+;; (flycheck-define-checker javascript-flow
+;;   "Static type checking using Flow."
+;;   :command ("flow" "--json" source-original)
+;;   :error-parser flycheck-parse-flow
+;;   :modes (js2-mode js-mode jsx-mode))
+;; (add-to-list 'flycheck-checkers 'javascript-flow)
 
 ;; HTML mode
 (defun unhtml (start end)
