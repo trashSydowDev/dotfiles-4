@@ -1,0 +1,4 @@
+#!/bin/bash
+# Plots emacs load times with gnuplot and edm data
+cat ~/.emacs-load-times |
+gnuplot -e "set terminal 'dumb'; plot '<cat' title 'emacs load times' with lines"

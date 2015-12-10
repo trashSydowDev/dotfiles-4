@@ -173,6 +173,7 @@
 (setq tab-width 2)
 (tooltip-mode -1)
 (setq redisplay-dont-pause t)
+(setq server-use-tcp t)
 ;(setq debug-on-error nil)
 (evil-leader/set-key "ds" 'delete-trailing-whitespace)
 (evil-leader/set-key "sl" 'sort-lines)
