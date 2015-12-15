@@ -1,0 +1,25 @@
+#!/usr/bin/env stack
+-- stack --install-ghc runghc --package turtle --package text
+{-# LANGUAGE OverloadedStrings #-}
+
+import           Data.List (find)
+import qualified Data.Text as Text
+import           Prelude   hiding (FilePath)
+import           Turtle    hiding (find)
+
+main :: IO ()
+main = do
+    remotes <- (Text.lines . snd) <$> shellStrict "git remote -v" empty
+    case find ((== "origin") . head . Text.words) remotes of
+        Nothing -> do
+            err "No `origin` remote found."
+            exit (ExitFailure 1)
+        Just origin -> do
+            let name = extractName (Text.words origin !! 1)
+            err $ "Using project name: " <> name
+            echo $ "[![Build Status](https://travis-ci.org/"
+                <> name
+                <> ".svg?branch=master)](https://travis-ci.org/"
+                <> name <> ")"
+  where
+    extractName url = head (Text.split (== '.') (last (Text.split (== ':') url)))
