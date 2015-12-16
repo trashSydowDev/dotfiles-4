@@ -16,6 +16,7 @@
  '(ansi-term-color-vector
    [unspecified "#272935" "#da4939" "#a5c261" "#ffc66d" "#6d9cbe" "#b6b3eb" "#6d9cbe" "#f4f1ed"] t)
  '(coffee-tab-width 2)
+ '(company-ghc-show-info (quote oneline))
  '(css-indent-offset 2)
  '(custom-safe-themes
    (quote
@@ -520,6 +521,7 @@
 (evil-leader/set-key-for-mode 'haskell-mode "d" 'shm/kill-node)
 (evil-leader/set-key-for-mode 'haskell-mode "D" 'shm/kill-line)
 (evil-leader/set-key-for-mode 'haskell-mode "is" 'shm/case-split)
+(evil-leader/set-key-for-mode 'haskell-mode "qi" 'shm/qualify-import)
 
 ;; FSharp mode
 (require 'fsharp-mode)
